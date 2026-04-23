@@ -62,7 +62,7 @@ export function buildTimeline(): TimelineEvent[] {
       events.push({
         year: p.death.year,
         kind: "death",
-        title: `${p.name} died`,
+        title: `${p.name} passed away`,
         place: p.death.place,
         personSlug: p.slug,
       });

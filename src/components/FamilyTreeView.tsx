@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import {
   TransformWrapper,
@@ -7,6 +8,7 @@ import {
   useControls,
 } from "react-zoom-pan-pinch";
 import type { Person } from "@/data/types";
+import { ConnectorsLayer } from "@/components/tree/ConnectorsLayer";
 
 type TreeNode = {
   slug: string;
@@ -74,6 +76,7 @@ function Controls() {
 export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
   const bySlug = Object.fromEntries(peopleList.map((p) => [p.slug, p]));
   const get = (slug: string) => bySlug[slug];
+  const treeRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="relative h-[85vh] rounded-lg border border-ink-100 bg-parchment-dark overflow-hidden">
@@ -105,7 +108,8 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             minWidth: "100%",
           }}
         >
-          <div className="p-12 flex flex-col items-center gap-0 min-w-[1500px]">
+          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[1500px]">
+            <ConnectorsLayer containerRef={treeRef} />
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
             <Row>
               <Card data={node(get("gondilal-goel"))} />
@@ -115,63 +119,60 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             <Missing label="3 unnamed generations · Gondilal&rsquo;s son (shop founder, ~1850s) → ~1880s → ~1910s (Radha Krishna&rsquo;s father)" />
             <Connector />
 
-            <GenLabel>Generation 5 · paternal grandparents · Radha Krishna&rsquo;s 4 brothers + 3 sisters</GenLabel>
-            <Row gap="md">
-              <Card data={{ slug: "#", name: "Brother 2", sub: "name TBD · upper-floor gold shop", placeholder: true }} />
-              <Card data={node(get("manmohan-goel"))} />
-              <Couple>
-                <Card data={node(get("radha-krishna-goel"))} />
-                <Card data={node(get("rani-agarwal-dadiji"))} />
-              </Couple>
-              <Card data={node(get("sohan-goel"))} />
-              <Card data={{ slug: "#", name: "3 sisters", sub: "Banda · Gurugram · ✝", placeholder: true }} />
-            </Row>
-            <Connector />
-
-            <GenLabel>Generation 6 · parents&rsquo; generation</GenLabel>
-            <div className="flex items-start gap-12 flex-wrap justify-center">
+            <GenLabel>Generation 5 · grandparents</GenLabel>
+            <div className="flex items-end justify-center gap-16 flex-wrap">
               <div className="flex flex-col items-center gap-2">
-                <BranchLabel>Paternal</BranchLabel>
-                <Row>
+                <BranchLabel>Paternal · Banda · Radha Krishna&rsquo;s 4 brothers + 3 sisters</BranchLabel>
+                <Row gap="md">
+                  <Card data={node(get("mahesh-goel"))} />
+                  <Card data={node(get("manmohan-goel"))} />
                   <Couple>
-                    <Card data={node(get("vinod-goel"))} />
-                    <Card data={node(get("neelam-agarwal-vinod"))} />
+                    <Card data={node(get("radha-krishna-goel"))} />
+                    <Card data={node(get("rani-agarwal-dadiji"))} />
                   </Couple>
-                  <Couple>
-                    <Card data={node(get("shobhit-goel"))} />
-                    <Card data={node(get("roli"))} />
-                  </Couple>
-                  <Card data={node(get("seema-agarwal"))} />
-                  <Couple>
-                    <Card data={node(get("rohit-goel"))} />
-                    <Card data={node(get("richa-goel"))} />
-                  </Couple>
+                  <Card data={node(get("sohan-goel"))} />
+                  <Card data={{ slug: "#", name: "3 sisters", sub: "Banda · Gurugram · ✝", placeholder: true }} />
                 </Row>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <BranchLabel>Maternal · Jhansi</BranchLabel>
-                <Row>
+                <Row gap="md">
                   <Couple>
                     <Card data={node(get("ramesh-chandra-agarwal"))} />
                     <Card data={node(get("prem-kumari"))} />
                   </Couple>
                 </Row>
-                <Connector small />
-                <Row>
-                  <Couple>
-                    <Card data={node(get("vivek-agarwal"))} />
-                    <Card data={node(get("rashi-agarwal"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("nitin-agarwal"))} />
-                    <Card data={node(get("manjari-garg"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("kapil-agarwal"))} />
-                    <Card data={node(get("nidhi-modi"))} />
-                  </Couple>
-                </Row>
               </div>
+            </div>
+            <Connector />
+
+            <GenLabel>Generation 6 · parents&rsquo; generation</GenLabel>
+            <div className="flex items-start justify-center gap-8 flex-wrap">
+              <Couple>
+                <Card data={node(get("vinod-goel"))} />
+                <Card data={node(get("neelam-agarwal-vinod"))} />
+              </Couple>
+              <Couple>
+                <Card data={node(get("shobhit-goel"))} />
+                <Card data={node(get("roli"))} />
+              </Couple>
+              <Card data={node(get("seema-agarwal"))} />
+              <Couple>
+                <Card data={node(get("rohit-goel"))} />
+                <Card data={node(get("richa-goel"))} />
+              </Couple>
+              <Couple>
+                <Card data={node(get("vivek-agarwal"))} />
+                <Card data={node(get("rashi-agarwal"))} />
+              </Couple>
+              <Couple>
+                <Card data={node(get("nitin-agarwal"))} />
+                <Card data={node(get("manjari-garg"))} />
+              </Couple>
+              <Couple>
+                <Card data={node(get("kapil-agarwal"))} />
+                <Card data={node(get("nidhi-modi"))} />
+              </Couple>
             </div>
             <Connector />
 
@@ -323,8 +324,9 @@ function Card({ data }: { data: TreeNode }) {
   const { slug, name, alias, sub, deceased, newborn, self, placeholder } = data;
   const content = (
     <div
+      data-slug={slug}
       className={[
-        "w-[160px] min-h-[64px] rounded-md border px-2.5 py-1.5 text-left transition-all",
+        "relative z-[1] w-[160px] min-h-[64px] rounded-md border px-2.5 py-1.5 text-left transition-all",
         self
           ? "border-accent-700 border-2 bg-accent-400/10 shadow-sm"
           : deceased

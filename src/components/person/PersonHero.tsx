@@ -1,4 +1,5 @@
 import type { Person } from "@/data/types";
+import { computeAge } from "@/lib/schema";
 
 export function PersonHero({ person }: { person: Person }) {
   const lifespan = buildLifespan(person);
@@ -49,8 +50,15 @@ function buildLifespan(person: Person): string | undefined {
   const b = person.birth?.year;
   const d = person.death?.year;
   const approx = person.birth?.yearApprox ? "c. " : "";
-  if (b && d) return `${approx}${b} – ${d}`;
-  if (b && person.isLiving) return `b. ${approx}${b}`;
+  const age = computeAge(person);
+  if (b && d) {
+    const suffix = age ? ` (aged ${age.years})` : "";
+    return `${approx}${b} – ${d}${suffix}`;
+  }
+  if (b && person.isLiving) {
+    const suffix = age ? ` (age ${age.years})` : "";
+    return `b. ${approx}${b}${suffix}`;
+  }
   if (b) return `b. ${approx}${b}`;
   return undefined;
 }

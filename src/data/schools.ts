@@ -65,6 +65,20 @@ export const schools: School[] = [
     name: "KCNIT Banda",
     city: "Banda, Uttar Pradesh",
   },
+  {
+    slug: "vit-vellore",
+    name: "VIT Vellore",
+    aliases: ["Vellore Institute of Technology"],
+    website: "https://vit.ac.in/",
+    city: "Vellore, Tamil Nadu",
+  },
+  {
+    slug: "uc-san-diego",
+    name: "UC San Diego",
+    aliases: ["University of California, San Diego", "UCSD"],
+    website: "https://ucsd.edu/",
+    city: "La Jolla, California",
+  },
 ];
 
 export const schoolsBySlug: Record<string, School> = Object.fromEntries(

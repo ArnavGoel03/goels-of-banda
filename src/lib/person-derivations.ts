@@ -80,7 +80,7 @@ export function getLifeEvents(person: Person): LifeEvent[] {
   if (person.death?.year) {
     events.push({
       year: person.death.year,
-      title: "Died",
+      title: "Passed away",
       kind: "death",
       place: person.death.place,
     });

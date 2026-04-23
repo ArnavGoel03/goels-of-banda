@@ -58,4 +58,5 @@ export type Place = {
   connection: string;
   personSlugs: string[];
   businessSlugs?: string[];
+  coords?: [number, number];
 };

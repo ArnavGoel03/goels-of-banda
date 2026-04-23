@@ -37,9 +37,59 @@ export function displayDeath(person: Person): string | undefined {
 }
 
 export function ageIfLiving(person: Person): number | undefined {
-  if (!person.isLiving || !person.birth?.year) return undefined;
-  const now = new Date().getFullYear();
-  return now - person.birth.year;
+  const info = computeAge(person);
+  return info && !info.atDeath ? info.years : undefined;
+}
+
+export function computeAge(
+  person: Person,
+  now: Date = new Date(),
+): { years: number; atDeath: boolean } | undefined {
+  const birthYear = person.birth?.year;
+  if (!birthYear) return undefined;
+
+  const birthDate = parsePartialDate(person.birth?.date);
+  const birthMonth = birthDate?.month ?? 1;
+  const birthDay = birthDate?.day ?? 1;
+
+  let refYear: number;
+  let refMonth: number;
+  let refDay: number;
+  let atDeath = false;
+  if (!person.isLiving && person.death?.year) {
+    atDeath = true;
+    const dd = parsePartialDate(person.death.date);
+    refYear = person.death.year;
+    refMonth = dd?.month ?? 12;
+    refDay = dd?.day ?? 31;
+  } else {
+    refYear = now.getFullYear();
+    refMonth = now.getMonth() + 1;
+    refDay = now.getDate();
+  }
+
+  let years = refYear - birthYear;
+  if (refMonth < birthMonth || (refMonth === birthMonth && refDay < birthDay)) {
+    years -= 1;
+  }
+  if (years < 0) return undefined;
+  return { years, atDeath };
+}
+
+const MONTHS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december",
+];
+
+function parsePartialDate(
+  s?: string,
+): { month: number; day: number } | undefined {
+  if (!s) return undefined;
+  const m = s
+    .toLowerCase()
+    .match(/(\d{1,2})\s+(january|february|march|april|may|june|july|august|september|october|november|december)/);
+  if (!m) return undefined;
+  return { day: parseInt(m[1], 10), month: MONTHS.indexOf(m[2]) + 1 };
 }
 
 export function personJsonLd(person: Person) {

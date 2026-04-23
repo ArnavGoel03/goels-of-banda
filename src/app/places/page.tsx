@@ -4,6 +4,7 @@ import { places } from "@/data/places";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { site } from "@/data/config";
+import { PlacesMapLoader } from "@/components/places/PlacesMapLoader";
 
 export const metadata: Metadata = {
   title: "Places",
@@ -37,6 +38,10 @@ export default function PlacesPage() {
           Uttar Pradesh, with marriages and migrations reaching outward to Delhi,
           Chandigarh, Dubai, California, and Ohio.
         </p>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-6 pb-6">
+        <PlacesMapLoader />
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-6">
