@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/data/config";
+import { SearchTrigger } from "@/components/search/SearchTrigger";
 
 export function Header() {
   return (
@@ -13,17 +14,23 @@ export function Header() {
             since 1820s · Banda
           </span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-1 text-sm">
-          <NavLink href="/story">Story</NavLink>
-          <NavLink href="/family-tree">Tree</NavLink>
-          <NavLink href="/people">People</NavLink>
-          <NavLink href="/businesses">Businesses</NavLink>
-          <NavLink href="/places">Places</NavLink>
-          <NavLink href="/faq">FAQ</NavLink>
-          <NavLink href="/contribute" highlight>
+        <div className="flex items-center gap-2">
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-1 text-sm">
+            <NavLink href="/story">Story</NavLink>
+            <NavLink href="/family-tree">Tree</NavLink>
+            <NavLink href="/people">People</NavLink>
+            <NavLink href="/businesses">Businesses</NavLink>
+            <NavLink href="/places">Places</NavLink>
+            <NavLink href="/faq">FAQ</NavLink>
+          </nav>
+          <SearchTrigger />
+          <Link
+            href="/contribute"
+            className="rounded-md bg-accent-700 px-3 py-1.5 text-sm text-parchment hover:bg-accent-800 transition-colors"
+          >
             Contribute
-          </NavLink>
-        </nav>
+          </Link>
+        </div>
       </div>
     </header>
   );

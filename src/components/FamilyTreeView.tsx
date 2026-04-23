@@ -84,7 +84,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
         limitToBounds={false}
         centerOnInit
         smooth
-        wheel={{ step: 0.05 }}
+        wheel={{ step: 0.08, activationKeys: ["Control", "Meta"] }}
         doubleClick={{ mode: "reset" }}
         pinch={{ step: 4 }}
         panning={{ velocityDisabled: true }}
@@ -92,7 +92,8 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
         <Controls />
         <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs">
           <span className="font-medium text-ink-800">Drag</span> to pan ·{" "}
-          <span className="font-medium text-ink-800">Scroll / pinch</span> to zoom ·{" "}
+          <span className="font-medium text-ink-800">⌘/Ctrl + scroll</span> or{" "}
+          <span className="font-medium text-ink-800">pinch</span> to zoom ·{" "}
           <span className="font-medium text-ink-800">Click</span> a name to open
         </div>
         <TransformComponent

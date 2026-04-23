@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local-only source material (private interview notes, raw GEDCOM, planning docs)
+/docs/sources/

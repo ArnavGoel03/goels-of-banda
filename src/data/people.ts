@@ -290,12 +290,16 @@ export const people: Person[] = [
     familyRole: "Maternal uncle",
     relationshipToArnav: "Maternal uncle (mother's brother)",
     currentLocation: "Foster City, California, USA",
+    occupation: "Software Engineering Leader, Ford Motor Company",
     parents: { father: "ramesh-chandra-agarwal", mother: "prem-kumari" },
     spouse: { slug: "rashi-agarwal" },
     children: ["anayra-agarwal", "rhidhaan-agarwal"],
     publicity: "full",
     bio:
-      "Vivek Agarwal, born in Jhansi, is the eldest son of Ramesh Chandra and Prem Kumari. He lives in Foster City, California (San Francisco Bay Area) with his wife Rashi Agarwal. Father of Anayra and Rhidhaan Agarwal, both born in Foster City.",
+      "Vivek Agarwal, born in Jhansi, is the eldest son of Ramesh Chandra and Prem Kumari. He studied Electrical and Electronics Engineering at IIT Delhi (1997–2001), including a semester on exchange at EPFL in Switzerland. After moving to the United States, he spent over a decade in Bay Area connected-device and IoT engineering — Engineering Manager R&D at SNRLabs (2010–13, acquired by Seven Networks), Director/Manager of Software Engineering at Seven Networks (2013–15), and nearly seven years as Sr. Manager / Technical Lead at Aeris Communications (2015–22), a leader in IoT and connected-car platforms. He then led a team at Autonomic before moving to Ford Motor Company in 2023, where he currently works as a Software Engineering Leader (Principal Software Engineer). Lives in Foster City, California with his wife Rashi and their two children, Anayra and Rhidhaan.",
+    sources: [
+      { label: "LinkedIn profile", url: "https://www.linkedin.com/in/vivek-agarwal-46119b2/" },
+    ],
   },
   {
     slug: "rashi-agarwal",
@@ -427,8 +431,10 @@ export const people: Person[] = [
     spouse: { slug: "deepak-agarwal" },
     birthFamilySurname: "Goel",
     publicity: "full",
+    occupation: "Creative direction and design, Clay Craft India Pvt Ltd",
+    businessSlugs: ["clay-craft-india"],
     bio:
-      "Vijaya Agarwal (née Vijaya Goel), known in the family as Happy, is the daughter of Manmohan and Nandita Goel. She married Deepak Agarwal, a named co-founder and current director of Clay Craft India Pvt Ltd, and lives in Jaipur, Rajasthan.",
+      "Vijaya Agarwal (née Vijaya Goel), known in the family as Happy, is the daughter of Manmohan and Nandita Goel. She married Deepak Agarwal, a named co-founder and director of Clay Craft India Pvt Ltd, and lives in Jaipur, Rajasthan. Alongside her husband and his two brothers, who jointly run the company, Vijaya handles creative direction for Clay Craft and designs new tableware collections for the brand.",
   },
   {
     slug: "deepak-agarwal",
@@ -443,7 +449,7 @@ export const people: Person[] = [
     spouse: { slug: "vijaya-agarwal" },
     publicity: "full",
     bio:
-      "Deepak Agarwal is a named co-founder and current director of Clay Craft India Private Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue ~$148M). Husband of Vijaya Agarwal. Deepak's family is the Agarwal family that owns Clay Craft.",
+      "Deepak Agarwal is a named co-founder and current director of Clay Craft India Private Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue ~$148M). Deepak has two brothers who run Clay Craft alongside him — the three of them jointly operate the company as the founding Agarwal family. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand. Deepak's family is the Agarwal family that owns Clay Craft.",
     sources: [
       { label: "Clay Craft India — Corporate Leadership", url: "https://corporate.claycraftindia.com/leadership-management/" },
       { label: "Clay Craft India on ZaubaCorp", url: "https://www.zaubacorp.com/company/CLAY-CRAFT-INDIA-PVT-LTD/U26933RJ1988PTC004677" },
@@ -461,13 +467,18 @@ export const people: Person[] = [
     generation: 4,
     familyRole: "Paternal first cousin",
     relationshipToArnav: "Paternal first cousin",
+    currentLocation: "Bengaluru, Karnataka, India",
+    occupation: "Staff Software Engineer, Intuit (Observability)",
     parents: { father: "vinod-goel", mother: "neelam-agarwal-vinod" },
     spouse: { slug: "preksha-agarwal" },
     children: ["raghav-goel"],
     publicity: "full",
     bio:
-      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026 — the sixth generation of the Banda Goel family.",
+      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. He attended The Scindia School in Gwalior (2006–2010) and studied Electronics and Instrumentation at BITS Pilani (2012–2016), where he was active in the Film Making Club. He began his career as a DevOps Intern at Exotel (2015), then worked as a Member of Technical Staff at VMware in Bengaluru (2016–2018) on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin. He moved to RIVIGO as a Software Development Engineer in Gurugram (2018–2019), building a Kubernetes-based virtual development environment, before joining Zomato in 2019, where he spent five years as SDE 2 and then SDE 3 — notably replacing the company's ELK logging stack with ClickHouse (saving roughly $1M/year) and speaking at DevOpsDays Bengaluru 2023. In November 2024 he joined Intuit as a Staff Software Engineer working on observability, based in Bengaluru. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026 — the sixth generation of the Banda Goel family.",
     notes: "Birth year approximate (calculated as 10.5 years older than Arnav Goel).",
+    sources: [
+      { label: "LinkedIn profile", url: "https://www.linkedin.com/in/palashg/" },
+    ],
   },
   {
     slug: "preksha-agarwal",
@@ -495,7 +506,8 @@ export const people: Person[] = [
     parents: { father: "vinod-goel", mother: "neelam-agarwal-vinod" },
     spouse: { slug: "manmohan-agrawal-kanpur" },
     publicity: "full",
-    bio: "Palak Goel is the daughter of Vinod and Neelam Agarwal Goel. She is married to Manmohan Agrawal, who runs a wire manufacturing business in Kanpur.",
+    bio:
+      "Palak Goel is the daughter of Vinod and Neelam Agarwal Goel. She did her entire K-12 education at KCNIT Banda, growing up in the family home in Banda. She is married to Manmohan Agrawal, who runs MP Wire India (M. P. Wire Industries), a wire and fencing products manufacturer in Kanpur.",
   },
   {
     slug: "manmohan-agrawal-kanpur",
@@ -516,14 +528,32 @@ export const people: Person[] = [
   },
   {
     slug: "shally-goel",
-    name: "Shally Goel",
+    name: "Shourya Goel",
+    altNames: ["Shally"],
     sex: "F",
     isLiving: true,
     generation: 4,
     familyRole: "Paternal first cousin",
+    currentLocation: "Bhagalpur, Bihar, India",
     parents: { father: "shobhit-goel", mother: "roli" },
+    spouse: { slug: "shally-husband" },
     publicity: "summary",
-    bio: "Daughter of Shobhit and Roli Goel.",
+    bio:
+      "Shourya Goel — known within the family as Shally — is the daughter of Shobhit and Roli Goel. She lives in Bhagalpur, Bihar with her husband; the couple owns rental properties and mills in the state.",
+  },
+  {
+    slug: "shally-husband",
+    name: "Shourya's husband (name TBD)",
+    sex: "M",
+    isLiving: true,
+    generation: 4,
+    familyRole: "Husband of Shourya (Shally) Goel",
+    currentLocation: "Bhagalpur, Bihar, India",
+    occupation: "Owns rental properties and mills in Bihar (with Shourya)",
+    spouse: { slug: "shally-goel" },
+    publicity: "summary",
+    bio:
+      "Husband of Shourya Goel (known as Shally). Based in Bhagalpur, Bihar, where the couple owns rental properties and mills. Name to be confirmed.",
   },
   {
     slug: "esha-goel",
@@ -532,9 +562,15 @@ export const people: Person[] = [
     isLiving: true,
     generation: 4,
     familyRole: "Paternal first cousin",
+    currentLocation: "Satna, Madhya Pradesh, India",
+    occupation: "Chartered Accountant (qualified Sept 2025)",
     parents: { father: "shobhit-goel", mother: "roli" },
     publicity: "summary",
-    bio: "Daughter of Shobhit and Roli Goel.",
+    bio:
+      "Esha Goel is the daughter of Shobhit and Roli Goel. She studied at the Institute of Chartered Accountants of India (2019–2024) and qualified as a Chartered Accountant in September 2025, securing All-India Rank 28 at the CA Foundation level. She has been an Article Trainee at Preeti Jain & Associates in India since September 2022. Based in Satna, Madhya Pradesh.",
+    sources: [
+      { label: "LinkedIn profile", url: "https://www.linkedin.com/in/esha-goel-a31b14220/" },
+    ],
   },
   {
     slug: "rhitik-goel",
@@ -559,9 +595,21 @@ export const people: Person[] = [
     occupation: "Runs Dubai office of AG Shares & Securities",
     businessSlugs: ["ag-shares-securities"],
     parents: { mother: "seema-agarwal" },
+    spouse: { slug: "sugandha-agarwal" },
     publicity: "full",
     bio:
-      "Aditya Agarwal is the son of Seema Agarwal (née Goel). He lives in Dubai, UAE, where he runs the Dubai branch of the family stockbroking firm AG Shares & Securities — the company his father founded and which is registered in Agra, Uttar Pradesh.",
+      "Aditya Agarwal is the son of Seema Agarwal (née Goel). He lives in Dubai, UAE, where he runs the Dubai branch of the family stockbroking firm AG Shares & Securities — the company his father founded and which is registered in Agra, Uttar Pradesh. Husband of Sugandha Agarwal.",
+  },
+  {
+    slug: "sugandha-agarwal",
+    name: "Sugandha Agarwal",
+    sex: "F",
+    isLiving: true,
+    generation: 4,
+    familyRole: "Wife of Aditya Agarwal",
+    spouse: { slug: "aditya-agarwal" },
+    publicity: "summary",
+    bio: "Wife of Aditya Agarwal.",
   },
   {
     slug: "anu-agarwal",
@@ -688,9 +736,15 @@ export const people: Person[] = [
     generation: 4,
     familyRole: "Sister",
     relationshipToArnav: "Sister",
+    currentLocation: "Gujarat, India",
+    occupation: "Area Field Marketing Manager, Pidilite Industries Limited",
     parents: { father: "rohit-goel", mother: "richa-goel" },
     publicity: "summary",
-    bio: "Aditi Goel, daughter of Rohit and Richa Goel, was born in Kanpur, Uttar Pradesh. Elder sister of Arnav Goel.",
+    bio:
+      "Aditi Goel, daughter of Rohit and Richa Goel, was born in Kanpur, Uttar Pradesh. Elder sister of Arnav Goel. She studied English Language and Literature at Indraprastha College for Women, Delhi (2016–2019), where she was active in the English Literary Society and the Leaders For Tomorrow NGO, and then earned her MBA in Marketing from NMIMS Mumbai (2020–2022), where she served as Vice President of ADverb, the school's media, marketing, branding and advertising cell. She joined Pidilite Industries in 2022 as a Management Trainee in Mumbai and is currently based in Gujarat as an Area Field Marketing Manager.",
+    sources: [
+      { label: "LinkedIn profile", url: "https://www.linkedin.com/in/aditigoel1311/" },
+    ],
   },
 
   // ============ GENERATION 4 — Honey's daughter ============

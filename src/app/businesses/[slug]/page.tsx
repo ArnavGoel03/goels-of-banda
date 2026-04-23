@@ -10,6 +10,7 @@ import {
   businessUrl,
 } from "@/lib/schema";
 import { site } from "@/data/config";
+import { linkify } from "@/lib/linkify";
 
 export function generateStaticParams() {
   return businesses.map((b) => ({ slug: b.slug }));
@@ -80,22 +81,23 @@ export default async function BusinessPage({ params }: { params: Params }) {
             {b.established ? (
               <Fact label="Established">{b.established}</Fact>
             ) : null}
-            {b.website ? (
-              <Fact label="Website">
-                <a
-                  href={b.website}
-                  rel="noopener"
-                  className="text-accent-700 underline"
-                >
-                  {new URL(b.website).hostname}
-                </a>
-              </Fact>
-            ) : null}
           </dl>
+          {b.website ? (
+            <a
+              href={b.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-1.5 rounded-md border border-accent-700 bg-accent-700 px-4 py-2 text-sm font-medium text-parchment hover:bg-accent-800 hover:border-accent-800"
+            >
+              Visit {new URL(b.website).hostname.replace(/^www\./, "")} ↗
+            </a>
+          ) : null}
         </header>
 
         <section className="prose-family mt-8">
-          <p className="lead">{b.description}</p>
+          <p className="lead">
+            {linkify(b.description, [`/businesses/${b.slug}`])}
+          </p>
         </section>
 
         {operators.length > 0 ? (

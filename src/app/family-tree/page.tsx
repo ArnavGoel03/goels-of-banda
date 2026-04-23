@@ -30,8 +30,8 @@ export default function FamilyTreePage() {
         </h1>
         <p className="mt-3 max-w-2xl text-ink-600">
           Zoom and pan the tree below. Click any name to open that person&rsquo;s page. On
-          desktop use the scroll wheel or the zoom buttons; on a phone, pinch to zoom and
-          drag with one finger.
+          desktop hold ⌘ (or Ctrl) while scrolling — or use the zoom buttons — so regular
+          page scrolling still works. On a phone, pinch to zoom and drag with one finger.
         </p>
       </section>
 

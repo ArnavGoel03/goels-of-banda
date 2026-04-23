@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { websiteJsonLd } from "@/lib/schema";
+import { SearchProvider } from "@/components/search/SearchProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -94,9 +95,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <JsonLd data={websiteJsonLd()} />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SearchProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SearchProvider>
       </body>
     </html>
   );

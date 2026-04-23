@@ -38,11 +38,15 @@ export default function BusinessesPage() {
       <section className="mx-auto max-w-5xl px-6 pb-12">
         <div className="grid gap-4 md:grid-cols-2">
           {businesses.map((b) => (
-            <Link
+            <div
               key={b.slug}
-              href={`/businesses/${b.slug}`}
-              className="group block rounded-md border border-ink-100 bg-parchment p-5 border-l-2 border-l-gold transition-all hover:-translate-y-0.5 hover:border-accent-400 hover:shadow-sm"
+              className="group relative flex flex-col rounded-md border border-ink-100 border-l-2 border-l-gold bg-parchment p-5 transition-all hover:-translate-y-0.5 hover:border-accent-400 hover:shadow-sm"
             >
+              <Link
+                href={`/businesses/${b.slug}`}
+                className="absolute inset-0 rounded-md"
+                aria-label={`Open ${b.name}`}
+              />
               <p className="font-serif text-xl font-semibold text-ink-900 group-hover:text-accent-700">
                 {b.name}
               </p>
@@ -52,11 +56,16 @@ export default function BusinessesPage() {
                 {b.established ? ` · est. ${b.established}` : ""}
               </p>
               {b.website ? (
-                <p className="mt-2 text-xs text-ink-500">
-                  {new URL(b.website).hostname}
-                </p>
+                <a
+                  href={b.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 mt-3 inline-flex w-fit items-center gap-1 rounded-md border border-ink-100 bg-parchment-dark px-2.5 py-1 text-xs text-accent-700 hover:border-accent-400 hover:text-accent-800"
+                >
+                  {new URL(b.website).hostname.replace(/^www\./, "")} ↗
+                </a>
               ) : null}
-            </Link>
+            </div>
           ))}
         </div>
       </section>

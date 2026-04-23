@@ -20,6 +20,7 @@ export const businesses: Business[] = [
     city: "Banda",
     state: "Uttar Pradesh",
     country: "India",
+    website: "https://gondilalsaraf.com/",
     description:
       "A jewellery shop in the heart of Banda opened by Radha Krishna Goel after he stepped aside from his share of the ancestral firm and gave it to his three younger brothers. He named his new shop 'Gondilal Saraf' — preserving the founder's name forward while dropping 'Ganesh Prasad' from the title. Run today by Rohit and Vinod Goel, Radha Krishna's sons.",
     runByPersonSlugs: ["rohit-goel", "vinod-goel"],
@@ -63,8 +64,8 @@ export const businesses: Business[] = [
     established: 1994,
     website: "https://www.claycraftindia.com/",
     description:
-      "A major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan. Established in 1994 by the Agarwal family; FY25 revenue approximately $148M. Deepak Agarwal — husband of Vijaya Agarwal (née Goel, daughter of Manmohan Goel of Banda) — is a named co-founder and current director. Company CIN: U26933RJ1988PTC004677.",
-    runByPersonSlugs: ["deepak-agarwal"],
+      "A major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan. Established in 1994 by the Agarwal family; FY25 revenue approximately $148M. Deepak Agarwal — husband of Vijaya Agarwal (née Goel, daughter of Manmohan Goel of Banda) — is a named co-founder and current director; his two brothers jointly run the company alongside him. Vijaya Agarwal handles creative direction for the brand and designs new tableware collections. Company CIN: U26933RJ1988PTC004677.",
+    runByPersonSlugs: ["deepak-agarwal", "vijaya-agarwal"],
     sources: [
       { label: "Corporate Leadership page", url: "https://corporate.claycraftindia.com/leadership-management/" },
       { label: "ZaubaCorp filing", url: "https://www.zaubacorp.com/company/CLAY-CRAFT-INDIA-PVT-LTD/U26933RJ1988PTC004677" },
