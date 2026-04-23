@@ -31,7 +31,7 @@ export async function generateMetadata({
     description: b.description.slice(0, 170),
     alternates: { canonical: `/businesses/${slug}` },
     openGraph: {
-      title: `${b.name} — ${site.shortName}`,
+      title: `${b.name}, ${site.shortName}`,
       description: b.description.slice(0, 170),
       url: businessUrl(slug),
     },

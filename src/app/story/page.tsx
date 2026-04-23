@@ -45,42 +45,42 @@ export default function StoryPage() {
           founder&apos;s name forward for nearly two hundred years.
         </p>
 
-        <h2>The namesakes — 1820s, Banda</h2>
+        <h2>The namesakes, 1820s, Banda</h2>
         <p>
           The Goel family&apos;s presence in Banda begins in the 1820s with two brothers:{" "}
           <strong>Ganesh Prasad Goel</strong> and <strong>Gondilal Goel</strong>. They are
           the earliest named ancestors in the family&apos;s oral record. Of the two,{" "}
           Gondilal is on the direct paternal line of the current generation; Ganesh
-          Prasad is his brother — the great-granduncle of their great-grandsons and
+          Prasad is his brother, the great-granduncle of their great-grandsons and
           onward.
         </p>
 
-        <h2>The founding of the firm — next generation</h2>
+        <h2>The founding of the firm, next generation</h2>
         <p>
           Gondilal&apos;s son opened a jewellery shop in Banda and gave it a compound name
           that honored both older brothers:{" "}
-          <strong>&ldquo;Ganesh Prasad Gondilal Saraf&rdquo;</strong> — literally,{" "}
+          <strong>&ldquo;Ganesh Prasad Gondilal Saraf&rdquo;</strong>, literally,{" "}
           <em>the firm of Ganesh Prasad, son-of-Gondilal, jewellers</em>. It is a classic
           North Indian naming convention; in a single business title the founder&apos;s
           name, his father&apos;s name, and the trade are all preserved. That firm has
           run continuously in Banda for around 150 years.
         </p>
 
-        <h2>Three unnamed generations — 1850s to 1910s</h2>
+        <h2>Three unnamed generations, 1850s to 1910s</h2>
         <p>
           Between the namesake generation and the current family&apos;s grandfather
           (Radha Krishna Goel, born 1942), there are three intermediate ancestors whose
-          names have yet to be recovered — Gondilal&apos;s son (the shop founder, c. 1850s),
+          names have yet to be recovered, Gondilal&apos;s son (the shop founder, c. 1850s),
           his grandson (c. 1880s), and his great-grandson (c. 1910s, the father of Radha
           Krishna and his six siblings).
         </p>
 
-        <h2>The split — 1970s, Banda</h2>
+        <h2>The split, 1970s, Banda</h2>
         <p>
           When the ancestral firm reached <strong>Radha Krishna Goel</strong>, the eldest
           of four brothers, he stepped aside and gave up his share to his three younger
           brothers. He opened a separate jewellery shop in the heart of Banda and named
-          it simply <strong>&ldquo;Gondilal Saraf&rdquo;</strong> — dropping &ldquo;Ganesh
+          it simply <strong>&ldquo;Gondilal Saraf&rdquo;</strong>, dropping &ldquo;Ganesh
           Prasad&rdquo; from the title and keeping only his direct ancestor&apos;s name.
           That new shop is run today by his sons Rohit and Vinod Goel.
         </p>
@@ -93,15 +93,15 @@ export default function StoryPage() {
         </p>
         <ul>
           <li>
-            <strong>Upper floor (via stairs):</strong> the second brother&apos;s shop —
+            <strong>Upper floor (via stairs):</strong> the second brother&apos;s shop, 
             originally gold-only, now selling both gold and silver.
           </li>
           <li>
-            <strong>Ground floor (one half):</strong> Manmohan Goel&apos;s shop — gold and
+            <strong>Ground floor (one half):</strong> Manmohan Goel&apos;s shop, gold and
             silver.
           </li>
           <li>
-            <strong>Ground floor (other half):</strong> Sohan Goel&apos;s shop — gold and
+            <strong>Ground floor (other half):</strong> Sohan Goel&apos;s shop, gold and
             silver, co-run with his youngest son.
           </li>
         </ul>
@@ -111,7 +111,7 @@ export default function StoryPage() {
           Counting Radha Krishna&apos;s standalone shop (Gondilal Saraf), the modernised
           offshoot run by Manmohan&apos;s son Avijit &ldquo;Honey&rdquo; Goel (Gondilal
           Kiva, Gular Naka, Banda, est. 2016), and a new shop opened by two of
-          Sohan&apos;s elder sons — the family today operates at least{" "}
+          Sohan&apos;s elder sons, the family today operates at least{" "}
           <strong>six active jewellery shops in Banda</strong>, all tracing to a single
           ancestor named Gondilal.
         </p>

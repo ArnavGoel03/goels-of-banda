@@ -14,7 +14,7 @@ export const people: Person[] = [
     relationshipToArnav: "Great-great-great-great-grandfather",
     publicity: "full",
     bio:
-      "Gondilal Goel is one of the two founding-generation brothers of the Goel family of Banda. Along with his brother Ganesh Prasad Goel, Gondilal's name is preserved in the title of the family saraf (jewellery) firm, 'Ganesh Prasad Gondilal Saraf', which Gondilal's son founded one generation later in Banda, Uttar Pradesh. Four generations below Gondilal, his direct descendant Radha Krishna Goel (born 1942) opened a separate shop in the heart of Banda and named it simply 'Gondilal Saraf', preserving the founder's name forward. That shop is run today by Rohit and Vinod Goel. The surviving firm names — Gondilal Saraf, Gondilal Kiva — all trace to him.",
+      "Gondilal Goel is one of the two founding-generation brothers of the Goel family of Banda. Along with his brother Ganesh Prasad Goel, Gondilal's name is preserved in the title of the family saraf (jewellery) firm, 'Ganesh Prasad Gondilal Saraf', which Gondilal's son founded one generation later in Banda, Uttar Pradesh. Four generations below Gondilal, his direct descendant Radha Krishna Goel (born 1942) opened a separate shop in the heart of Banda and named it simply 'Gondilal Saraf', preserving the founder's name forward. That shop is run today by Rohit and Vinod Goel. The surviving firm names, Gondilal Saraf, Gondilal Kiva, all trace to him.",
     notes: "Precise birth and death dates unknown. Estimated 1820s based on generational arithmetic (four generations above Radha Krishna b. 1942).",
   },
   {
@@ -29,11 +29,11 @@ export const people: Person[] = [
     relationshipToArnav: "Great-great-great-great-granduncle",
     publicity: "full",
     bio:
-      "Ganesh Prasad Goel was the brother of Gondilal Goel. The two brothers are preserved together in the name of the family jewellery firm 'Ganesh Prasad Gondilal Saraf', founded by Gondilal's son in Banda — a classic North Indian naming pattern where the founding brothers' names are both honored in the business title. While Gondilal is on Arnav Goel's direct paternal line, Ganesh Prasad is his great-granduncle through the sibling branch.",
+      "Ganesh Prasad Goel was the brother of Gondilal Goel. The two brothers are preserved together in the name of the family jewellery firm 'Ganesh Prasad Gondilal Saraf', founded by Gondilal's son in Banda, a classic North Indian naming pattern where the founding brothers' names are both honored in the business title. While Gondilal is on Arnav Goel's direct paternal line, Ganesh Prasad is his great-granduncle through the sibling branch.",
     notes: "Exact dates unknown. Brother-sibling relationship with Gondilal confirmed by family record; the firm name 'Ganesh Prasad Gondilal' honors both brothers.",
   },
 
-  // ============ GENERATION 2 — Radha Krishna's generation, paternal ============
+  // ============ GENERATION 2, Radha Krishna's generation, paternal ============
   {
     slug: "radha-krishna-goel",
     name: "Radha Krishna Goel",
@@ -51,7 +51,7 @@ export const people: Person[] = [
     spouse: { slug: "rani-agarwal-dadiji" },
     publicity: "full",
     bio:
-      "Radha Krishna Goel, known within the family as Dadaji, is the eldest of seven siblings — four brothers (himself, one unnamed, Manmohan, and Sohan) and three sisters — in the Banda Goel family. His father owned shares in the ancestral firm 'Ganesh Prasad Gondilal Saraf', founded four generations earlier by a descendant of the founding brothers Gondilal and Ganesh Prasad Goel. As eldest, Radha Krishna gave up his share of the ancestral firm to his three younger brothers and opened a separate jewellery shop in the heart of Banda, which he named simply 'Gondilal Saraf' — preserving his direct ancestor's name. That shop is run today by his sons Rohit and Vinod.",
+      "Radha Krishna Goel, known within the family as Dadaji, is the eldest of seven siblings, four brothers (himself, one unnamed, Manmohan, and Sohan) and three sisters, in the Banda Goel family. His father owned shares in the ancestral firm 'Ganesh Prasad Gondilal Saraf', founded four generations earlier by a descendant of the founding brothers Gondilal and Ganesh Prasad Goel. As eldest, Radha Krishna gave up his share of the ancestral firm to his three younger brothers and opened a separate jewellery shop in the heart of Banda, which he named simply 'Gondilal Saraf', preserving his direct ancestor's name. That shop is run today by his sons Rohit and Vinod.",
   },
   {
     slug: "rani-agarwal-dadiji",
@@ -87,8 +87,8 @@ export const people: Person[] = [
     children: ["avijit-goel", "vijaya-agarwal"],
     publicity: "full",
     bio:
-      "Manmohan Goel is the third of four brothers (after Radha Krishna, the unnamed second, and before the youngest, Sohan) in the Banda Goel family. He runs one of the three jewellery shops inside the ancestral 'Ganesh Prasad Gondilal Saraf' building on the ground floor — a shop that originally specialised in silver and has since grown to offer both gold and silver. His son Avijit 'Honey' Goel runs the family's modern store, Gondilal Kiva, in Gular Naka, Banda. His daughter Vijaya married Deepak Agarwal, a named co-founder and director of Clay Craft India.",
-    notes: "Name collision: Palak Goel's husband is also named Manmohan Agrawal (Kanpur) — a different person.",
+      "Manmohan Goel is the third of four brothers (after Radha Krishna, the unnamed second, and before the youngest, Sohan) in the Banda Goel family. He runs one of the three jewellery shops inside the ancestral 'Ganesh Prasad Gondilal Saraf' building on the ground floor, a shop that originally specialised in silver and has since grown to offer both gold and silver. His son Avijit 'Honey' Goel runs the family's modern store, Gondilal Kiva, in Gular Naka, Banda. His daughter Vijaya married Deepak Agarwal, a named co-founder and director of Clay Craft India.",
+    notes: "Name collision: Palak Goel's husband is also named Manmohan Agrawal (Kanpur), a different person.",
   },
   {
     slug: "nandita-goel",
@@ -120,7 +120,7 @@ export const people: Person[] = [
       "Sohan Goel is the youngest of four brothers in Radha Krishna Goel's generation. He runs one of the three jewellery shops inside the ancestral 'Ganesh Prasad Gondilal Saraf' building on the ground floor together with his youngest son. His two elder sons, known by the family nicknames 'Chanu' and 'Tukku', have opened their own separate jewellery shop nearby. Sohan and his wife also raised an adopted daughter, Khushi Agrawal, who is biologically his wife's sister's daughter.",
   },
 
-  // ============ GENERATION 2 — Maternal grandparents ============
+  // ============ GENERATION 2, Maternal grandparents ============
   {
     slug: "ramesh-chandra-agarwal",
     name: "Ramesh Chandra Agarwal",
@@ -136,7 +136,7 @@ export const people: Person[] = [
     children: ["vivek-agarwal", "nitin-agarwal", "kapil-agarwal", "richa-goel"],
     publicity: "full",
     bio:
-      "Ramesh Chandra Agarwal, known as Nanaji, lives in Jhansi, Uttar Pradesh, the city where he and all twelve of his siblings (seven brothers and five sisters) make their home — a striking degree of geographic clustering for an Indian family of this size. Father of Vivek, Nitin, Kapil, and Neelam (Richa Goel).",
+      "Ramesh Chandra Agarwal, known as Nanaji, lives in Jhansi, Uttar Pradesh, the city where he and all twelve of his siblings (seven brothers and five sisters) make their home, a striking degree of geographic clustering for an Indian family of this size. Father of Vivek, Nitin, Kapil, and Neelam (Richa Goel).",
   },
   {
     slug: "prem-kumari",
@@ -155,7 +155,7 @@ export const people: Person[] = [
       "Prem Kumari, known as Naniji, was the wife of Ramesh Chandra Agarwal and the mother of Vivek, Nitin, Kapil, and Neelam (Richa Goel). She lived in Jhansi, Uttar Pradesh, and passed away in 2013.",
   },
 
-  // ============ GENERATION 3 — Rohit's generation, paternal ============
+  // ============ GENERATION 3, Rohit's generation, paternal ============
   {
     slug: "vinod-goel",
     name: "Vinod Goel",
@@ -190,7 +190,7 @@ export const people: Person[] = [
     birthFamilySurname: "Agarwal",
     publicity: "summary",
     bio:
-      "Neelam Agarwal, wife of Vinod Goel, is from Jhansi, Uttar Pradesh. Mother of Palash and Palak Goel. She shares a name with her sister-in-law (Richa Goel, née Neelam Agarwal) — both brothers married women named Neelam Agarwal from Jhansi, a long-running marriage tie between the Banda Goels and the Jhansi Agarwals.",
+      "Neelam Agarwal, wife of Vinod Goel, is from Jhansi, Uttar Pradesh. Mother of Palash and Palak Goel. She shares a name with her sister-in-law (Richa Goel, née Neelam Agarwal), both brothers married women named Neelam Agarwal from Jhansi, a long-running marriage tie between the Banda Goels and the Jhansi Agarwals.",
   },
   {
     slug: "shobhit-goel",
@@ -276,10 +276,10 @@ export const people: Person[] = [
     birthFamilySurname: "Agarwal",
     publicity: "full",
     bio:
-      "Richa Goel — born Neelam Agarwal in 1973 in Jhansi — married Rohit Goel and took the post-marriage name Richa Goel, per tradition in some North Indian Agarwal families. Mother of Arnav and Aditi Goel. One of two Neelam Agarwals (the other being Vinod Goel's wife) who married Goel brothers from Banda; the pattern is part of a long-running intermarriage tie between the Banda Goels and the Jhansi Agarwals.",
+      "Richa Goel, born Neelam Agarwal in 1973 in Jhansi, married Rohit Goel and took the post-marriage name Richa Goel, per tradition in some North Indian Agarwal families. Mother of Arnav and Aditi Goel. One of two Neelam Agarwals (the other being Vinod Goel's wife) who married Goel brothers from Banda; the pattern is part of a long-running intermarriage tie between the Banda Goels and the Jhansi Agarwals.",
   },
 
-  // ============ GENERATION 3 — Mom's siblings (maternal side) ============
+  // ============ GENERATION 3, Mom's siblings (maternal side) ============
   {
     slug: "vivek-agarwal",
     name: "Vivek Agarwal",
@@ -296,7 +296,7 @@ export const people: Person[] = [
     children: ["anayra-agarwal", "rhidhaan-agarwal"],
     publicity: "full",
     bio:
-      "Vivek Agarwal, born in Jhansi, is the eldest son of Ramesh Chandra and Prem Kumari. He studied Electrical and Electronics Engineering at IIT Delhi (1997–2001), including a semester on exchange at EPFL in Switzerland. After moving to the United States, he spent over a decade in Bay Area connected-device and IoT engineering — Engineering Manager R&D at SNRLabs (2010–13, acquired by Seven Networks), Director/Manager of Software Engineering at Seven Networks (2013–15), and nearly seven years as Sr. Manager / Technical Lead at Aeris Communications (2015–22), a leader in IoT and connected-car platforms. He then led a team at Autonomic before moving to Ford Motor Company in 2023, where he currently works as a Software Engineering Leader (Principal Software Engineer). Lives in Foster City, California with his wife Rashi and their two children, Anayra and Rhidhaan.",
+      "Vivek Agarwal, born in Jhansi, is the eldest son of Ramesh Chandra and Prem Kumari. He studied Electrical and Electronics Engineering at IIT Delhi (1997–2001), including a semester on exchange at EPFL in Switzerland. After moving to the United States, he spent over a decade in Bay Area connected-device and IoT engineering, Engineering Manager R&D at SNRLabs (2010–13, acquired by Seven Networks), Director/Manager of Software Engineering at Seven Networks (2013–15), and nearly seven years as Sr. Manager / Technical Lead at Aeris Communications (2015–22), a leader in IoT and connected-car platforms. He then led a team at Autonomic before moving to Ford Motor Company in 2023, where he currently works as a Software Engineering Leader (Principal Software Engineer). Lives in Foster City, California with his wife Rashi and their two children, Anayra and Rhidhaan.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/vivek-agarwal-46119b2/" },
     ],
@@ -378,7 +378,7 @@ export const people: Person[] = [
     bio: "Nidhi Modi is from the Modi family of Hathras, Uttar Pradesh. Lives in Jhansi with her husband Kapil Agarwal.",
   },
 
-  // ============ GENERATION 3 — Manmohan's children ============
+  // ============ GENERATION 3, Manmohan's children ============
   {
     slug: "avijit-goel",
     name: "Avijit Goel",
@@ -395,7 +395,7 @@ export const people: Person[] = [
     children: ["vashundhara-goel"],
     publicity: "full",
     bio:
-      "Avijit Goel, known in the family as Honey, owns Gondilal Kiva — a gold and diamond jewellery showroom in Gular Naka, Banda, established in 2016 under the family's Gondilal name. The business has an online catalogue at gondilal.com. He is the son of Manmohan and Nandita Goel.",
+      "Avijit Goel, known in the family as Honey, owns Gondilal Kiva, a gold and diamond jewellery showroom in Gular Naka, Banda, established in 2016 under the family's Gondilal name. The business has an online catalogue at gondilal.com. He is the son of Manmohan and Nandita Goel.",
     sources: [
       { label: "Gondilal Kiva official website", url: "https://www.gondilal.com/" },
       { label: "Gondilal Kiva on Justdial", url: "https://www.justdial.com/Banda/Gondilal-Kiva-Gular-Naka/9999PX519-X519-170401164503-I6U5_BZDET" },
@@ -449,15 +449,15 @@ export const people: Person[] = [
     spouse: { slug: "vijaya-agarwal" },
     publicity: "full",
     bio:
-      "Deepak Agarwal is a named co-founder and current director of Clay Craft India Private Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue ~$148M). Deepak has two brothers who run Clay Craft alongside him — the three of them jointly operate the company as the founding Agarwal family. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand. Deepak's family is the Agarwal family that owns Clay Craft.",
+      "Deepak Agarwal is a named co-founder and current director of Clay Craft India Private Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue ~$148M). Deepak has two brothers who run Clay Craft alongside him, the three of them jointly operate the company as the founding Agarwal family. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand. Deepak's family is the Agarwal family that owns Clay Craft.",
     sources: [
-      { label: "Clay Craft India — Corporate Leadership", url: "https://corporate.claycraftindia.com/leadership-management/" },
+      { label: "Clay Craft India, Corporate Leadership", url: "https://corporate.claycraftindia.com/leadership-management/" },
       { label: "Clay Craft India on ZaubaCorp", url: "https://www.zaubacorp.com/company/CLAY-CRAFT-INDIA-PVT-LTD/U26933RJ1988PTC004677" },
       { label: "Clay Craft India on LinkedIn", url: "https://in.linkedin.com/company/clay-craft-india-private-limited" },
     ],
   },
 
-  // ============ GENERATION 4 — Arnav's cousins ============
+  // ============ GENERATION 4, Arnav's cousins ============
   {
     slug: "palash-goel",
     name: "Palash Goel",
@@ -474,7 +474,7 @@ export const people: Person[] = [
     children: ["raghav-goel"],
     publicity: "full",
     bio:
-      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. He attended The Scindia School in Gwalior (2006–2010) and studied Electronics and Instrumentation at BITS Pilani (2012–2016), where he was active in the Film Making Club. He began his career as a DevOps Intern at Exotel (2015), then worked as a Member of Technical Staff at VMware in Bengaluru (2016–2018) on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin. He moved to RIVIGO as a Software Development Engineer in Gurugram (2018–2019), building a Kubernetes-based virtual development environment, before joining Zomato in 2019, where he spent five years as SDE 2 and then SDE 3 — notably replacing the company's ELK logging stack with ClickHouse (saving roughly $1M/year) and speaking at DevOpsDays Bengaluru 2023. In November 2024 he joined Intuit as a Staff Software Engineer working on observability, based in Bengaluru. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026 — the sixth generation of the Banda Goel family.",
+      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. He attended The Scindia School in Gwalior (2006–2010) and studied Electronics and Instrumentation at BITS Pilani (2012–2016), where he was active in the Film Making Club. He began his career as a DevOps Intern at Exotel (2015), then worked as a Member of Technical Staff at VMware in Bengaluru (2016–2018) on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin. He moved to RIVIGO as a Software Development Engineer in Gurugram (2018–2019), building a Kubernetes-based virtual development environment, before joining Zomato in 2019, where he spent five years as SDE 2 and then SDE 3, notably replacing the company's ELK logging stack with ClickHouse (saving roughly $1M/year) and speaking at DevOpsDays Bengaluru 2023. In November 2024 he joined Intuit as a Staff Software Engineer working on observability, based in Bengaluru. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026, the sixth generation of the Banda Goel family.",
     notes: "Birth year approximate (calculated as 10.5 years older than Arnav Goel).",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/palashg/" },
@@ -539,7 +539,7 @@ export const people: Person[] = [
     spouse: { slug: "shally-husband" },
     publicity: "summary",
     bio:
-      "Shourya Goel — known within the family as Shally — is the daughter of Shobhit and Roli Goel. She lives in Bhagalpur, Bihar with her husband; the couple owns rental properties and mills in the state.",
+      "Shourya Goel, known within the family as Shally, is the daughter of Shobhit and Roli Goel. She lives in Bhagalpur, Bihar with her husband; the couple owns rental properties and mills in the state.",
   },
   {
     slug: "shally-husband",
@@ -598,7 +598,7 @@ export const people: Person[] = [
     spouse: { slug: "sugandha-agarwal" },
     publicity: "full",
     bio:
-      "Aditya Agarwal is the son of Seema Agarwal (née Goel). He lives in Dubai, UAE, where he runs the Dubai branch of the family stockbroking firm AG Shares & Securities — the company his father founded and which is registered in Agra, Uttar Pradesh. Husband of Sugandha Agarwal.",
+      "Aditya Agarwal is the son of Seema Agarwal (née Goel). He lives in Dubai, UAE, where he runs the Dubai branch of the family stockbroking firm AG Shares & Securities, the company his father founded and which is registered in Agra, Uttar Pradesh. Husband of Sugandha Agarwal.",
   },
   {
     slug: "sugandha-agarwal",
@@ -711,7 +711,7 @@ export const people: Person[] = [
     bio: "Daughter of Kapil and Nidhi Agarwal. Born in Jhansi.",
   },
 
-  // ============ GENERATION 4 — Arnav and Aditi ============
+  // ============ GENERATION 4, Arnav and Aditi ============
   {
     slug: "arnav-goel",
     name: "Arnav Goel",
@@ -722,10 +722,15 @@ export const people: Person[] = [
     generation: 4,
     familyRole: "Self",
     relationshipToArnav: "Self",
+    currentLocation: "La Jolla, California, USA",
+    occupation: "SWE Intern; undergraduate student at UC San Diego; member of Triton Quantitative Trading",
     parents: { father: "rohit-goel", mother: "richa-goel" },
     publicity: "full",
     bio:
-      "Arnav Goel, also known as Yash, was born 3 November 2004 in Banda, Uttar Pradesh. Son of Rohit and Richa Goel; younger brother of Aditi Goel. He is the seventh-generation member of the Goel family of Banda on the paternal side.",
+      "Arnav Goel, also known as Yash, was born 3 November 2004 in Banda, Uttar Pradesh. Son of Rohit and Richa Goel; younger brother of Aditi Goel. He is the seventh-generation member of the Goel family of Banda on the paternal side. He is an undergraduate at UC San Diego, a member of Triton Quantitative Trading, and is currently based in La Jolla, California while working as a software engineering intern.",
+    sources: [
+      { label: "LinkedIn profile", url: "https://www.linkedin.com/in/arnav-goel--/" },
+    ],
   },
   {
     slug: "aditi-goel",
@@ -747,7 +752,7 @@ export const people: Person[] = [
     ],
   },
 
-  // ============ GENERATION 4 — Honey's daughter ============
+  // ============ GENERATION 4, Honey's daughter ============
   {
     slug: "vashundhara-goel",
     name: "Vashundhara Goel",
@@ -762,7 +767,7 @@ export const people: Person[] = [
     bio: "Daughter of Avijit 'Honey' Goel and Shayana Goyal. Known in the family as Shivi. Currently studies in Dehradun.",
   },
 
-  // ============ GENERATION 5 — Newborn ============
+  // ============ GENERATION 5, Newborn ============
   {
     slug: "raghav-goel",
     name: "Raghav Goel",
@@ -777,7 +782,7 @@ export const people: Person[] = [
       "Raghav Goel, born 7 February 2026, is the youngest member of the Goel family of Banda. His birth brings four generations of the family into the same year on the paternal line: Radha Krishna (born 1942), Vinod (his grandfather), Palash (his father), and Raghav.",
   },
 
-  // ============ EXTENDED — Deceased sister's descendant ============
+  // ============ EXTENDED, Deceased sister's descendant ============
   {
     slug: "harsh-agarwal",
     name: "Harsh Agarwal",

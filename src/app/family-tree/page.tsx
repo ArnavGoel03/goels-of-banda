@@ -8,7 +8,7 @@ import { site } from "@/data/config";
 export const metadata: Metadata = {
   title: "Family tree",
   description:
-    "Interactive family tree of the Goel family of Banda, Uttar Pradesh — six generations from the 1820s to 2026, zoomable and pannable.",
+    "Interactive family tree of the Goel family of Banda, Uttar Pradesh, six generations from the 1820s to 2026, zoomable and pannable.",
   alternates: { canonical: "/family-tree" },
 };
 
@@ -30,7 +30,7 @@ export default function FamilyTreePage() {
         </h1>
         <p className="mt-3 max-w-2xl text-ink-600">
           Zoom and pan the tree below. Click any name to open that person&rsquo;s page. On
-          desktop hold ⌘ (or Ctrl) while scrolling — or use the zoom buttons — so regular
+          desktop hold ⌘ (or Ctrl) while scrolling, or use the zoom buttons, so regular
           page scrolling still works. On a phone, pinch to zoom and drag with one finger.
         </p>
       </section>

@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <p className="font-serif text-base font-semibold text-ink-900">{site.shortName}</p>
             <p className="mt-2 leading-relaxed">
-              A living record of the Goel family of Banda, Uttar Pradesh — maintained collaboratively by the family.
+              A living record of the Goel family of Banda, Uttar Pradesh, maintained collaboratively by the family.
             </p>
           </div>
           <div>

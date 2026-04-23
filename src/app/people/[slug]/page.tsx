@@ -41,7 +41,7 @@ export async function generateMetadata({
       ? undefined
       : { index: false, follow: false, nocache: true },
     openGraph: {
-      title: `${title} — ${site.shortName}`,
+      title: `${title}, ${site.shortName}`,
       description: desc,
       url: `${site.baseUrl}/people/${slug}`,
       type: "profile",

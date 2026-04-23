@@ -7,12 +7,12 @@ import { breadcrumbJsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Contribute",
   description:
-    "Help complete the Goel family of Banda's living history — add names, correct details, share stories or photos.",
+    "Help complete the Goel family of Banda's living history, add names, correct details, share stories or photos.",
   alternates: { canonical: "/contribute" },
 };
 
 const newIssueTemplate = encodeURIComponent(
-  `### Who / what does this concern?\n_(name or page, e.g. "Rohit Goel" or "/places/banda")_\n\n### What should be added, changed, or corrected?\n\n### Source or how you know this\n_(optional — dadaji told you, a document, a photo, etc.)_\n\n### Anything else\n`,
+  `### Who / what does this concern?\n_(name or page, e.g. "Rohit Goel" or "/places/banda")_\n\n### What should be added, changed, or corrected?\n\n### Source or how you know this\n_(optional, dadaji told you, a document, a photo, etc.)_\n\n### Anything else\n`,
 );
 
 const issueUrl = `${site.repoUrl}/issues/new?labels=contribution&title=Family%20tree%20addition&body=${newIssueTemplate}`;
@@ -36,7 +36,7 @@ export default function ContributePage() {
         </h1>
 
         <p className="lead mt-4">
-          This tree is a living record of the family — not a finished book. Every page
+          This tree is a living record of the family, not a finished book. Every page
           still has gaps. If you know something that should be added or corrected,
           please contribute.
         </p>
@@ -63,7 +63,7 @@ export default function ContributePage() {
           Not on GitHub? Send an email to{" "}
           <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> with the
           addition or correction. Please include the person or page it concerns, what
-          should change, and — if you&apos;re comfortable — how you know.
+          should change, and, if you&apos;re comfortable, how you know.
         </p>
 
         <h3>3. Submit a pull request (technical)</h3>
@@ -84,11 +84,11 @@ export default function ContributePage() {
             sons and 1 Australia-based daughter.
           </li>
           <li>
-            The names of the three paternal grand-aunts (Radha Krishna&apos;s sisters) —
+            The names of the three paternal grand-aunts (Radha Krishna&apos;s sisters), 
             the one in Banda, the one in Gurugram, and the one who passed (in Allahabad).
           </li>
           <li>
-            The 12 siblings of Ramesh Chandra Agarwal (maternal grandfather) — all of
+            The 12 siblings of Ramesh Chandra Agarwal (maternal grandfather), all of
             whom live in Jhansi.
           </li>
           <li>
@@ -97,7 +97,7 @@ export default function ContributePage() {
           </li>
           <li>Exact birth years for most grandparents and older cousins.</li>
           <li>
-            Photographs of the Ganesh Prasad Gondilal Saraf heritage building — exterior,
+            Photographs of the Ganesh Prasad Gondilal Saraf heritage building, exterior,
             the stairs to the upper-floor shop, and the ground-floor shopfronts.
           </li>
         </ul>
@@ -106,7 +106,7 @@ export default function ContributePage() {
         <p>
           Profiles of minors are minimal by design and are not indexed by search
           engines. If you are in the family and would prefer a profile be removed or
-          reduced, just ask — there is no argument required.{" "}
+          reduced, just ask, there is no argument required.{" "}
           <Link href="/faq">See the FAQ</Link> for more details.
         </p>
 

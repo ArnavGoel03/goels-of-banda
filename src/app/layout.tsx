@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(site.baseUrl),
   title: {
-    default: `${site.name} — Jewellers of Banda, Uttar Pradesh since the 1820s`,
+    default: `${site.name}, Jewellers of Banda, Uttar Pradesh since the 1820s`,
     template: `%s · ${site.shortName}`,
   },
   description: site.description,
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: site.locale,
     url: site.baseUrl,
     siteName: site.shortName,
-    title: `${site.name} — Jewellers of Banda since the 1820s`,
+    title: `${site.name}, Jewellers of Banda since the 1820s`,
     description: site.description,
   },
   twitter: {

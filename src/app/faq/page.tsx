@@ -7,7 +7,7 @@ import { site } from "@/data/config";
 export const metadata: Metadata = {
   title: "Frequently asked",
   description:
-    "Short, direct answers to common questions about the Goel family of Banda — the founding brothers, the heritage firm, who runs which shop today, and the family's connections to Clay Craft India, MP Wire India, and AG Shares & Securities.",
+    "Short, direct answers to common questions about the Goel family of Banda, the founding brothers, the heritage firm, who runs which shop today, and the family's connections to Clay Craft India, MP Wire India, and AG Shares & Securities.",
   alternates: { canonical: "/faq" },
 };
 
@@ -30,7 +30,7 @@ export default function FAQPage() {
           Questions &amp; short answers
         </h1>
         <p className="mt-3 max-w-2xl text-ink-600">
-          This page is formatted for AI answer engines as well as readers — each question
+          This page is formatted for AI answer engines as well as readers, each question
           has a short, factual, self-contained answer.
         </p>
 

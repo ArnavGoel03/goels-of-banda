@@ -8,7 +8,7 @@ import { site } from "@/data/config";
 export const metadata: Metadata = {
   title: "Everyone in the family",
   description:
-    "Every member of the Goel family of Banda — living, deceased, across generations and continents. Click any name for their individual profile.",
+    "Every member of the Goel family of Banda, living, deceased, across generations and continents. Click any name for their individual profile.",
   alternates: { canonical: "/people" },
 };
 
@@ -41,7 +41,7 @@ export default function PeoplePage() {
           Everyone in the family
         </h1>
         <p className="mt-3 max-w-2xl text-ink-600">
-          Organised by generation — from the founding brothers in the 1820s to
+          Organised by generation, from the founding brothers in the 1820s to
           Raghav, born February 2026. Click any card to open that person&rsquo;s full
           profile.
         </p>
@@ -71,15 +71,15 @@ export default function PeoplePage() {
 function genTitle(gen: number): string {
   switch (gen) {
     case 1:
-      return "Generation 1 — the founding brothers (1820s)";
+      return "Generation 1, the founding brothers (1820s)";
     case 2:
-      return "Generation 5 — grandparents' generation";
+      return "Generation 5, grandparents' generation";
     case 3:
-      return "Generation 6 — parents' generation";
+      return "Generation 6, parents' generation";
     case 4:
-      return "Generation 7 — cousins and Arnav's generation";
+      return "Generation 7, cousins and Arnav's generation";
     case 5:
-      return "Generation 8 — the newborn";
+      return "Generation 8, the newborn";
     default:
       return `Generation ${gen}`;
   }

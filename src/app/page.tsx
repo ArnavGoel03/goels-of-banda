@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: `${site.name} — 200 years of jewellers in Banda, Uttar Pradesh`,
+  title: `${site.name}, 200 years of jewellers in Banda, Uttar Pradesh`,
   description: site.description,
   alternates: { canonical: "/" },
 };
@@ -42,22 +42,22 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-6 py-10 prose-family">
         <h2>The founding story</h2>
         <p className="lead">
-          In the 1820s, two brothers — <strong>Ganesh Prasad Goel</strong> and{" "}
-          <strong>Gondilal Goel</strong> — settled in Banda, a small town in what is now
+          In the 1820s, two brothers, <strong>Ganesh Prasad Goel</strong> and{" "}
+          <strong>Gondilal Goel</strong>, settled in Banda, a small town in what is now
           Uttar Pradesh. A generation later, Gondilal&apos;s son opened a jewellery shop
           and named it after both his father and his uncle:{" "}
-          <em>&ldquo;Ganesh Prasad Gondilal Saraf&rdquo;</em> — the Hindi word{" "}
+          <em>&ldquo;Ganesh Prasad Gondilal Saraf&rdquo;</em>, the Hindi word{" "}
           <em>saraf</em> meaning goldsmith and silver-dealer.
         </p>
         <p>
           The shop has passed down within the family ever since. Today, the original
-          heritage building in the heart of Banda still stands — and still houses three
+          heritage building in the heart of Banda still stands, and still houses three
           separate jewellery shops, one upstairs and two on the ground floor, each run
           by a different branch of the family. Around it, the Goels now operate at
           least six jewellery businesses, all descending from the same 1820s founding.
         </p>
         <p>
-          This site tells that story — and traces the six generations that followed,
+          This site tells that story, and traces the six generations that followed,
           from Banda outward to Jhansi, Kanpur, Agra, Jaipur, Chandigarh, Dubai,
           California, Ohio, and beyond.
         </p>
@@ -86,7 +86,7 @@ export default function Home() {
           <ExploreCard
             href="/businesses"
             title="Family businesses"
-            copy={`${businesses.length} enterprises — from heritage jewellery to modern manufacturing.`}
+            copy={`${businesses.length} enterprises, from heritage jewellery to modern manufacturing.`}
           />
           <ExploreCard
             href="/places"
@@ -101,7 +101,7 @@ export default function Home() {
           <ExploreCard
             href="/contribute"
             title="Add a memory"
-            copy="Names, dates, stories, photos — help fill in what's missing."
+            copy="Names, dates, stories, photos, help fill in what's missing."
           />
         </div>
       </section>

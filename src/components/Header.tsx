@@ -18,6 +18,7 @@ export function Header() {
           <nav aria-label="Primary" className="hidden md:flex items-center gap-1 text-sm">
             <NavLink href="/story">Story</NavLink>
             <NavLink href="/family-tree">Tree</NavLink>
+            <NavLink href="/timeline">Timeline</NavLink>
             <NavLink href="/people">People</NavLink>
             <NavLink href="/businesses">Businesses</NavLink>
             <NavLink href="/places">Places</NavLink>

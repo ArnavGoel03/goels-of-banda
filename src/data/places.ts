@@ -5,7 +5,7 @@ export const places: Place[] = [
     slug: "banda",
     name: "Banda, Uttar Pradesh",
     country: "India",
-    connection: "Ancestral home of the Goel family — 200+ years. Six active family jewellery shops.",
+    connection: "Ancestral home of the Goel family, 200+ years. Six active family jewellery shops.",
     personSlugs: [
       "gondilal-goel",
       "ganesh-prasad-goel",
@@ -65,7 +65,7 @@ export const places: Place[] = [
     slug: "allahabad",
     name: "Allahabad (Prayagraj), Uttar Pradesh",
     country: "India",
-    connection: "Harsh Agarwal and his family — descendants of one of Radha Krishna Goel's three sisters.",
+    connection: "Harsh Agarwal and his family, descendants of one of Radha Krishna Goel's three sisters.",
     personSlugs: ["harsh-agarwal"],
     businessSlugs: ["harsh-construction"],
   },
@@ -80,14 +80,14 @@ export const places: Place[] = [
     slug: "hathras",
     name: "Hathras, Uttar Pradesh",
     country: "India",
-    connection: "Nidhi Modi's family — Kapil Agarwal's in-laws.",
+    connection: "Nidhi Modi's family, Kapil Agarwal's in-laws.",
     personSlugs: [],
   },
   {
     slug: "delhi",
     name: "Delhi",
     country: "India",
-    connection: "Rashi Agarwal's family — Vivek Agarwal's in-laws.",
+    connection: "Rashi Agarwal's family, Vivek Agarwal's in-laws.",
     personSlugs: [],
   },
   {
@@ -125,7 +125,7 @@ export const places: Place[] = [
     name: "Foster City, California",
     country: "USA",
     connection:
-      "Vivek and Rashi Agarwal live here with their children Anayra and Rhidhaan — the family's California branch.",
+      "Vivek and Rashi Agarwal live here with their children Anayra and Rhidhaan, the family's California branch.",
     personSlugs: ["vivek-agarwal", "rashi-agarwal", "anayra-agarwal", "rhidhaan-agarwal"],
   },
   {
@@ -133,7 +133,7 @@ export const places: Place[] = [
     name: "Mason, Ohio",
     country: "USA",
     connection:
-      "Nitin and Manjari Agarwal live here with their children Nayonika and Rayaan — the family's Ohio branch.",
+      "Nitin and Manjari Agarwal live here with their children Nayonika and Rayaan, the family's Ohio branch.",
     personSlugs: ["nitin-agarwal", "manjari-garg", "nayonika-agarwal", "rayaan-agarwal"],
   },
 ];

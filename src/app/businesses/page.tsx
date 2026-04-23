@@ -8,7 +8,7 @@ import { breadcrumbJsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Family businesses",
   description:
-    "Enterprises owned or run by members of the Goel family of Banda and their extended family — heritage jewellery firms in Banda, manufacturing in Kanpur and Chandigarh, stockbroking in Agra and Dubai, ceramics in Jaipur.",
+    "Enterprises owned or run by members of the Goel family of Banda and their extended family, heritage jewellery firms in Banda, manufacturing in Kanpur and Chandigarh, stockbroking in Agra and Dubai, ceramics in Jaipur.",
   alternates: { canonical: "/businesses" },
 };
 

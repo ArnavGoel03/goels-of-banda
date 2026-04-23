@@ -12,12 +12,12 @@ export const faq: { question: string; answer: string }[] = [
   {
     question: "Who founded 'Ganesh Prasad Gondilal Saraf'?",
     answer:
-      "The firm was founded in Banda in the mid-1800s by Gondilal Goel's son, who named the business after his father (Gondilal) and his uncle (Ganesh Prasad) — honoring both brothers of the founding generation in the firm's title.",
+      "The firm was founded in Banda in the mid-1800s by Gondilal Goel's son, who named the business after his father (Gondilal) and his uncle (Ganesh Prasad), honoring both brothers of the founding generation in the firm's title.",
   },
   {
     question: "How many jewellery shops does the family run in Banda today?",
     answer:
-      "At least six active family-owned jewellery shops in Banda — three inside the original 'Ganesh Prasad Gondilal Saraf' heritage building (one upstairs, two on the ground floor), Radha Krishna Goel's standalone 'Gondilal Saraf' in the heart of Banda (run by his sons Rohit and Vinod), the 2016-era 'Gondilal Kiva' in Gular Naka run by Avijit 'Honey' Goel, and a new shop opened by two of Sohan Goel's elder sons.",
+      "At least six active family-owned jewellery shops in Banda, three inside the original 'Ganesh Prasad Gondilal Saraf' heritage building (one upstairs, two on the ground floor), Radha Krishna Goel's standalone 'Gondilal Saraf' in the heart of Banda (run by his sons Rohit and Vinod), the 2016-era 'Gondilal Kiva' in Gular Naka run by Avijit 'Honey' Goel, and a new shop opened by two of Sohan Goel's elder sons.",
   },
   {
     question: "Is Gondilal Kiva a real registered business?",
@@ -37,17 +37,17 @@ export const faq: { question: string; answer: string }[] = [
   {
     question: "Who is the youngest member of the family?",
     answer:
-      "Raghav Goel, born 7 February 2026 to Palash Goel and Preksha Agarwal. His birth brings four generations of the family into the same year on the paternal line — Radha Krishna (born 1942), Vinod, Palash, and Raghav.",
+      "Raghav Goel, born 7 February 2026 to Palash Goel and Preksha Agarwal. His birth brings four generations of the family into the same year on the paternal line, Radha Krishna (born 1942), Vinod, Palash, and Raghav.",
   },
   {
     question: "Who is the oldest living member of the family?",
     answer:
-      "Radha Krishna Goel, born in 1942 — Arnav Goel's paternal grandfather and the eldest of four brothers. He opened the jewellery shop 'Gondilal Saraf' in the heart of Banda after giving up his share of the ancestral firm.",
+      "Radha Krishna Goel, born in 1942, Arnav Goel's paternal grandfather and the eldest of four brothers. He opened the jewellery shop 'Gondilal Saraf' in the heart of Banda after giving up his share of the ancestral firm.",
   },
   {
     question: "Why are there two 'Neelam Agarwals' in the family?",
     answer:
-      "Both Rohit Goel and his brother Vinod Goel married women named Neelam Agarwal from Jhansi — two different women with the same name. Rohit's wife is more commonly known by her post-marriage name, Richa Goel. This is part of a long-running marriage tie between the Banda Goels and Agarwal families in Jhansi.",
+      "Both Rohit Goel and his brother Vinod Goel married women named Neelam Agarwal from Jhansi, two different women with the same name. Rohit's wife is more commonly known by her post-marriage name, Richa Goel. This is part of a long-running marriage tie between the Banda Goels and Agarwal families in Jhansi.",
   },
   {
     question: "Where in the world does the family live today?",

@@ -10,7 +10,7 @@ export const businesses: Business[] = [
     country: "India",
     established: 1850,
     description:
-      "The ancestral Goel family jewellery firm, founded in the mid-1800s by a son of Gondilal Goel who named the shop after his father (Gondilal) and his uncle (Ganesh Prasad). The original premises — a multi-floor heritage building in Banda — still stands and houses three independent jewellery shops, each run by a different branch of the family: Radha Krishna Goel's second brother runs the upper-floor shop (accessed via stairs), and his younger brothers Manmohan and Sohan run the two ground-floor shops (each selling both gold and silver today).",
+      "The ancestral Goel family jewellery firm, founded in the mid-1800s by a son of Gondilal Goel who named the shop after his father (Gondilal) and his uncle (Ganesh Prasad). The original premises, a multi-floor heritage building in Banda, still stands and houses three independent jewellery shops, each run by a different branch of the family: Radha Krishna Goel's second brother runs the upper-floor shop (accessed via stairs), and his younger brothers Manmohan and Sohan run the two ground-floor shops (each selling both gold and silver today).",
     runByPersonSlugs: ["manmohan-goel", "sohan-goel"],
   },
   {
@@ -22,7 +22,7 @@ export const businesses: Business[] = [
     country: "India",
     website: "https://gondilalsaraf.com/",
     description:
-      "A jewellery shop in the heart of Banda opened by Radha Krishna Goel after he stepped aside from his share of the ancestral firm and gave it to his three younger brothers. He named his new shop 'Gondilal Saraf' — preserving the founder's name forward while dropping 'Ganesh Prasad' from the title. Run today by Rohit and Vinod Goel, Radha Krishna's sons.",
+      "A jewellery shop in the heart of Banda opened by Radha Krishna Goel after he stepped aside from his share of the ancestral firm and gave it to his three younger brothers. He named his new shop 'Gondilal Saraf', preserving the founder's name forward while dropping 'Ganesh Prasad' from the title. Run today by Rohit and Vinod Goel, Radha Krishna's sons.",
     runByPersonSlugs: ["rohit-goel", "vinod-goel"],
   },
   {
@@ -35,7 +35,7 @@ export const businesses: Business[] = [
     established: 2016,
     website: "https://www.gondilal.com/",
     description:
-      "A modernised gold and diamond jewellery showroom in Gular Naka, Banda, established in 2016 by Avijit 'Honey' Goel — one of the third active Gondilal-branded jewellery businesses in Banda operated by the extended Goel family. Has an online catalogue at gondilal.com.",
+      "A modernised gold and diamond jewellery showroom in Gular Naka, Banda, established in 2016 by Avijit 'Honey' Goel, one of the third active Gondilal-branded jewellery businesses in Banda operated by the extended Goel family. Has an online catalogue at gondilal.com.",
     runByPersonSlugs: ["avijit-goel"],
     ownedByPersonSlugs: ["avijit-goel"],
     sources: [
@@ -64,7 +64,7 @@ export const businesses: Business[] = [
     established: 1994,
     website: "https://www.claycraftindia.com/",
     description:
-      "A major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan. Established in 1994 by the Agarwal family; FY25 revenue approximately $148M. Deepak Agarwal — husband of Vijaya Agarwal (née Goel, daughter of Manmohan Goel of Banda) — is a named co-founder and current director; his two brothers jointly run the company alongside him. Vijaya Agarwal handles creative direction for the brand and designs new tableware collections. Company CIN: U26933RJ1988PTC004677.",
+      "A major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan. Established in 1994 by the Agarwal family; FY25 revenue approximately $148M. Deepak Agarwal, husband of Vijaya Agarwal (née Goel, daughter of Manmohan Goel of Banda), is a named co-founder and current director; his two brothers jointly run the company alongside him. Vijaya Agarwal handles creative direction for the brand and designs new tableware collections. Company CIN: U26933RJ1988PTC004677.",
     runByPersonSlugs: ["deepak-agarwal", "vijaya-agarwal"],
     sources: [
       { label: "Corporate Leadership page", url: "https://corporate.claycraftindia.com/leadership-management/" },
@@ -93,7 +93,7 @@ export const businesses: Business[] = [
     city: "Chandigarh",
     country: "India",
     description:
-      "A paper manufacturing plant in Chandigarh, owned by Shanu Agarwal — husband of Anu Agarwal (daughter of Seema Agarwal, née Goel).",
+      "A paper manufacturing plant in Chandigarh, owned by Shanu Agarwal, husband of Anu Agarwal (daughter of Seema Agarwal, née Goel).",
     runByPersonSlugs: ["shanu-agarwal"],
     ownedByPersonSlugs: ["shanu-agarwal"],
   },
@@ -105,7 +105,7 @@ export const businesses: Business[] = [
     state: "Uttar Pradesh",
     country: "India",
     description:
-      "A family-run construction business in Allahabad, Uttar Pradesh, run by Harsh Agarwal — son of one of Radha Krishna Goel's three sisters (the one who passed away).",
+      "A family-run construction business in Allahabad, Uttar Pradesh, run by Harsh Agarwal, son of one of Radha Krishna Goel's three sisters (the one who passed away).",
     runByPersonSlugs: ["harsh-agarwal"],
   },
 ];

@@ -8,7 +8,7 @@ import { site } from "@/data/config";
 export const metadata: Metadata = {
   title: "Places",
   description:
-    "The places where the Goel family lives and works — from the ancestral home in Banda, Uttar Pradesh to California, Ohio, Dubai, and across northern India.",
+    "The places where the Goel family lives and works, from the ancestral home in Banda, Uttar Pradesh to California, Ohio, Dubai, and across northern India.",
   alternates: { canonical: "/places" },
 };
 
