@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-parchment: #faf7f2;
+  --color-parchment-dark: #f3ede1;
+  --color-ink-50: #fafaf8;
+  --color-ink-100: #ece8df;
+  --color-ink-200: #d6d0c1;
+  --color-ink-300: #b8b1a1;
+  --color-ink-400: #8f8879;
+  --color-ink-500: #6b6659;
+  --color-ink-600: #504a3f;
+  --color-ink-700: #3a352c;
+  --color-ink-800: #25221b;
+  --color-ink-900: #14120e;
+
+  --color-accent-400: #c97a5c;
+  --color-accent-700: #8a3324;
+  --color-accent-800: #6b2519;
+  --color-gold: #b58a3c;
+  --color-deceased: #8b8580;
+  --color-newborn: #3b7a57;
+
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
+  background-color: var(--color-parchment);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  line-height: 1.55;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-parchment);
+  color: var(--color-ink-900);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+.prose-family h2 {
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--color-ink-100);
+}
+
+.prose-family h3 {
+  font-size: 1.3rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-accent-700);
+}
+
+.prose-family p {
+  margin-bottom: 1em;
+  color: var(--color-ink-600);
+  max-width: 65ch;
+}
+
+.prose-family p.lead {
+  font-size: 1.15rem;
+  color: var(--color-ink-800);
+}
+
+.prose-family strong {
+  color: var(--color-ink-900);
+  font-weight: 600;
+}
+
+.prose-family a {
+  color: var(--color-accent-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.prose-family a:hover {
+  color: var(--color-accent-800);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

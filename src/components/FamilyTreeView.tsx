@@ -1,0 +1,345 @@
+"use client";
+
+import Link from "next/link";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
+import type { Person } from "@/data/types";
+
+type TreeNode = {
+  slug: string;
+  name: string;
+  alias?: string;
+  sub?: string;
+  deceased?: boolean;
+  newborn?: boolean;
+  self?: boolean;
+  placeholder?: boolean;
+};
+
+function node(p: Person, opts?: { self?: boolean }): TreeNode {
+  return {
+    slug: p.slug,
+    name: p.name,
+    alias: p.altNames?.[0],
+    sub: p.currentLocation ?? p.birth?.place,
+    deceased: !p.isLiving,
+    newborn: p.slug === "raghav-goel",
+    self: opts?.self,
+  };
+}
+
+function Controls() {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+  return (
+    <div className="absolute top-3 right-3 flex gap-1 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm z-10">
+      <button
+        onClick={() => zoomIn()}
+        className="h-8 w-8 text-lg font-semibold text-ink-700 hover:bg-ink-100 rounded-l-md"
+        aria-label="Zoom in"
+      >
+        +
+      </button>
+      <button
+        onClick={() => zoomOut()}
+        className="h-8 w-8 text-lg font-semibold text-ink-700 hover:bg-ink-100"
+        aria-label="Zoom out"
+      >
+        −
+      </button>
+      <button
+        onClick={() => resetTransform()}
+        className="h-8 px-2 text-xs font-medium text-ink-700 hover:bg-ink-100 rounded-r-md"
+        aria-label="Reset view"
+      >
+        Reset
+      </button>
+    </div>
+  );
+}
+
+export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
+  const bySlug = Object.fromEntries(peopleList.map((p) => [p.slug, p]));
+  const get = (slug: string) => bySlug[slug];
+
+  return (
+    <div className="relative h-[85vh] rounded-lg border border-ink-100 bg-parchment-dark overflow-hidden">
+      <TransformWrapper
+        initialScale={0.85}
+        minScale={0.25}
+        maxScale={3}
+        centerOnInit
+        wheel={{ step: 0.1 }}
+        doubleClick={{ mode: "zoomIn", step: 0.6 }}
+        pinch={{ step: 5 }}
+        panning={{ velocityDisabled: false }}
+      >
+        <Controls />
+        <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs">
+          <span className="font-medium text-ink-800">Drag</span> to pan ·{" "}
+          <span className="font-medium text-ink-800">Scroll / pinch</span> to zoom ·{" "}
+          <span className="font-medium text-ink-800">Click</span> a name to open
+        </div>
+        <TransformComponent
+          wrapperStyle={{ width: "100%", height: "100%" }}
+          contentStyle={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            minWidth: "100%",
+          }}
+        >
+          <div className="p-16 flex flex-col items-center gap-0 min-w-[1800px]">
+            <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
+            <Row>
+              <Card data={node(get("gondilal-goel"))} />
+              <Card data={node(get("ganesh-prasad-goel"))} />
+            </Row>
+            <Connector />
+            <Missing label="3 unnamed generations · Gondilal&rsquo;s son (shop founder, ~1850s) → ~1880s → ~1910s (Radha Krishna&rsquo;s father)" />
+            <Connector />
+
+            <GenLabel>Generation 5 · paternal grandparents · Radha Krishna&rsquo;s 4 brothers + 3 sisters</GenLabel>
+            <Row gap="md">
+              <Card data={{ slug: "#", name: "Brother 2", sub: "name TBD · upper-floor gold shop", placeholder: true }} />
+              <Card data={node(get("manmohan-goel"))} />
+              <Couple>
+                <Card data={node(get("radha-krishna-goel"))} />
+                <Card data={node(get("rani-agarwal-dadiji"))} />
+              </Couple>
+              <Card data={node(get("sohan-goel"))} />
+              <Card data={{ slug: "#", name: "3 sisters", sub: "Banda · Gurugram · ✝", placeholder: true }} />
+            </Row>
+            <Connector />
+
+            <GenLabel>Generation 6 · parents&rsquo; generation</GenLabel>
+            <div className="flex items-start gap-12 flex-wrap justify-center">
+              <div className="flex flex-col items-center gap-2">
+                <BranchLabel>Paternal</BranchLabel>
+                <Row>
+                  <Couple>
+                    <Card data={node(get("vinod-goel"))} />
+                    <Card data={node(get("neelam-agarwal-vinod"))} />
+                  </Couple>
+                  <Couple>
+                    <Card data={node(get("shobhit-goel"))} />
+                    <Card data={node(get("roli"))} />
+                  </Couple>
+                  <Card data={node(get("seema-agarwal"))} />
+                  <Couple>
+                    <Card data={node(get("rohit-goel"))} />
+                    <Card data={node(get("richa-goel"))} />
+                  </Couple>
+                </Row>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <BranchLabel>Maternal · Jhansi</BranchLabel>
+                <Row>
+                  <Couple>
+                    <Card data={node(get("ramesh-chandra-agarwal"))} />
+                    <Card data={node(get("prem-kumari"))} />
+                  </Couple>
+                </Row>
+                <Connector small />
+                <Row>
+                  <Couple>
+                    <Card data={node(get("vivek-agarwal"))} />
+                    <Card data={node(get("rashi-agarwal"))} />
+                  </Couple>
+                  <Couple>
+                    <Card data={node(get("nitin-agarwal"))} />
+                    <Card data={node(get("manjari-garg"))} />
+                  </Couple>
+                  <Couple>
+                    <Card data={node(get("kapil-agarwal"))} />
+                    <Card data={node(get("nidhi-modi"))} />
+                  </Couple>
+                </Row>
+              </div>
+            </div>
+            <Connector />
+
+            <GenLabel>Generation 6 · Manmohan&rsquo;s branch</GenLabel>
+            <Row>
+              <Couple>
+                <Card data={node(get("avijit-goel"))} />
+                <Card data={node(get("shayana-goyal"))} />
+              </Couple>
+              <Couple>
+                <Card data={node(get("vijaya-agarwal"))} />
+                <Card data={node(get("deepak-agarwal"))} />
+              </Couple>
+            </Row>
+            <Connector />
+
+            <GenLabel>Generation 7 · cousins</GenLabel>
+            <div className="flex items-start gap-10 flex-wrap justify-center">
+              <ClusterGroup title="Vinod&rsquo;s">
+                <Couple>
+                  <Card data={node(get("palash-goel"))} />
+                  <Card data={node(get("preksha-agarwal"))} />
+                </Couple>
+                <Couple>
+                  <Card data={node(get("palak-goel"))} />
+                  <Card data={node(get("manmohan-agrawal-kanpur"))} />
+                </Couple>
+              </ClusterGroup>
+              <ClusterGroup title="Shobhit&rsquo;s">
+                <Card data={node(get("shally-goel"))} />
+                <Card data={node(get("esha-goel"))} />
+                <Card data={node(get("rhitik-goel"))} />
+              </ClusterGroup>
+              <ClusterGroup title="Seema&rsquo;s">
+                <Card data={node(get("aditya-agarwal"))} />
+                <Couple>
+                  <Card data={node(get("anu-agarwal"))} />
+                  <Card data={node(get("shanu-agarwal"))} />
+                </Couple>
+              </ClusterGroup>
+              <ClusterGroup title="Rohit&rsquo;s">
+                <Card data={node(get("arnav-goel"), { self: true })} />
+                <Card data={node(get("aditi-goel"))} />
+              </ClusterGroup>
+              <ClusterGroup title="Honey&rsquo;s">
+                <Card data={node(get("vashundhara-goel"))} />
+              </ClusterGroup>
+              <ClusterGroup title="Vivek&rsquo;s">
+                <Card data={node(get("anayra-agarwal"))} />
+                <Card data={node(get("rhidhaan-agarwal"))} />
+              </ClusterGroup>
+              <ClusterGroup title="Nitin&rsquo;s">
+                <Card data={node(get("nayonika-agarwal"))} />
+                <Card data={node(get("rayaan-agarwal"))} />
+              </ClusterGroup>
+              <ClusterGroup title="Kapil&rsquo;s">
+                <Card data={node(get("atharva-agarwal"))} />
+                <Card data={node(get("lovnika-agarwal"))} />
+              </ClusterGroup>
+            </div>
+            <Connector />
+
+            <GenLabel>Generation 8 · newborn</GenLabel>
+            <Row>
+              <Card data={node(get("raghav-goel"))} />
+            </Row>
+          </div>
+        </TransformComponent>
+      </TransformWrapper>
+    </div>
+  );
+}
+
+function GenLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-8 mb-3 text-xs uppercase tracking-[0.2em] text-accent-700 font-medium text-center">
+      {children}
+    </p>
+  );
+}
+
+function BranchLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[10px] uppercase tracking-[0.18em] text-ink-500 font-medium border-b border-ink-200 pb-1 w-full text-center max-w-[900px]">
+      {children}
+    </p>
+  );
+}
+
+function Row({
+  children,
+  gap = "sm",
+}: {
+  children: React.ReactNode;
+  gap?: "sm" | "md";
+}) {
+  const g = gap === "md" ? "gap-4" : "gap-2";
+  return <div className={`flex items-start justify-center flex-wrap ${g}`}>{children}</div>;
+}
+
+function Couple({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-1 rounded-md px-2 py-1">
+      <div className="flex gap-1 items-center">
+        {Array.isArray(children) ? children[0] : children}
+        <span className="text-accent-700 font-serif text-xl">⚭</span>
+        {Array.isArray(children) ? children[1] : null}
+      </div>
+    </div>
+  );
+}
+
+function ClusterGroup({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-md border border-dashed border-ink-200 bg-parchment/60 p-3 flex flex-col gap-2 items-center">
+      <p
+        className="text-[10px] uppercase tracking-[0.15em] text-accent-700 font-semibold"
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
+      <div className="flex flex-col gap-2 items-stretch">{children}</div>
+    </div>
+  );
+}
+
+function Connector({ small }: { small?: boolean } = {}) {
+  return (
+    <div
+      className={`w-px bg-ink-200 ${small ? "h-4" : "h-6"}`}
+      aria-hidden
+    />
+  );
+}
+
+function Missing({ label }: { label: string }) {
+  return (
+    <div className="rounded-md border border-dashed border-ink-300 bg-parchment px-4 py-3 text-xs text-ink-500 italic max-w-md text-center">
+      <span dangerouslySetInnerHTML={{ __html: label }} />
+    </div>
+  );
+}
+
+function Card({ data }: { data: TreeNode }) {
+  const { slug, name, alias, sub, deceased, newborn, self, placeholder } = data;
+  const content = (
+    <div
+      className={[
+        "w-[190px] min-h-[70px] rounded-md border px-3 py-2 text-left transition-all",
+        self
+          ? "border-accent-700 border-2 bg-accent-400/10 shadow-sm"
+          : deceased
+            ? "border-ink-200 bg-parchment opacity-85"
+            : newborn
+              ? "border-newborn bg-parchment"
+              : placeholder
+                ? "border-ink-200 bg-parchment/60 border-dashed"
+                : "border-ink-100 bg-parchment hover:border-accent-400 hover:shadow-sm",
+      ].join(" ")}
+    >
+      <p className="font-serif text-[15px] font-semibold text-ink-900 leading-tight">
+        {name}
+        {deceased ? <span className="ml-1 text-ink-400">✝</span> : null}
+        {newborn ? <span className="ml-1 text-newborn">★</span> : null}
+        {self ? <span className="ml-1 text-accent-700">★</span> : null}
+      </p>
+      {alias ? (
+        <p className="text-[11px] italic text-ink-500 leading-tight mt-0.5">
+          &ldquo;{alias}&rdquo;
+        </p>
+      ) : null}
+      {sub ? <p className="text-[10px] text-ink-500 leading-tight mt-1">{sub}</p> : null}
+    </div>
+  );
+  if (placeholder || slug === "#") return content;
+  return (
+    <Link href={`/people/${slug}`} className="no-underline">
+      {content}
+    </Link>
+  );
+}

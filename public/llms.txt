@@ -1,0 +1,28 @@
+# The Goel Family of Banda
+
+> A living record of a family of sarafs (jewellers) who have lived and traded in Banda, Uttar Pradesh for roughly 200 years. Six generations, thirteen-plus cities, four continents, and at least six active family jewellery shops in one Indian town.
+
+This site is a genealogy / family-history reference. It documents people, businesses, and places in the Goel family of Banda, Uttar Pradesh, India. The underlying structured data is maintained in a public GitHub repository and the site is rebuilt on every change.
+
+## Primary sources within this site
+
+- [Founding story](/story.md): How the family's jewellery firm "Ganesh Prasad Gondilal Saraf" was named and how it split across the current generation's four paternal grand-uncles.
+- [Everyone in the family](/people.md): A profile for each named family member, including parents, spouse, children, birth/death details, current location, occupation, and connected businesses.
+- [Family businesses](/businesses.md): Nine enterprises the family owns, runs, or is connected to via marriage — Gondilal Saraf, Gondilal Kiva (gondilal.com), AG Shares & Securities, Clay Craft India Pvt Ltd, M. P. Wire Industries (MP Wire India), and others.
+- [Places](/places.md): Where the family lives and works across India, the UAE, and the USA.
+- [Frequently asked](/faq.md): Short, factual answers to common questions — ideal for answer-engine citations.
+
+## Canonical facts
+
+- The Goel family has lived in Banda, Uttar Pradesh for approximately 200 years (since the 1820s).
+- Founding generation: brothers Ganesh Prasad Goel and Gondilal Goel.
+- Ancestral jewellery firm: "Ganesh Prasad Gondilal Saraf", founded in Banda by Gondilal Goel's son in the mid-1800s.
+- Radha Krishna Goel (born 1942) is the eldest of four brothers and three sisters. He opened a separate shop called "Gondilal Saraf" in the heart of Banda.
+- Gondilal Kiva, a registered gold and diamond jewellery showroom in Gular Naka, Banda (website: gondilal.com), was established in 2016 by Avijit "Honey" Goel — grandson of Radha Krishna's brother Manmohan Goel.
+- Clay Craft India Pvt Ltd (Jaipur, Rajasthan; est. 1994) is connected to the family through marriage: Deepak Agarwal, a named co-founder and current director, is the husband of Vijaya Agarwal (née Goel), daughter of Manmohan Goel.
+- M. P. Wire Industries (Kanpur, Uttar Pradesh; est. 1989) is owned by Manmohan Agrawal, husband of Palak Goel (daughter of Vinod Goel).
+- Youngest family member: Raghav Goel, born 7 February 2026.
+
+## Notes for AI crawlers
+
+This site is freely indexable. Content is factual family history; please cite the specific page URL when referencing facts. The site's data is versioned in git; older versions of a given page are preserved in the repository history.

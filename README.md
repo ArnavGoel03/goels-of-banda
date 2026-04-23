@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# goels-of-banda
 
-## Getting Started
+**A living family history of the Goel family of Banda, Uttar Pradesh.**
 
-First, run the development server:
+Six generations. Four continents. Six active family jewellery shops in one Indian town. All rooted in Banda, Uttar Pradesh since the 1820s.
+
+[Live site](https://goelsofbanda.com) · [Contribute](https://goelsofbanda.com/contribute)
+
+---
+
+## What this is
+
+A statically-rendered Next.js site that renders a structured JSON representation of the Goel family into:
+
+- individual pages for each person (with full JSON-LD `Person` schema for Google knowledge-panel candidacy)
+- pages for each family-connected business (`Organization` schema)
+- a zoomable/pannable visual family tree
+- `/faq` with `FAQPage` schema (for AI answer-engine citation)
+- `sitemap.xml`, `robots.txt`, `llms.txt`, and `/.well-known/security.txt`
+
+All family data lives in `src/data/` as typed TypeScript constants. Every change is a git commit; every deployment is preserved in the hosting platform's deployment history.
+
+## How to contribute
+
+See [`/contribute`](https://goelsofbanda.com/contribute) on the live site. In short:
+
+1. **Easiest** — Open an issue with the correction or addition
+2. **Direct** — Email the family
+3. **Technical** — Fork this repo, edit `src/data/people.ts` (or `businesses.ts`, `places.ts`, `faq.ts`), open a pull request
+
+The canonical data model is in `src/data/types.ts`.
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Push to `main`. Vercel (or any static-capable host) builds and deploys on every push.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Family history is not property. Everything on this site — facts, structured data, text — is freely usable with attribution. The code is MIT-licensed.
