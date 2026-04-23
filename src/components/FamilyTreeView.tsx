@@ -32,27 +32,38 @@ function node(p: Person, opts?: { self?: boolean }): TreeNode {
 }
 
 function Controls() {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
+  const { zoomIn, zoomOut, resetTransform, centerView } = useControls();
   return (
-    <div className="absolute top-3 right-3 flex gap-1 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm z-10">
+    <div className="absolute top-3 right-3 flex items-stretch gap-0 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm z-10 overflow-hidden">
       <button
-        onClick={() => zoomIn()}
-        className="h-8 w-8 text-lg font-semibold text-ink-700 hover:bg-ink-100 rounded-l-md"
+        onClick={() => zoomIn(0.25, 200)}
+        className="h-9 w-9 text-lg font-semibold text-ink-700 hover:bg-ink-100"
         aria-label="Zoom in"
+        type="button"
       >
         +
       </button>
       <button
-        onClick={() => zoomOut()}
-        className="h-8 w-8 text-lg font-semibold text-ink-700 hover:bg-ink-100"
+        onClick={() => zoomOut(0.25, 200)}
+        className="h-9 w-9 text-lg font-semibold text-ink-700 hover:bg-ink-100 border-l border-ink-100"
         aria-label="Zoom out"
+        type="button"
       >
         −
       </button>
       <button
-        onClick={() => resetTransform()}
-        className="h-8 px-2 text-xs font-medium text-ink-700 hover:bg-ink-100 rounded-r-md"
+        onClick={() => centerView(0.6, 300)}
+        className="h-9 px-3 text-xs font-medium text-ink-700 hover:bg-ink-100 border-l border-ink-100"
+        aria-label="Fit tree to view"
+        type="button"
+      >
+        Fit
+      </button>
+      <button
+        onClick={() => resetTransform(300)}
+        className="h-9 px-3 text-xs font-medium text-ink-700 hover:bg-ink-100 border-l border-ink-100"
         aria-label="Reset view"
+        type="button"
       >
         Reset
       </button>
@@ -67,14 +78,16 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
   return (
     <div className="relative h-[85vh] rounded-lg border border-ink-100 bg-parchment-dark overflow-hidden">
       <TransformWrapper
-        initialScale={0.85}
-        minScale={0.25}
-        maxScale={3}
+        initialScale={0.6}
+        minScale={0.2}
+        maxScale={2.5}
+        limitToBounds={false}
         centerOnInit
-        wheel={{ step: 0.1 }}
-        doubleClick={{ mode: "zoomIn", step: 0.6 }}
-        pinch={{ step: 5 }}
-        panning={{ velocityDisabled: false }}
+        smooth
+        wheel={{ step: 0.05 }}
+        doubleClick={{ mode: "reset" }}
+        pinch={{ step: 4 }}
+        panning={{ velocityDisabled: true }}
       >
         <Controls />
         <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs">
@@ -91,7 +104,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             minWidth: "100%",
           }}
         >
-          <div className="p-16 flex flex-col items-center gap-0 min-w-[1800px]">
+          <div className="p-12 flex flex-col items-center gap-0 min-w-[1500px]">
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
             <Row>
               <Card data={node(get("gondilal-goel"))} />
@@ -310,7 +323,7 @@ function Card({ data }: { data: TreeNode }) {
   const content = (
     <div
       className={[
-        "w-[190px] min-h-[70px] rounded-md border px-3 py-2 text-left transition-all",
+        "w-[160px] min-h-[64px] rounded-md border px-2.5 py-1.5 text-left transition-all",
         self
           ? "border-accent-700 border-2 bg-accent-400/10 shadow-sm"
           : deceased
