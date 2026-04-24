@@ -2,23 +2,27 @@
 
 Deferred work, noted here so it's not lost. Not yet implemented.
 
-## Tree page — bleeding-edge rebuild
+## Tree page — what stuck vs. what didn't
 
-Rebuild the `/family-tree` renderer with a 2026-native stack. Estimated ~6
-hours; drops ~300 lines of current hand-rolled math.
+Shipped:
+- **`panzoom`** by @anvaka replaced our hand-rolled pan/zoom math.
+- **View Transitions API** — each card and the PersonHero share
+  `view-transition-name: person-<slug>`, so Chrome 111+ / Safari 18+
+  smoothly morph card → hero on click.
 
-- **Layout:** `d3-hierarchy` Reingold–Tilford tidy-tree (better sibling
-  alignment for family trees than dagre's general-DAG layout). 5 kB.
-- **Render:** keep plain SVG — no framework rendering layer.
-- **Interaction:** replace hand-rolled pan/zoom with **`panzoom`** by
-  @anvaka (4 kB, handles pinch + inertia + boundaries).
-- **Card → person-page transition:** wrap with React 19.2's
-  `<ViewTransition>` so the tree smoothly morphs into the person page
-  on click. No animation code needed.
-- **Lineage highlight on hover:** **CSS Anchor Positioning API** (Safari
+Tried and reverted:
+- ~~**d3-hierarchy tidy-tree layout**~~ — the algorithm assumes a strict
+  tree (one parent per node). Real family trees are DAGs with cross-
+  marriages (Richa's Agarwal parents on one side, Rohit's Goel line on
+  the other, married to each other) — which meant the maternal and
+  paternal sides rendered as disconnected islands under d3. Reverted to
+  dagre, which handles multi-parent + spouse edges natively via rank
+  anchors.
+
+Still to do:
+- **Lineage highlight on hover:** CSS Anchor Positioning API (Safari
   17.4+, Chrome 125+). Native tooltip/popover anchored to the card
-  showing the lineage path back to the viewer. Replaces any Floating-UI
-  dependency.
+  showing the lineage path back to the viewer.
 
 ## React 19.2 features to adopt
 
