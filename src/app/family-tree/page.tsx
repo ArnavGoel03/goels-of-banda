@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { people } from "@/data/people";
-import { TreeFlowView } from "@/components/tree-flow/TreeFlowView";
+import { TreeFlowLoader } from "@/components/tree-flow/TreeFlowLoader";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { site } from "@/data/config";
@@ -52,7 +52,7 @@ export default function FamilyTreePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-12">
-        <TreeFlowView peopleList={people} />
+        <TreeFlowLoader peopleList={people} />
       </section>
     </>
   );
