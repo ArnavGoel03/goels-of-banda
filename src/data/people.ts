@@ -51,7 +51,7 @@ export const people: Person[] = [
     spouse: { slug: "rani-agarwal-dadiji" },
     publicity: "full",
     bio:
-      "Radha Krishna Goel, known within the family as Dadaji, is the eldest of seven siblings, four brothers (himself, Mahesh, Manmohan, and Sohan) and three sisters, in the Banda Goel family. His father owned shares in the ancestral firm 'Ganesh Prasad Gondilal Saraf', founded four generations earlier by a descendant of the founding brothers Gondilal and Ganesh Prasad Goel. As eldest, Radha Krishna gave up his share of the ancestral firm to his three younger brothers and opened a separate jewellery shop in the heart of Banda, which he named simply 'Gondilal Saraf', preserving his direct ancestor's name. That shop is run today by his sons Rohit and Vinod.",
+      "Radha Krishna Goel, known within the family as Dadaji, is the eldest of seven siblings, four brothers (himself, Mahesh, Manmohan, and Sohan) and three sisters, in the Banda Goel family. His father owned shares in the ancestral firm 'Ganesh Prasad Gondilal Saraf', founded four generations earlier by a descendant of the founding brothers Gondilal and Ganesh Prasad Goel. In 2000, as the eldest, Radha Krishna gave up his share of the ancestral firm to his three younger brothers and opened a separate jewellery shop in the heart of Banda, which he named simply 'Gondilal Saraf', preserving his direct ancestor's name; his father passed away a couple of years later. That shop is run today by his sons Rohit and Vinod.",
   },
   {
     slug: "rani-agarwal-dadiji",

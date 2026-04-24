@@ -33,14 +33,22 @@ const historicalAnchors: TimelineEvent[] = [
       "Gondilal's son opens the ancestral jewellery firm, naming it after his father and his uncle.",
   },
   {
-    year: 1970,
-    yearApprox: true,
+    year: 2000,
     kind: "business",
     title: "‘Gondilal Saraf’ opens in the heart of Banda",
     place: "Banda, Uttar Pradesh",
     businessSlug: "gondilal-saraf",
     description:
-      "Radha Krishna Goel gives up his share of the ancestral firm to his three younger brothers and opens a separate jewellery shop.",
+      "As eldest son, Radha Krishna Goel gives up his share of the ancestral Ganesh Prasad Gondilal Saraf to his three younger brothers and opens a separate jewellery shop in the heart of Banda, naming it after their ancestor Gondilal.",
+  },
+  {
+    year: 2002,
+    yearApprox: true,
+    kind: "milestone",
+    title: "Radha Krishna Goel's father passes away",
+    place: "Banda, Uttar Pradesh",
+    description:
+      "The passing of Radha Krishna's father a couple of years after the 2000 split closes the generation that had held shares in the original Ganesh Prasad Gondilal Saraf firm.",
   },
 ];
 

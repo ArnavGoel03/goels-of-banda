@@ -75,13 +75,14 @@ export default function StoryPage() {
           Krishna and his six siblings).
         </p>
 
-        <h2>The split, 1970s, Banda</h2>
+        <h2>The split, 2000, Banda</h2>
         <p>
-          When the ancestral firm reached <strong>Radha Krishna Goel</strong>, the eldest
-          of four brothers, he stepped aside and gave up his share to his three younger
-          brothers. He opened a separate jewellery shop in the heart of Banda and named
-          it simply <strong>&ldquo;Gondilal Saraf&rdquo;</strong>, dropping &ldquo;Ganesh
-          Prasad&rdquo; from the title and keeping only his direct ancestor&apos;s name.
+          In 2000, when the ancestral firm reached <strong>Radha Krishna Goel</strong>,
+          the eldest of four brothers, he stepped aside and gave up his share to his
+          three younger brothers. He opened a separate jewellery shop in the heart of
+          Banda and named it simply <strong>&ldquo;Gondilal Saraf&rdquo;</strong>,
+          dropping &ldquo;Ganesh Prasad&rdquo; from the title and keeping only his
+          direct ancestor&apos;s name. A couple of years later, his father passed away.
           That new shop is run today by his sons Rohit and Vinod Goel.
         </p>
 

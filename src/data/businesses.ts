@@ -20,9 +20,10 @@ export const businesses: Business[] = [
     city: "Banda",
     state: "Uttar Pradesh",
     country: "India",
+    established: 2000,
     website: "https://gondilalsaraf.com/",
     description:
-      "A jewellery shop in the heart of Banda opened by Radha Krishna Goel after he stepped aside from his share of the ancestral firm and gave it to his three younger brothers. He named his new shop 'Gondilal Saraf', preserving the founder's name forward while dropping 'Ganesh Prasad' from the title. Run today by Rohit and Vinod Goel, Radha Krishna's sons.",
+      "A jewellery shop in the heart of Banda opened by Radha Krishna Goel in 2000, a couple of years before his father passed away. As the eldest of four brothers, Radha Krishna stepped aside from his share of the ancestral Ganesh Prasad Gondilal Saraf and gave it to his three younger brothers, opening this shop on his own and naming it 'Gondilal Saraf', preserving the founder's name forward while dropping 'Ganesh Prasad' from the title. Run today by Rohit and Vinod Goel, Radha Krishna's sons.",
     runByPersonSlugs: ["rohit-goel", "vinod-goel"],
   },
   {
