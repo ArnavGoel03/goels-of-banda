@@ -11,6 +11,31 @@ type Box = {
   right: number;
 };
 
+function orthogonalPath(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  busY: number,
+  radius: number,
+): string {
+  if (Math.abs(x1 - x2) < 1) {
+    return `M ${x1} ${y1} L ${x2} ${y2}`;
+  }
+  const goingRight = x2 > x1;
+  const r = Math.min(radius, Math.abs(x2 - x1) / 2, Math.abs(y2 - y1) / 2);
+  const topCornerX = goingRight ? x1 + r : x1 - r;
+  const turnTopEnd = goingRight ? x2 - r : x2 + r;
+  return [
+    `M ${x1} ${y1}`,
+    `L ${x1} ${busY - r}`,
+    `Q ${x1} ${busY} ${topCornerX} ${busY}`,
+    `L ${turnTopEnd} ${busY}`,
+    `Q ${x2} ${busY} ${x2} ${busY + r}`,
+    `L ${x2} ${y2}`,
+  ].join(" ");
+}
+
 type Edge = {
   kind: "parent-child" | "spouse";
   path: string;
@@ -51,6 +76,9 @@ export function ConnectorsLayer({
       });
 
       const result: Edge[] = [];
+      const containerWidth = container.offsetWidth;
+      const midline = containerWidth / 2;
+      const cornerRadius = 8;
       for (const p of people) {
         const kid = pos.get(p.slug);
         if (!kid) continue;
@@ -72,9 +100,10 @@ export function ConnectorsLayer({
         const toCx = kid.cx;
         const toY = kid.top;
         const midY = (fromY + toY) / 2;
-        const d = `M ${fromCx} ${fromY} C ${fromCx} ${midY}, ${toCx} ${midY}, ${toCx} ${toY}`;
-        const containerWidth = container.offsetWidth;
-        const bridge = Math.abs(fromCx - toCx) > containerWidth * 0.35;
+        const d = orthogonalPath(fromCx, fromY, toCx, toY, midY, cornerRadius);
+        const parentSide = fromCx < midline ? "L" : "R";
+        const childSide = toCx < midline ? "L" : "R";
+        const bridge = parentSide !== childSide;
         result.push({
           kind: "parent-child",
           path: d,
@@ -119,19 +148,20 @@ export function ConnectorsLayer({
     >
       <g>
         {edges.map((e, i) => (
-          <g key={i}>
+          <g key={i} opacity={e.bridge ? 0.55 : 0.45}>
             <path
               d={e.path}
               fill="none"
-              stroke={e.bridge ? "var(--color-accent-700)" : "var(--color-ink-300)"}
-              strokeWidth={e.bridge ? 1.6 : 1.25}
+              stroke={e.bridge ? "var(--color-accent-700)" : "var(--color-ink-400)"}
+              strokeWidth={1.1}
+              strokeLinejoin="round"
               strokeLinecap="round"
-              strokeDasharray={e.bridge ? "4 3" : undefined}
+              strokeDasharray={e.bridge ? "5 4" : undefined}
             />
             <circle
               cx={e.endX}
               cy={e.endY}
-              r={e.bridge ? 3.5 : 0}
+              r={e.bridge ? 2.5 : 0}
               fill="var(--color-accent-700)"
             />
           </g>
