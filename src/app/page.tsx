@@ -79,6 +79,16 @@ export default function Home() {
             copy="The full visual tree, six generations deep."
           />
           <ExploreCard
+            href="/timeline"
+            title="Timeline"
+            copy="Two centuries of births, shops opening, and milestones, on one continuous spine."
+          />
+          <ExploreCard
+            href="/relationship"
+            title="Relationship finder"
+            copy="Pick any two people and see how they are related."
+          />
+          <ExploreCard
             href="/people"
             title="All people"
             copy={`${people.length} family members with individual profiles.`}
@@ -91,7 +101,7 @@ export default function Home() {
           <ExploreCard
             href="/places"
             title="Places"
-            copy={`${places.length} cities on three continents where the family lives and works.`}
+            copy={`${places.length} cities on three continents, now on an interactive map.`}
           />
           <ExploreCard
             href="/faq"

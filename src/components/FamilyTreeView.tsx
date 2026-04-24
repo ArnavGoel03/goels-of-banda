@@ -94,10 +94,10 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
       >
         <Controls />
         <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs">
+          <span className="font-medium text-ink-800">Tap any card</span> to open that person&rsquo;s page ·{" "}
           <span className="font-medium text-ink-800">Drag</span> to pan ·{" "}
           <span className="font-medium text-ink-800">⌘/Ctrl + scroll</span> or{" "}
-          <span className="font-medium text-ink-800">pinch</span> to zoom ·{" "}
-          <span className="font-medium text-ink-800">Click</span> a name to open
+          <span className="font-medium text-ink-800">pinch</span> to zoom
         </div>
         <TransformComponent
           wrapperStyle={{ width: "100%", height: "100%" }}
@@ -322,11 +322,12 @@ function Missing({ label }: { label: string }) {
 
 function Card({ data }: { data: TreeNode }) {
   const { slug, name, alias, sub, deceased, newborn, self, placeholder } = data;
+  const isClickable = !placeholder && slug !== "#";
   const content = (
     <div
       data-slug={slug}
       className={[
-        "relative z-[1] w-[160px] min-h-[64px] rounded-md border px-2.5 py-1.5 text-left transition-all",
+        "group relative z-[1] w-[160px] min-h-[64px] rounded-md border px-2.5 py-1.5 text-left transition-all",
         self
           ? "border-accent-700 border-2 bg-accent-400/10 shadow-sm"
           : deceased
@@ -335,10 +336,18 @@ function Card({ data }: { data: TreeNode }) {
               ? "border-newborn bg-parchment"
               : placeholder
                 ? "border-ink-200 bg-parchment/60 border-dashed"
-                : "border-ink-100 bg-parchment hover:border-accent-400 hover:shadow-sm",
+                : "border-ink-100 bg-parchment hover:border-accent-700 hover:shadow-md hover:-translate-y-0.5",
       ].join(" ")}
     >
-      <p className="font-serif text-[15px] font-semibold text-ink-900 leading-tight">
+      {isClickable ? (
+        <span
+          className="absolute right-1.5 top-1 text-[10px] text-ink-300 group-hover:text-accent-700 transition-colors"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
+      ) : null}
+      <p className="font-serif text-[15px] font-semibold text-ink-900 leading-tight pr-3">
         {name}
         {deceased ? <span className="ml-1 text-ink-400">✝</span> : null}
         {newborn ? <span className="ml-1 text-newborn">★</span> : null}
@@ -352,9 +361,13 @@ function Card({ data }: { data: TreeNode }) {
       {sub ? <p className="text-[10px] text-ink-500 leading-tight mt-1">{sub}</p> : null}
     </div>
   );
-  if (placeholder || slug === "#") return content;
+  if (!isClickable) return content;
   return (
-    <Link href={`/people/${slug}`} className="no-underline">
+    <Link
+      href={`/people/${slug}`}
+      className="no-underline cursor-pointer"
+      title={`Open ${name}'s page`}
+    >
       {content}
     </Link>
   );
