@@ -1,9 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 
-export type PersonNodeData = {
+export type PersonCardData = {
   slug: string;
   name: string;
   alias?: string;
@@ -16,13 +13,14 @@ export type PersonNodeData = {
   placeholder?: boolean;
 };
 
-export type PersonFlowNode = Node<PersonNodeData, "person">;
+export const CARD_WIDTH = 170;
+export const CARD_HEIGHT = 74;
 
-export function PersonNode({ data }: NodeProps<PersonFlowNode>) {
+export function PersonCard({ data }: { data: PersonCardData }) {
   const { slug, name, alias, sub, age, badge, deceased, newborn, self, placeholder } = data;
   const isClickable = !placeholder && slug !== "#" && !slug.startsWith("__");
 
-  const card = (
+  const inner = (
     <div
       className={[
         "group relative w-[170px] min-h-[74px] rounded-md border px-2.5 py-1.5 text-left transition-all",
@@ -68,21 +66,14 @@ export function PersonNode({ data }: NodeProps<PersonFlowNode>) {
     </div>
   );
 
+  if (!isClickable) return inner;
   return (
-    <>
-      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
-      {isClickable ? (
-        <Link
-          href={`/people/${slug}`}
-          className="no-underline cursor-pointer block"
-          title={`Open ${name}'s page`}
-        >
-          {card}
-        </Link>
-      ) : (
-        card
-      )}
-      <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
-    </>
+    <Link
+      href={`/people/${slug}`}
+      className="no-underline cursor-pointer block"
+      title={`Open ${name}'s page`}
+    >
+      {inner}
+    </Link>
   );
 }
