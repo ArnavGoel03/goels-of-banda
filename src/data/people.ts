@@ -92,7 +92,8 @@ export const people: Person[] = [
   },
   {
     slug: "nandita-goel",
-    name: "Nandita Goel",
+    name: "Nandita Agarwal",
+    altNames: ["Nandita Goel (married name)"],
     sex: "F",
     isLiving: true,
     generation: 2,
@@ -101,6 +102,7 @@ export const people: Person[] = [
     occupation: "Homemaker",
     spouse: { slug: "manmohan-goel" },
     children: ["avijit-goel", "vijaya-agarwal"],
+    birthFamilySurname: "Agarwal",
     publicity: "summary",
     bio: "Wife of Manmohan Goel. Mother of Avijit 'Honey' Goel and Vijaya 'Happy' Goel.",
   },
@@ -115,9 +117,25 @@ export const people: Person[] = [
     currentLocation: "Banda, Uttar Pradesh, India",
     occupation: "Jeweller",
     businessSlugs: ["ganesh-prasad-gondilal-saraf"],
+    spouse: { slug: "sohan-wife" },
     publicity: "full",
     bio:
       "Sohan Goel is the youngest of four brothers in Radha Krishna Goel's generation. He runs one of the three jewellery shops inside the ancestral 'Ganesh Prasad Gondilal Saraf' building on the ground floor together with his youngest son. His two elder sons, known by the family nicknames 'Chanu' and 'Tukku', have opened their own separate jewellery shop nearby. Sohan and his wife also raised an adopted daughter, Khushi Agrawal, who is biologically his wife's sister's daughter.",
+  },
+  {
+    slug: "sohan-wife",
+    name: "Sohan's wife",
+    sex: "F",
+    isLiving: true,
+    generation: 2,
+    familyRole: "Wife of Sohan Goel",
+    currentLocation: "Banda, Uttar Pradesh, India",
+    occupation: "Homemaker",
+    spouse: { slug: "sohan-goel" },
+    publicity: "minimal",
+    bio:
+      "Wife of Sohan Goel. Alongside her husband, raised an adopted daughter, Khushi Agrawal, who is biologically her sister's daughter.",
+    notes: "Legal name not yet recorded in this tree.",
   },
   {
     slug: "mahesh-goel",
@@ -130,9 +148,24 @@ export const people: Person[] = [
     currentLocation: "Banda, Uttar Pradesh, India",
     occupation: "Jeweller",
     businessSlugs: ["ganesh-prasad-gondilal-saraf"],
+    spouse: { slug: "mahesh-wife" },
     publicity: "summary",
     bio:
       "Mahesh Goel is the second of the four brothers in Radha Krishna Goel's generation, between Radha Krishna and Manmohan. He runs the upper-floor gold shop (accessed via stairs) inside the ancestral Ganesh Prasad Gondilal Saraf building in Banda. Has three sons and one daughter, who lives in Australia with her husband.",
+  },
+  {
+    slug: "mahesh-wife",
+    name: "Mahesh's wife",
+    sex: "F",
+    isLiving: true,
+    generation: 2,
+    familyRole: "Wife of Mahesh Goel",
+    currentLocation: "Banda, Uttar Pradesh, India",
+    occupation: "Homemaker",
+    spouse: { slug: "mahesh-goel" },
+    publicity: "minimal",
+    bio: "Wife of Mahesh Goel. Mother of three sons and one daughter.",
+    notes: "Legal name not yet recorded in this tree.",
   },
 
   // ============ GENERATION 2, Maternal grandparents ============

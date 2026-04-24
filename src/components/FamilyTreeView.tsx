@@ -137,13 +137,22 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
               <SideColumn side="paternal">
                 <BranchLabel>Paternal · Banda · Radha Krishna&rsquo;s 4 brothers + 3 sisters</BranchLabel>
                 <Row gap="md">
-                  <Card data={node(get("mahesh-goel"))} />
-                  <Card data={node(get("manmohan-goel"))} />
                   <Couple>
                     <Card data={node(get("radha-krishna-goel"))} />
                     <Card data={node(get("rani-agarwal-dadiji"))} />
                   </Couple>
-                  <Card data={node(get("sohan-goel"))} />
+                  <Couple>
+                    <Card data={node(get("mahesh-goel"))} />
+                    <Card data={node(get("mahesh-wife"))} />
+                  </Couple>
+                  <Couple>
+                    <Card data={node(get("manmohan-goel"))} />
+                    <Card data={node(get("nandita-goel"))} />
+                  </Couple>
+                  <Couple>
+                    <Card data={node(get("sohan-goel"))} />
+                    <Card data={node(get("sohan-wife"))} />
+                  </Couple>
                   <Card data={{ slug: "#", name: "3 sisters", sub: "Banda · Gurugram · ✝", placeholder: true }} />
                 </Row>
               </SideColumn>
