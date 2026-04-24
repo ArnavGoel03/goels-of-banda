@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { websiteJsonLd } from "@/lib/schema";
 import { SearchProvider } from "@/components/search/SearchProvider";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -108,6 +110,8 @@ export default function RootLayout({
           </main>
           <Footer />
         </SearchProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

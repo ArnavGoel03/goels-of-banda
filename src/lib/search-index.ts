@@ -1,3 +1,4 @@
+import Fuse from "fuse.js";
 import { people } from "@/data/people";
 import { businesses } from "@/data/businesses";
 import { places } from "@/data/places";
@@ -68,21 +69,24 @@ export function buildSearchIndex(): SearchItem[] {
   return items;
 }
 
-export function scoreItem(item: SearchItem, query: string): number {
-  const q = query.trim().toLowerCase();
-  if (!q) return 0;
-  const name = item.name.toLowerCase();
-  if (name === q) return 1000;
-  if (name.startsWith(q)) return 500;
-  if (name.includes(q)) return 250;
-  // word-boundary in name
-  if (new RegExp(`\\b${escapeRegex(q)}`, "i").test(item.name)) return 150;
-  if (item.haystack.includes(q)) return 50;
-  return 0;
-}
+let fuseCache: Fuse<SearchItem> | null = null;
+let indexCache: SearchItem[] | null = null;
 
-function escapeRegex(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function getFuse(index: SearchItem[]): Fuse<SearchItem> {
+  if (fuseCache && indexCache === index) return fuseCache;
+  indexCache = index;
+  fuseCache = new Fuse(index, {
+    keys: [
+      { name: "name", weight: 3 },
+      { name: "subtitle", weight: 0.5 },
+      { name: "haystack", weight: 1 },
+    ],
+    threshold: 0.34,
+    ignoreLocation: true,
+    includeScore: true,
+    minMatchCharLength: 2,
+  });
+  return fuseCache;
 }
 
 export function searchItems(
@@ -90,11 +94,10 @@ export function searchItems(
   query: string,
   limit = 20,
 ): SearchItem[] {
-  if (!query.trim()) return [];
-  return index
-    .map((item) => ({ item, score: scoreItem(item, query) }))
-    .filter((x) => x.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((x) => x.item);
+  const q = query.trim();
+  if (!q) return [];
+  const fuse = getFuse(index);
+  return fuse
+    .search(q, { limit })
+    .map((r) => r.item);
 }
