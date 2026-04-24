@@ -137,8 +137,8 @@ export const places: Place[] = [
     country: "India",
     coords: [25.2425, 86.9842],
     connection:
-      "Shourya (Shally) Goel and her husband live here; they own rental properties and mills across Bihar.",
-    personSlugs: ["shally-goel", "shally-husband"],
+      "Shourya (Shally) Goel and her husband Atulit Agarwal live here; they own rental properties and mills across Bihar.",
+    personSlugs: ["shally-goel", "atulit-agarwal"],
   },
   {
     slug: "gujarat",
@@ -164,8 +164,8 @@ export const places: Place[] = [
     country: "United Arab Emirates",
     coords: [25.2048, 55.2708],
     connection:
-      "Aditya Agarwal runs the Dubai branch of AG Shares & Securities; lives here with his wife Sugandha.",
-    personSlugs: ["aditya-agarwal", "sugandha-agarwal"],
+      "Aditya Agarwal runs the Dubai branch of AG Shares & Securities; lives here with his wife Sugandha Maheshwari, from the Agra Maheshwari marble family.",
+    personSlugs: ["aditya-agarwal", "sugandha-maheshwari"],
   },
   {
     slug: "foster-city",

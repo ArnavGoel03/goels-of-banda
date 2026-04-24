@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/data/config";
 import { people } from "@/data/people";
 import { businesses } from "@/data/businesses";
+import { stories } from "@/data/stories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.baseUrl;
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/people`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/businesses`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/places`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/stories`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
     { url: `${base}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/contribute`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
@@ -36,5 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...peoplePages, ...businessPages];
+  const storyPages: MetadataRoute.Sitemap = stories.map((s) => ({
+    url: `${base}/stories/${s.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...peoplePages, ...businessPages, ...storyPages];
 }

@@ -30,7 +30,7 @@ export type Person = {
   bio: string;
   publicity?: "full" | "summary" | "minimal";
   birthFamilySurname?: string;
-  relationshipToArnav?: string;
+  relationshipToViewer?: string;
   sources?: { label: string; url: string }[];
   notes?: string;
   generation?: number;
@@ -49,6 +49,19 @@ export type Business = {
   runByPersonSlugs: string[];
   ownedByPersonSlugs?: string[];
   sources?: { label: string; url: string }[];
+};
+
+export type Story = {
+  slug: string;
+  title: string;
+  kind: "founding" | "milestone" | "profile" | "intermarriage" | "memoir";
+  summary: string;
+  body: string[];
+  era?: string;
+  date?: { year?: number; date?: string };
+  personSlugs?: string[];
+  businessSlugs?: string[];
+  placeSlugs?: string[];
 };
 
 export type Place = {

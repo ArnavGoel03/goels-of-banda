@@ -110,7 +110,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             minWidth: "100%",
           }}
         >
-          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[1500px]">
+          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[2200px]">
             <ConnectorsLayer containerRef={treeRef} />
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
             <Row>
@@ -122,8 +122,8 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             <Connector />
 
             <GenLabel>Generation 5 · grandparents</GenLabel>
-            <div className="flex items-end justify-center gap-16 flex-wrap">
-              <div className="flex flex-col items-center gap-2">
+            <SideBySide>
+              <SideColumn side="paternal">
                 <BranchLabel>Paternal · Banda · Radha Krishna&rsquo;s 4 brothers + 3 sisters</BranchLabel>
                 <Row gap="md">
                   <Card data={node(get("mahesh-goel"))} />
@@ -135,128 +135,142 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                   <Card data={node(get("sohan-goel"))} />
                   <Card data={{ slug: "#", name: "3 sisters", sub: "Banda · Gurugram · ✝", placeholder: true }} />
                 </Row>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <BranchLabel>Maternal · Jhansi</BranchLabel>
+              </SideColumn>
+              <SideColumn side="maternal">
+                <BranchLabel>Maternal · Jhansi · Ramesh Chandra&rsquo;s 12 siblings</BranchLabel>
                 <Row gap="md">
                   <Couple>
                     <Card data={node(get("ramesh-chandra-agarwal"))} />
                     <Card data={node(get("prem-kumari"))} />
                   </Couple>
                 </Row>
-              </div>
-            </div>
+              </SideColumn>
+            </SideBySide>
             <Connector />
 
             <GenLabel>Generation 6 · parents&rsquo; generation</GenLabel>
-            <div className="flex items-start justify-center gap-24 flex-wrap">
-              <Branch label="Radha Krishna&rsquo;s children · Banda">
-                <Row>
-                  <Couple>
-                    <Card data={node(get("vinod-goel"))} />
-                    <Card data={node(get("neelam-agarwal-vinod"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("shobhit-goel"))} />
-                    <Card data={node(get("roli"))} />
-                  </Couple>
-                  <Card data={node(get("seema-agarwal"))} />
-                  <Couple>
-                    <Card data={node(get("rohit-goel"))} />
-                    <Card data={node(get("richa-goel"))} />
-                  </Couple>
-                </Row>
-              </Branch>
-              <Branch label="Manmohan&rsquo;s children · Banda">
-                <Row>
-                  <Couple>
-                    <Card data={node(get("avijit-goel"))} />
-                    <Card data={node(get("shayana-goyal"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("vijaya-agarwal"))} />
-                    <Card data={node(get("deepak-agarwal"))} />
-                  </Couple>
-                </Row>
-              </Branch>
-              <Branch label="Nanaji&rsquo;s children · Jhansi">
-                <Row>
-                  <Couple>
-                    <Card data={node(get("vivek-agarwal"))} />
-                    <Card data={node(get("rashi-agarwal"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("nitin-agarwal"))} />
-                    <Card data={node(get("manjari-garg"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("kapil-agarwal"))} />
-                    <Card data={node(get("nidhi-modi"))} />
-                  </Couple>
-                </Row>
-              </Branch>
-            </div>
+            <SideBySide>
+              <SideColumn side="paternal">
+                <div className="flex items-start justify-center gap-16 flex-wrap">
+                  <Branch label="Radha Krishna&rsquo;s children · Banda">
+                    <Row>
+                      <Couple>
+                        <Card data={node(get("vinod-goel"))} />
+                        <Card data={node(get("neelam-agarwal-vinod"))} />
+                      </Couple>
+                      <Couple>
+                        <Card data={node(get("shobhit-goel"))} />
+                        <Card data={node(get("roli"))} />
+                      </Couple>
+                      <Card data={node(get("seema-agarwal"))} />
+                      <Couple>
+                        <Card data={node(get("rohit-goel"))} />
+                        <Card data={node(get("richa-goel"))} />
+                      </Couple>
+                    </Row>
+                  </Branch>
+                  <Branch label="Manmohan&rsquo;s children · Banda">
+                    <Row>
+                      <Couple>
+                        <Card data={node(get("avijit-goel"))} />
+                        <Card data={node(get("shayana-goyal"))} />
+                      </Couple>
+                      <Couple>
+                        <Card data={node(get("vijaya-agarwal"))} />
+                        <Card data={node(get("deepak-agarwal"))} />
+                      </Couple>
+                    </Row>
+                  </Branch>
+                </div>
+              </SideColumn>
+              <SideColumn side="maternal">
+                <Branch label="Nanaji&rsquo;s children · Jhansi">
+                  <Row>
+                    <Couple>
+                      <Card data={node(get("kapil-agarwal"))} />
+                      <Card data={node(get("nidhi-modi"))} />
+                    </Couple>
+                    <Couple>
+                      <Card data={node(get("vivek-agarwal"))} />
+                      <Card data={node(get("rashi-agarwal"))} />
+                    </Couple>
+                    <Couple>
+                      <Card data={node(get("nitin-agarwal"))} />
+                      <Card data={node(get("manjari-garg"))} />
+                    </Couple>
+                  </Row>
+                </Branch>
+              </SideColumn>
+            </SideBySide>
             <Connector />
 
             <GenLabel>Generation 7 · cousins</GenLabel>
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex items-start justify-center gap-16 flex-wrap">
-                <BranchSectionLabel>Paternal · Radha Krishna&rsquo;s grandchildren</BranchSectionLabel>
-              </div>
-              <div className="flex items-start justify-center gap-6 flex-wrap">
-                <ClusterGroup title="Vinod&rsquo;s">
-                  <Couple>
-                    <Card data={node(get("palash-goel"))} />
-                    <Card data={node(get("preksha-agarwal"))} />
-                  </Couple>
-                  <Couple>
-                    <Card data={node(get("palak-goel"))} />
-                    <Card data={node(get("manmohan-agrawal-kanpur"))} />
-                  </Couple>
-                </ClusterGroup>
-                <ClusterGroup title="Shobhit&rsquo;s">
-                  <Card data={node(get("shally-goel"))} />
-                  <Card data={node(get("esha-goel"))} />
-                  <Card data={node(get("rhitik-goel"))} />
-                </ClusterGroup>
-                <ClusterGroup title="Seema&rsquo;s">
-                  <Card data={node(get("aditya-agarwal"))} />
-                  <Couple>
-                    <Card data={node(get("anu-agarwal"))} />
-                    <Card data={node(get("shanu-agarwal"))} />
-                  </Couple>
-                </ClusterGroup>
-                <ClusterGroup title="Rohit&rsquo;s">
-                  <Card data={node(get("arnav-goel"), { self: true })} />
-                  <Card data={node(get("aditi-goel"))} />
-                </ClusterGroup>
-              </div>
-              <div className="flex items-start justify-center gap-16 flex-wrap mt-2">
-                <BranchSectionLabel>Paternal · Manmohan&rsquo;s grandchildren</BranchSectionLabel>
-              </div>
-              <div className="flex items-start justify-center gap-6 flex-wrap">
-                <ClusterGroup title="Honey&rsquo;s">
-                  <Card data={node(get("vashundhara-goel"))} />
-                </ClusterGroup>
-              </div>
-              <div className="flex items-start justify-center gap-16 flex-wrap mt-2">
-                <BranchSectionLabel>Maternal · Nanaji&rsquo;s grandchildren</BranchSectionLabel>
-              </div>
-              <div className="flex items-start justify-center gap-6 flex-wrap">
-                <ClusterGroup title="Vivek&rsquo;s">
-                  <Card data={node(get("anayra-agarwal"))} />
-                  <Card data={node(get("rhidhaan-agarwal"))} />
-                </ClusterGroup>
-                <ClusterGroup title="Nitin&rsquo;s">
-                  <Card data={node(get("nayonika-agarwal"))} />
-                  <Card data={node(get("rayaan-agarwal"))} />
-                </ClusterGroup>
-                <ClusterGroup title="Kapil&rsquo;s">
-                  <Card data={node(get("atharva-agarwal"))} />
-                  <Card data={node(get("lovnika-agarwal"))} />
-                </ClusterGroup>
-              </div>
-            </div>
+            <SideBySide>
+              <SideColumn side="paternal">
+                <div className="flex flex-col items-center gap-6">
+                  <BranchSectionLabel>Paternal · Radha Krishna&rsquo;s grandchildren</BranchSectionLabel>
+                  <div className="flex items-start justify-center gap-6 flex-wrap">
+                    <ClusterGroup title="Vinod&rsquo;s">
+                      <Couple>
+                        <Card data={node(get("palash-goel"))} />
+                        <Card data={node(get("preksha-agarwal"))} />
+                      </Couple>
+                      <Couple>
+                        <Card data={node(get("palak-goel"))} />
+                        <Card data={node(get("manmohan-agrawal-kanpur"))} />
+                      </Couple>
+                    </ClusterGroup>
+                    <ClusterGroup title="Shobhit&rsquo;s">
+                      <Couple>
+                        <Card data={node(get("shally-goel"))} />
+                        <Card data={node(get("atulit-agarwal"))} />
+                      </Couple>
+                      <Card data={node(get("esha-goel"))} />
+                      <Card data={node(get("rhitik-goel"))} />
+                    </ClusterGroup>
+                    <ClusterGroup title="Seema&rsquo;s">
+                      <Couple>
+                        <Card data={node(get("anu-agarwal"))} />
+                        <Card data={node(get("shanu-agarwal"))} />
+                      </Couple>
+                      <Couple>
+                        <Card data={node(get("aditya-agarwal"))} />
+                        <Card data={node(get("sugandha-maheshwari"))} />
+                      </Couple>
+                    </ClusterGroup>
+                    <ClusterGroup title="Rohit&rsquo;s">
+                      <Card data={node(get("aditi-goel"), { self: true })} />
+                      <Card data={node(get("arnav-goel"))} />
+                    </ClusterGroup>
+                  </div>
+                  <BranchSectionLabel>Paternal · Manmohan&rsquo;s grandchildren</BranchSectionLabel>
+                  <div className="flex items-start justify-center gap-6 flex-wrap">
+                    <ClusterGroup title="Honey&rsquo;s">
+                      <Card data={node(get("vashundhara-goel"))} />
+                    </ClusterGroup>
+                  </div>
+                </div>
+              </SideColumn>
+              <SideColumn side="maternal">
+                <div className="flex flex-col items-center gap-6">
+                  <BranchSectionLabel>Maternal · Nanaji&rsquo;s grandchildren</BranchSectionLabel>
+                  <div className="flex items-start justify-center gap-6 flex-wrap">
+                    <ClusterGroup title="Kapil&rsquo;s">
+                      <Card data={node(get("atharva-agarwal"))} />
+                      <Card data={node(get("lovnika-agarwal"))} />
+                    </ClusterGroup>
+                    <ClusterGroup title="Vivek&rsquo;s">
+                      <Card data={node(get("rhidhaan-agarwal"))} />
+                      <Card data={node(get("anayra-agarwal"))} />
+                    </ClusterGroup>
+                    <ClusterGroup title="Nitin&rsquo;s">
+                      <Card data={node(get("nayonika-agarwal"))} />
+                      <Card data={node(get("rayaan-agarwal"))} />
+                    </ClusterGroup>
+                  </div>
+                </div>
+              </SideColumn>
+            </SideBySide>
             <Connector />
 
             <GenLabel>Generation 8 · newborn</GenLabel>
@@ -283,6 +297,33 @@ function BranchLabel({ children }: { children: React.ReactNode }) {
     <p className="text-[10px] uppercase tracking-[0.18em] text-ink-500 font-medium border-b border-ink-200 pb-1 w-full text-center max-w-[900px]">
       {children}
     </p>
+  );
+}
+
+function SideBySide({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start justify-center gap-0 w-full">
+      {children}
+    </div>
+  );
+}
+
+function SideColumn({
+  side,
+  children,
+}: {
+  side: "paternal" | "maternal";
+  children: React.ReactNode;
+}) {
+  const sideLabel = side === "paternal" ? "Paternal · Goels of Banda" : "Maternal · Agarwals of Jhansi";
+  const borderClass = side === "paternal" ? "border-r border-dashed border-ink-200" : "";
+  return (
+    <div className={`flex-1 flex flex-col items-center gap-3 px-10 ${borderClass}`}>
+      <span className="text-[10px] uppercase tracking-[0.22em] text-ink-400 font-medium">
+        {sideLabel}
+      </span>
+      {children}
+    </div>
   );
 }
 

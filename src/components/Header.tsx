@@ -19,6 +19,7 @@ export function Header() {
             <NavLink href="/story">Story</NavLink>
             <NavLink href="/family-tree">Tree</NavLink>
             <NavLink href="/timeline">Timeline</NavLink>
+            <NavLink href="/stories">Stories</NavLink>
             <NavLink href="/people">People</NavLink>
             <NavLink href="/businesses">Businesses</NavLink>
             <NavLink href="/places">Places</NavLink>

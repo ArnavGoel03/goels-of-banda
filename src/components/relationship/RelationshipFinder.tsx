@@ -11,7 +11,7 @@ import { RelationshipPath } from "./RelationshipPath";
 export function RelationshipFinder() {
   const searchParams = useSearchParams();
   const [from, setFrom] = useState(
-    searchParams.get("from") ?? "arnav-goel",
+    searchParams.get("from") ?? "aditi-goel",
   );
   const [to, setTo] = useState(
     searchParams.get("to") ?? "radha-krishna-goel",
@@ -28,7 +28,7 @@ export function RelationshipFinder() {
   const path = useMemo(() => findRelationshipPath(from, to), [from, to]);
   const fromPerson = getPerson(from);
   const toPerson = getPerson(to);
-  const viewerIsFirst = from === "arnav-goel";
+  const viewerIsFirst = from === "aditi-goel";
 
   return (
     <article className="mx-auto max-w-3xl px-6 pt-12 pb-16">

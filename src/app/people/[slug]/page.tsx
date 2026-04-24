@@ -12,6 +12,7 @@ import { BusinessesPanel } from "@/components/person/BusinessesPanel";
 import { PlacesForPerson } from "@/components/person/PlacesForPerson";
 import { SourcesPanel } from "@/components/person/SourcesPanel";
 import { AdjacentNav } from "@/components/person/AdjacentNav";
+import { RelatedStories } from "@/components/person/RelatedStories";
 import { linkify } from "@/lib/linkify";
 
 export function generateStaticParams() {
@@ -87,6 +88,7 @@ export default async function PersonPage({ params }: { params: Params }) {
         <LifeTimeline person={person} />
         <BusinessesPanel person={person} />
         <PlacesForPerson person={person} />
+        <RelatedStories personSlug={person.slug} />
         <SourcesPanel person={person} />
 
         {person.notes ? (
