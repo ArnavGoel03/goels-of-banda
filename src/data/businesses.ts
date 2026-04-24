@@ -54,7 +54,8 @@ export const businesses: Business[] = [
     website: "https://www.agssl.in",
     description:
       "A stock-brokering firm registered in Agra, Uttar Pradesh, and an NSDL-registered Depository Participant (DP code IN301006). Owned by the husband of Seema Agarwal (née Goel), and operates a Dubai branch run by their son Aditya Agarwal. The firm runs its own equity trading platform, similar in scope to consumer-facing brokers like Zerodha, that clients use to place trades and manage their portfolios. Shobhit Goel works as a sub-broker under the firm's broking licence in Satna, Madhya Pradesh.",
-    runByPersonSlugs: ["aditya-agarwal"],
+    runByPersonSlugs: ["seema-husband", "aditya-agarwal"],
+    ownedByPersonSlugs: ["seema-husband"],
     sources: [
       { label: "Official website", url: "https://www.agssl.in" },
       { label: "NSDL Depository Participant listing", url: "https://nsdl.co.in/dps-detail-display.php?dpname=IN301006" },

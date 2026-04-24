@@ -173,7 +173,10 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                         <Card data={node(get("shobhit-goel"))} />
                         <Card data={node(get("roli"))} />
                       </Couple>
-                      <Card data={node(get("seema-agarwal"))} />
+                      <Couple>
+                        <Card data={node(get("seema-agarwal"))} />
+                        <Card data={node(get("seema-husband"))} />
+                      </Couple>
                       <Couple>
                         <Card data={node(get("rohit-goel"))} />
                         <Card data={node(get("richa-goel"))} />
