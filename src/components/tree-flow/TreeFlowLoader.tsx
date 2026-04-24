@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 import type { Person } from "@/data/types";
+import { useLowBandwidth, SlowConnectionNotice } from "./SlowConnectionNotice";
+import { TreeFallbackList } from "./TreeFallbackList";
 
 const TreeFlowView = dynamic(
   () => import("./TreeFlowView").then((m) => m.TreeFlowView),
@@ -16,5 +18,15 @@ const TreeFlowView = dynamic(
 );
 
 export function TreeFlowLoader({ peopleList }: { peopleList: Person[] }) {
-  return <TreeFlowView peopleList={peopleList} />;
+  const low = useLowBandwidth();
+  return (
+    <>
+      <SlowConnectionNotice />
+      {low ? (
+        <TreeFallbackList peopleList={peopleList} />
+      ) : (
+        <TreeFlowView peopleList={peopleList} />
+      )}
+    </>
+  );
 }

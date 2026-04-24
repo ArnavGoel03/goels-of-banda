@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 // Strict-transport-security: HTTPS only
 // Content-Security-Policy: hardened for a static content site
