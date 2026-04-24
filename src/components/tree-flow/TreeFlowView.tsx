@@ -314,19 +314,36 @@ function buildEdgePaths(
     spouseOf.set(e.target, e.source);
   }
 
-  for (const [parentSlug, childSlugs] of childrenByParent) {
+  // Merge married-couple child combs into one. A married couple with
+  // shared children would otherwise get two parallel combs (one from
+  // each parent), which reads as duplicate lines. We iterate in a
+  // stable order and skip a parent if their spouse was already drawn
+  // for the same couple.
+  const drawnCouples = new Set<string>();
+
+  for (const [parentSlug, rawChildren] of childrenByParent) {
     const parent = posById.get(parentSlug);
     if (!parent) continue;
+
+    const spouseSlug = spouseOf.get(parentSlug);
+    const spouseNode = spouseSlug ? posById.get(spouseSlug) : undefined;
+
+    let childSlugs = rawChildren;
+    if (spouseSlug) {
+      const coupleKey = [parentSlug, spouseSlug].sort().join("::");
+      if (drawnCouples.has(coupleKey)) continue;
+      drawnCouples.add(coupleKey);
+      const spouseKids = childrenByParent.get(spouseSlug) ?? [];
+      childSlugs = Array.from(new Set([...rawChildren, ...spouseKids]));
+    }
+
     const kids = childSlugs
       .map((s) => posById.get(s))
       .filter((n): n is LayoutNode => Boolean(n));
     if (kids.length === 0) continue;
 
-    // If this parent has a spouse drawn, anchor the child-stem at the
-    // midpoint between the couple, not at the primary parent's card
-    // center. Otherwise the stem visually belongs to only one parent.
-    const spouseSlug = spouseOf.get(parentSlug);
-    const spouseNode = spouseSlug ? posById.get(spouseSlug) : undefined;
+    // Stem anchors at the midpoint between the couple when both are
+    // drawn. A single parent drops from their own card centre.
     const parentCx = spouseNode
       ? (parent.x + CARD_WIDTH / 2 + spouseNode.x + CARD_WIDTH / 2) / 2
       : parent.x + CARD_WIDTH / 2;
