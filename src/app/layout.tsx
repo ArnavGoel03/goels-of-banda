@@ -94,10 +94,18 @@ export default function RootLayout({
       className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-md focus:bg-accent-700 focus:px-3 focus:py-1.5 focus:text-parchment focus:outline-none"
+        >
+          Skip to content
+        </a>
         <JsonLd data={websiteJsonLd()} />
         <SearchProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main" className="flex-1" tabIndex={-1}>
+            {children}
+          </main>
           <Footer />
         </SearchProvider>
       </body>

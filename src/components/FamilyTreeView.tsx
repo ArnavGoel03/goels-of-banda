@@ -10,6 +10,7 @@ import {
 import type { Person } from "@/data/types";
 import { ConnectorsLayer } from "@/components/tree/ConnectorsLayer";
 import { TreeSearch } from "@/components/tree/TreeSearch";
+import { TreeFilters } from "@/components/tree/TreeFilters";
 
 type TreeNode = {
   slug: string;
@@ -95,6 +96,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
       >
         <Controls />
         <TreeSearch containerRef={treeRef} />
+        <TreeFilters containerRef={treeRef} />
         <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs">
           <span className="font-medium text-ink-800">Tap any card</span> to open that person&rsquo;s page ·{" "}
           <span className="font-medium text-ink-800">Drag</span> to pan ·{" "}

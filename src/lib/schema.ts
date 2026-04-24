@@ -83,23 +83,40 @@ const MONTHS = [
 
 function parsePartialDate(
   s?: string,
-): { month: number; day: number } | undefined {
+): { month: number; day: number; year?: number } | undefined {
   if (!s) return undefined;
   const m = s
     .toLowerCase()
-    .match(/(\d{1,2})\s+(january|february|march|april|may|june|july|august|september|october|november|december)/);
+    .match(
+      /(\d{1,2})\s+(january|february|march|april|may|june|july|august|september|october|november|december)(?:\s+(\d{4}))?/,
+    );
   if (!m) return undefined;
-  return { day: parseInt(m[1], 10), month: MONTHS.indexOf(m[2]) + 1 };
+  return {
+    day: parseInt(m[1], 10),
+    month: MONTHS.indexOf(m[2]) + 1,
+    year: m[3] ? parseInt(m[3], 10) : undefined,
+  };
+}
+
+function toIsoDate(dateStr?: string, fallbackYear?: number): string | undefined {
+  const dd = parsePartialDate(dateStr);
+  if (dd && (dd.year ?? fallbackYear)) {
+    const y = (dd.year ?? fallbackYear) as number;
+    const mm = String(dd.month).padStart(2, "0");
+    const d = String(dd.day).padStart(2, "0");
+    return `${y}-${mm}-${d}`;
+  }
+  return fallbackYear ? `${fallbackYear}` : undefined;
 }
 
 export function personJsonLd(person: Person) {
   const name = person.name;
   const alternateNames = person.altNames;
-  const birthDate = person.birth?.year ? `${person.birth.year}` : undefined;
+  const birthDate = toIsoDate(person.birth?.date, person.birth?.year);
   const birthPlace = person.birth?.place
     ? { "@type": "Place", name: person.birth.place }
     : undefined;
-  const deathDate = person.death?.year ? `${person.death.year}` : undefined;
+  const deathDate = toIsoDate(person.death?.date, person.death?.year);
 
   const parents = [
     person.parents?.father ? getPerson(person.parents.father) : undefined,

@@ -13,6 +13,7 @@ import { PlacesForPerson } from "@/components/person/PlacesForPerson";
 import { SourcesPanel } from "@/components/person/SourcesPanel";
 import { AdjacentNav } from "@/components/person/AdjacentNav";
 import { RelatedStories } from "@/components/person/RelatedStories";
+import { RelationshipChip } from "@/components/person/RelationshipChip";
 import { linkify } from "@/lib/linkify";
 
 export function generateStaticParams() {
@@ -75,6 +76,7 @@ export default async function PersonPage({ params }: { params: Params }) {
         </Link>
 
         <PersonHero person={person} />
+        <RelationshipChip person={person} />
 
         {person.bio ? (
           <section className="prose-family mt-8">
