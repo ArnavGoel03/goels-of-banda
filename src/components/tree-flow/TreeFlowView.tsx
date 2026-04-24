@@ -1,16 +1,18 @@
 "use client";
 
 import { useMemo } from "react";
-import ReactFlow, {
+import {
+  ReactFlow,
   Background,
   Controls,
   MiniMap,
   PanOnScrollMode,
   type Edge,
   type Node,
-} from "reactflow";
-import "reactflow/dist/style.css";
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
 import type { Person } from "@/data/types";
+import { computeAge } from "@/lib/schema";
 import { computeLayout } from "./computeLayout";
 import { PersonNode, type PersonNodeData } from "./PersonNode";
 
@@ -21,9 +23,16 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
     const layout = computeLayout(peopleList);
     const bySlug = new Map(peopleList.map((p) => [p.slug, p]));
 
+    const now = new Date();
     const flowNodes: Node<PersonNodeData>[] = layout.nodes.map((ln) => {
       const p = bySlug.get(ln.id)!;
       const isAditi = p.slug === "aditi-goel";
+      const age = computeAge(p, now);
+      const ageLabel = age
+        ? age.atDeath
+          ? `aged ${age.years}`
+          : `age ${age.years}`
+        : undefined;
       return {
         id: ln.id,
         type: "person",
@@ -33,6 +42,7 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
           name: p.name,
           alias: p.altNames?.[0],
           sub: p.currentLocation ?? p.birth?.place,
+          age: ageLabel,
           deceased: !p.isLiving,
           newborn: p.slug === "raghav-goel",
           self: isAditi,

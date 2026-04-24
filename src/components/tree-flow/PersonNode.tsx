@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Handle, Position, type NodeProps } from "reactflow";
+import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 
 export type PersonNodeData = {
   slug: string;
   name: string;
   alias?: string;
   sub?: string;
+  age?: string;
   badge?: string;
   deceased?: boolean;
   newborn?: boolean;
@@ -15,8 +16,10 @@ export type PersonNodeData = {
   placeholder?: boolean;
 };
 
-export function PersonNode({ data }: NodeProps<PersonNodeData>) {
-  const { slug, name, alias, sub, badge, deceased, newborn, self, placeholder } = data;
+export type PersonFlowNode = Node<PersonNodeData, "person">;
+
+export function PersonNode({ data }: NodeProps<PersonFlowNode>) {
+  const { slug, name, alias, sub, age, badge, deceased, newborn, self, placeholder } = data;
   const isClickable = !placeholder && slug !== "#" && !slug.startsWith("__");
 
   const card = (
@@ -57,6 +60,9 @@ export function PersonNode({ data }: NodeProps<PersonNodeData>) {
         <span className="inline-block mt-1 rounded-sm bg-accent-700 px-1.5 py-0.5 text-[8px] uppercase tracking-[0.12em] text-parchment font-semibold">
           {badge}
         </span>
+      ) : null}
+      {age ? (
+        <p className="text-[10px] text-ink-600 leading-tight mt-1 font-medium">{age}</p>
       ) : null}
       {sub ? <p className="text-[9px] text-ink-500 leading-tight mt-1">{sub}</p> : null}
     </div>

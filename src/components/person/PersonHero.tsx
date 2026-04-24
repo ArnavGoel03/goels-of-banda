@@ -1,5 +1,6 @@
 import type { Person } from "@/data/types";
 import { computeAge } from "@/lib/schema";
+import { LiveLifespan } from "./LiveLifespan";
 
 export function PersonHero({ person }: { person: Person }) {
   const lifespan = buildLifespan(person);
@@ -33,9 +34,7 @@ export function PersonHero({ person }: { person: Person }) {
         </p>
       ) : null}
 
-      {lifespan ? (
-        <p className="mt-5 font-serif text-lg text-ink-700">{lifespan}</p>
-      ) : null}
+      <LiveLifespan person={person} fallback={lifespan} />
 
       {bylineParts.length > 0 ? (
         <p className="mt-2 text-sm text-ink-500">
