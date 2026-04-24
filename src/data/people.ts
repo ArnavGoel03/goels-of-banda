@@ -9,7 +9,8 @@ export const people: Person[] = [
     birth: { year: 1820, yearApprox: true, place: "Banda, Uttar Pradesh, India" },
     death: { place: "Banda, Uttar Pradesh, India" },
     isLiving: false,
-    generation: 1,
+    generation: -2,
+    children: ["gondilal-son"],
     familyRole: "Direct paternal ancestor (founding generation)",
     relationshipToViewer: "Great-great-great-great-grandfather",
     publicity: "full",
@@ -24,7 +25,7 @@ export const people: Person[] = [
     birth: { year: 1822, yearApprox: true, place: "Banda, Uttar Pradesh, India" },
     death: { place: "Banda, Uttar Pradesh, India" },
     isLiving: false,
-    generation: 1,
+    generation: -2,
     familyRole: "Brother of Gondilal Goel (founding generation)",
     relationshipToViewer: "Great-great-great-great-granduncle",
     publicity: "full",
@@ -33,7 +34,40 @@ export const people: Person[] = [
     notes: "Exact dates unknown. Brother-sibling relationship with Gondilal confirmed by family record; the firm name 'Ganesh Prasad Gondilal' honors both brothers.",
   },
 
-  // ============ UNNAMED BRIDGE, Radha Krishna's father ============
+  // ============ GENERATION -1, Gondilal's son (founder of the firm) ============
+  {
+    slug: "gondilal-son",
+    name: "Gondilal's son",
+    altNames: ["Founder of Ganesh Prasad Gondilal Saraf"],
+    sex: "M",
+    isLiving: false,
+    generation: -1,
+    familyRole: "Bridge generation (unnamed)",
+    publicity: "minimal",
+    parents: { father: "gondilal-goel" },
+    children: ["rk-grandfather"],
+    bio:
+      "Son of Gondilal Goel. He is the one who opened the ancestral firm 'Ganesh Prasad Gondilal Saraf' in Banda, naming it after his father Gondilal and his uncle Ganesh Prasad. His legal name has not yet been recovered in our records.",
+    notes: "Placeholder card for one of the two bridge generations between founder Gondilal (~1820s) and Radha Krishna's father (~1910). Legal name unknown.",
+  },
+
+  // ============ GENERATION 0, Radha Krishna's grandfather (bridge) ============
+  {
+    slug: "rk-grandfather",
+    name: "Radha Krishna's grandfather",
+    sex: "M",
+    isLiving: false,
+    generation: 0,
+    familyRole: "Bridge generation (unnamed)",
+    publicity: "minimal",
+    parents: { father: "gondilal-son" },
+    children: ["rk-father"],
+    bio:
+      "Grandson of Gondilal Goel, grandfather of Radha Krishna Goel. Sat between the firm's founding generation and the generation that held shares through the 20th century. Legal name not yet recovered.",
+    notes: "Placeholder for the second of the two bridge generations between Gondilal (~1820s) and rk-father (~1910).",
+  },
+
+  // ============ GENERATION 1, Radha Krishna's father ============
   {
     slug: "rk-father",
     name: "Radha Krishna's father",
@@ -42,8 +76,9 @@ export const people: Person[] = [
     death: { year: 2002, place: "Banda, Uttar Pradesh, India" },
     isLiving: false,
     generation: 1,
-    familyRole: "Great-grandfather (one of the 3 unnamed bridge generations)",
+    familyRole: "Great-grandfather",
     publicity: "minimal",
+    parents: { father: "rk-grandfather" },
     children: [
       "radha-krishna-goel",
       "mahesh-goel",
@@ -54,7 +89,7 @@ export const people: Person[] = [
       "rk-sister-allahabad-dec",
     ],
     bio:
-      "Radha Krishna Goel's father. Held shares in the ancestral firm 'Ganesh Prasad Gondilal Saraf' until the 2000 split, when his eldest son Radha Krishna stepped aside and the three younger brothers kept the shares. Passed away roughly 2002.",
+      "Radha Krishna Goel's father. Great-grandson of Gondilal Goel. Held shares in the ancestral firm 'Ganesh Prasad Gondilal Saraf' until the 2000 split, when his eldest son Radha Krishna stepped aside and the three younger brothers kept the shares. Passed away roughly 2002.",
     notes: "Legal name not yet recorded in this tree. Placed in the graph so his seven children resolve as siblings and relationships span across the four brothers' and three sisters' lines.",
   },
 

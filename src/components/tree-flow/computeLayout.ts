@@ -118,6 +118,13 @@ export function computeLayout(people: Person[]): {
     });
   }
 
+  // Known-siblings hint for founders whose shared parents aren't recorded.
+  // Gondilal and Ganesh Prasad were brothers — layout only: pulls them
+  // adjacent at the top of the graph. Not rendered as an edge.
+  if (bySlug.has("gondilal-goel") && bySlug.has("ganesh-prasad-goel")) {
+    g.setEdge("gondilal-goel", "ganesh-prasad-goel", { weight: 3, minlen: 0 });
+  }
+
   dagre.layout(g);
 
   const nodes: LayoutNode[] = [];

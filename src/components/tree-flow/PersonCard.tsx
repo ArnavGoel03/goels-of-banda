@@ -70,7 +70,7 @@ export function PersonCard({ data }: { data: PersonCardData }) {
   return (
     <Link
       href={`/people/${slug}`}
-      className="no-underline cursor-pointer block"
+      className="no-underline cursor-pointer block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent-700 focus-visible:outline-offset-2"
       title={`Open ${name}'s page`}
     >
       {inner}
