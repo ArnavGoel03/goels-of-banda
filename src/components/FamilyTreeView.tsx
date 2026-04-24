@@ -114,7 +114,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             minWidth: "100%",
           }}
         >
-          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[5200px]">
+          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[7500px]">
             <ConnectorsLayer containerRef={treeRef} />
             <PaternalMaternalDivider />
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
@@ -182,7 +182,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                 <div className="flex items-start justify-center gap-24 flex-nowrap">
                   <SubFamily label="Radha Krishna&rsquo;s line">
                     <Branch label="Radha Krishna&rsquo;s children · Banda">
-                      <Row>
+                      <div className="grid grid-cols-4 gap-6 justify-items-center items-start">
                         <Couple>
                           <Card data={node(get("vinod-goel"))} />
                           <Card data={node(get("neelam-agarwal-vinod"))} />
@@ -199,7 +199,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                           <Card data={node(get("rohit-goel"))} />
                           <Card data={node(get("richa-goel"))} />
                         </Couple>
-                      </Row>
+                      </div>
                     </Branch>
                   </SubFamily>
                   <SubFamily label="Mahesh&rsquo;s line">
@@ -288,38 +288,40 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                   <BranchSectionLabel>Paternal · Gen 7 · grandchildren</BranchSectionLabel>
                   <div className="flex items-start justify-center gap-24 flex-nowrap">
                     <SubFamily label="Radha Krishna&rsquo;s line">
-                      <ClusterGroup title="Vinod&rsquo;s">
-                        <Couple>
-                          <Card data={node(get("palash-goel"))} />
-                          <Card data={node(get("preksha-agarwal"))} />
-                        </Couple>
-                        <Couple>
-                          <Card data={node(get("palak-goel"))} />
-                          <Card data={node(get("manmohan-agrawal-kanpur"))} />
-                        </Couple>
-                      </ClusterGroup>
-                      <ClusterGroup title="Seema&rsquo;s">
-                        <Couple>
-                          <Card data={node(get("anu-agarwal"))} />
-                          <Card data={node(get("shanu-agarwal"))} />
-                        </Couple>
-                        <Couple>
-                          <Card data={node(get("aditya-agarwal"))} />
-                          <Card data={node(get("sugandha-maheshwari"))} />
-                        </Couple>
-                      </ClusterGroup>
-                      <ClusterGroup title="Shobhit&rsquo;s">
-                        <Couple>
-                          <Card data={node(get("shally-goel"))} />
-                          <Card data={node(get("atulit-agarwal"))} />
-                        </Couple>
-                        <Card data={node(get("esha-goel"))} />
-                        <Card data={node(get("rhitik-goel"))} />
-                      </ClusterGroup>
-                      <ClusterGroup title="Rohit&rsquo;s">
-                        <Card data={node(get("aditi-goel"), { self: true, badge: "Future bride" })} />
-                        <Card data={node(get("arnav-goel"))} />
-                      </ClusterGroup>
+                      <div className="grid grid-cols-4 gap-6 justify-items-center items-start">
+                        <ClusterGroup title="Vinod&rsquo;s">
+                          <Couple>
+                            <Card data={node(get("palash-goel"))} />
+                            <Card data={node(get("preksha-agarwal"))} />
+                          </Couple>
+                          <Couple>
+                            <Card data={node(get("palak-goel"))} />
+                            <Card data={node(get("manmohan-agrawal-kanpur"))} />
+                          </Couple>
+                        </ClusterGroup>
+                        <ClusterGroup title="Seema&rsquo;s">
+                          <Couple>
+                            <Card data={node(get("anu-agarwal"))} />
+                            <Card data={node(get("shanu-agarwal"))} />
+                          </Couple>
+                          <Couple>
+                            <Card data={node(get("aditya-agarwal"))} />
+                            <Card data={node(get("sugandha-maheshwari"))} />
+                          </Couple>
+                        </ClusterGroup>
+                        <ClusterGroup title="Shobhit&rsquo;s">
+                          <Couple>
+                            <Card data={node(get("shally-goel"))} />
+                            <Card data={node(get("atulit-agarwal"))} />
+                          </Couple>
+                          <Card data={node(get("esha-goel"))} />
+                          <Card data={node(get("rhitik-goel"))} />
+                        </ClusterGroup>
+                        <ClusterGroup title="Rohit&rsquo;s">
+                          <Card data={node(get("aditi-goel"), { self: true, badge: "Future bride" })} />
+                          <Card data={node(get("arnav-goel"))} />
+                        </ClusterGroup>
+                      </div>
                     </SubFamily>
                     <SubFamily label="Manmohan&rsquo;s line">
                       <ClusterGroup title="Honey&rsquo;s">
@@ -358,9 +360,16 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             <Connector />
 
             <GenLabel>Generation 8 · newborn</GenLabel>
-            <Row>
-              <Card data={node(get("raghav-goel"))} />
-            </Row>
+            <SideBySide>
+              <SideColumn side="paternal">
+                <Row>
+                  <Card data={node(get("raghav-goel"))} />
+                </Row>
+              </SideColumn>
+              <SideColumn side="maternal">
+                <EmptySideNote>No Gen 8 maternal descendants yet.</EmptySideNote>
+              </SideColumn>
+            </SideBySide>
           </div>
         </TransformComponent>
       </TransformWrapper>
@@ -386,7 +395,10 @@ function BranchLabel({ children }: { children: React.ReactNode }) {
 
 function SideBySide({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-start justify-center gap-0 w-full">
+    <div
+      className="grid items-start w-full"
+      style={{ gridTemplateColumns: "3fr 1fr" }}
+    >
       {children}
     </div>
   );
@@ -401,7 +413,7 @@ function SideColumn({
 }) {
   const sideLabel = side === "paternal" ? "Paternal · Goels of Banda" : "Maternal · Agarwals of Jhansi";
   return (
-    <div className="flex-1 flex flex-col items-center gap-3 px-10">
+    <div className="flex flex-col items-center gap-3 px-10 min-w-0">
       <span className="text-[10px] uppercase tracking-[0.22em] text-ink-400 font-medium">
         {sideLabel}
       </span>
@@ -415,15 +427,17 @@ function PaternalMaternalDivider() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] z-[2]"
+        className="pointer-events-none absolute top-0 bottom-0 -translate-x-1/2 w-[2px] z-[2]"
         style={{
+          left: "75%",
           background:
             "repeating-linear-gradient(to bottom, var(--color-ink-300) 0, var(--color-ink-300) 6px, transparent 6px, transparent 12px)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 z-[3]"
+        className="pointer-events-none absolute top-6 -translate-x-1/2 z-[3]"
+        style={{ left: "75%" }}
       >
         <span className="inline-block bg-parchment px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-ink-600 font-semibold border border-ink-200 rounded-full whitespace-nowrap shadow-sm">
           Paternal · Maternal

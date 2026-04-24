@@ -148,21 +148,14 @@ export function ConnectorsLayer({
     >
       <g>
         {edges.map((e, i) => (
-          <g key={i} opacity={e.bridge ? 0.55 : 0.45}>
+          <g key={i} opacity={e.bridge ? 0.5 : 0.4}>
             <path
               d={e.path}
               fill="none"
               stroke={e.bridge ? "var(--color-accent-700)" : "var(--color-ink-400)"}
-              strokeWidth={1.1}
+              strokeWidth={1}
               strokeLinejoin="round"
               strokeLinecap="round"
-              strokeDasharray={e.bridge ? "5 4" : undefined}
-            />
-            <circle
-              cx={e.endX}
-              cy={e.endY}
-              r={e.bridge ? 2.5 : 0}
-              fill="var(--color-accent-700)"
             />
           </g>
         ))}
