@@ -40,46 +40,49 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
   const pzRef = useRef<PanZoom | null>(null);
 
   useEffect(() => {
-    if (!sceneRef.current || !viewportRef.current) return;
-    const pz = panzoom(sceneRef.current, {
+    const scene = sceneRef.current;
+    const vp = viewportRef.current;
+    if (!scene || !vp) return;
+
+    const rect = vp.getBoundingClientRect();
+    const zX = rect.width / worldW;
+    const zY = rect.height / worldH;
+    const initialZoom = Math.max(0.2, Math.min(1, Math.min(zX, zY)));
+    const initialX = (rect.width - worldW * initialZoom) / 2;
+    const initialY = (rect.height - worldH * initialZoom) / 2;
+
+    const pz = panzoom(scene, {
       maxZoom: 2.4,
-      minZoom: 0.2,
-      bounds: true,
-      boundsPadding: 0.2,
+      minZoom: 0.15,
+      initialX,
+      initialY,
+      initialZoom,
       smoothScroll: false,
-      filterKey() {
-        // Let our own key handler manage arrow keys so the whole page
-        // scrolls properly when focus isn't inside the tree.
-        return true;
-      },
       beforeMouseDown(e) {
-        // Don't start a pan when the pointer is inside a clickable card;
-        // let the click pass through. A card can still be dragged by
-        // pressing outside it first.
-        const target = e.target as HTMLElement | null;
-        return Boolean(target?.closest("[data-draggable-skip]"));
+        // Don't start a pan if the pointer is on a control or a card
+        // link — those handle their own events.
+        const t = e.target as HTMLElement | null;
+        return Boolean(t?.closest("[data-draggable-skip]"));
+      },
+      filterKey() {
+        return true;
       },
     });
     pzRef.current = pz;
 
-    // Fit to viewport on mount.
-    const fit = () => {
-      const vp = viewportRef.current;
-      if (!vp) return;
+    const onResize = () => {
       const r = vp.getBoundingClientRect();
       if (r.width === 0 || r.height === 0) return;
-      const sx = r.width / worldW;
-      const sy = r.height / worldH;
-      const s = Math.max(0.2, Math.min(1, Math.min(sx, sy)));
+      const s = Math.max(
+        0.2,
+        Math.min(1, Math.min(r.width / worldW, r.height / worldH)),
+      );
       pz.zoomAbs(0, 0, s);
       pz.moveTo((r.width - worldW * s) / 2, (r.height - worldH * s) / 2);
     };
-    const t = setTimeout(fit, 0);
-    const onResize = () => fit();
     window.addEventListener("resize", onResize);
 
     return () => {
-      clearTimeout(t);
       window.removeEventListener("resize", onResize);
       pz.dispose();
       pzRef.current = null;
@@ -99,16 +102,16 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
     const vp = viewportRef.current;
     if (!pz || !vp) return;
     const r = vp.getBoundingClientRect();
-    const sx = r.width / worldW;
-    const sy = r.height / worldH;
-    const s = Math.max(0.2, Math.min(1, Math.min(sx, sy)));
+    const s = Math.max(
+      0.2,
+      Math.min(1, Math.min(r.width / worldW, r.height / worldH)),
+    );
     pz.zoomAbs(0, 0, s);
     pz.moveTo((r.width - worldW * s) / 2, (r.height - worldH * s) / 2);
   };
 
   const print = () => {
-    if (typeof window === "undefined") return;
-    window.print();
+    if (typeof window !== "undefined") window.print();
   };
 
   return (
@@ -119,6 +122,11 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
       role="application"
       aria-label="Family tree. Drag to pan, pinch or Ctrl+scroll to zoom."
       data-tree-viewport
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 1px 1px, rgba(80,74,63,0.08) 1px, transparent 0)",
+        backgroundSize: "22px 22px",
+      }}
     >
       <div
         ref={sceneRef}
@@ -176,7 +184,10 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
         ))}
       </div>
 
-      <div className="absolute top-3 right-3 z-10 flex flex-col gap-1 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm print:hidden">
+      <div
+        data-draggable-skip
+        className="absolute top-3 right-3 z-20 flex flex-col gap-1 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm print:hidden"
+      >
         <button
           type="button"
           onClick={() => adjust(0.25)}
@@ -206,13 +217,15 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
           onClick={print}
           className="px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-ink-600 hover:text-accent-700"
           aria-label="Print / save as PDF"
-          title="Print — use 'Save as PDF' in the print dialog for a PDF export"
         >
           print
         </button>
       </div>
 
-      <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs print:hidden">
+      <div
+        data-draggable-skip
+        className="absolute bottom-3 left-3 z-20 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs print:hidden"
+      >
         <span className="font-medium text-ink-800">Tap</span> a card to open ·{" "}
         <span className="font-medium text-ink-800">Drag</span> to pan ·{" "}
         <span className="font-medium text-ink-800">Pinch</span> or{" "}
