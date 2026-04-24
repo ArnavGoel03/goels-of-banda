@@ -17,18 +17,20 @@ type TreeNode = {
   name: string;
   alias?: string;
   sub?: string;
+  badge?: string;
   deceased?: boolean;
   newborn?: boolean;
   self?: boolean;
   placeholder?: boolean;
 };
 
-function node(p: Person, opts?: { self?: boolean }): TreeNode {
+function node(p: Person, opts?: { self?: boolean; badge?: string }): TreeNode {
   return {
     slug: p.slug,
     name: p.name,
     alias: p.altNames?.[0],
     sub: p.currentLocation ?? p.birth?.place,
+    badge: opts?.badge,
     deceased: !p.isLiving,
     newborn: p.slug === "raghav-goel",
     self: opts?.self,
@@ -248,7 +250,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                       </Couple>
                     </ClusterGroup>
                     <ClusterGroup title="Rohit&rsquo;s">
-                      <Card data={node(get("aditi-goel"), { self: true })} />
+                      <Card data={node(get("aditi-goel"), { self: true, badge: "Future bride" })} />
                       <Card data={node(get("arnav-goel"))} />
                     </ClusterGroup>
                     <ClusterGroup title="Honey&rsquo;s">
@@ -426,7 +428,7 @@ function Missing({ label }: { label: string }) {
 }
 
 function Card({ data }: { data: TreeNode }) {
-  const { slug, name, alias, sub, deceased, newborn, self, placeholder } = data;
+  const { slug, name, alias, sub, badge, deceased, newborn, self, placeholder } = data;
   const isClickable = !placeholder && slug !== "#";
   const content = (
     <div
@@ -461,6 +463,11 @@ function Card({ data }: { data: TreeNode }) {
       {alias ? (
         <p className="text-[11px] italic text-ink-500 leading-tight mt-0.5">
           &ldquo;{alias}&rdquo;
+        </p>
+      ) : null}
+      {badge ? (
+        <p className="inline-block mt-1 rounded-sm bg-accent-700 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-parchment font-semibold">
+          {badge}
         </p>
       ) : null}
       {sub ? <p className="text-[10px] text-ink-500 leading-tight mt-1">{sub}</p> : null}
