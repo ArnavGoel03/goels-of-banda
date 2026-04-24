@@ -94,17 +94,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
-      <head>
-        <script
-          // FOUC-free theme bootstrap: applies the stored theme before
-          // anything else renders.
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('gob:theme')||'system';var d=t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);var h=document.documentElement;if(d)h.classList.add('dark');h.style.colorScheme=d?'dark':'light';}catch(e){}})();`,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col">
         <a
           href="#main"

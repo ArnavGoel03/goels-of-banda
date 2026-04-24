@@ -42,4 +42,5 @@ pass (2, 3, 11, 13 of the 14-item menu):
   embedded `<audio>` + transcript.
 - **11. Printable tree PDF** — one-click high-res export of the current
   tree view.
-- **13. Dark mode** — parchment palette has an obvious dark variant.
+- ~~**13. Dark mode**~~ — tried, reverted by user preference. The site is
+  locked to the light parchment palette via `color-scheme: light only`.
