@@ -308,6 +308,12 @@ function buildEdgePaths(
     }
   }
 
+  const spouseOf = new Map<string, string>();
+  for (const e of spouse) {
+    spouseOf.set(e.source, e.target);
+    spouseOf.set(e.target, e.source);
+  }
+
   for (const [parentSlug, childSlugs] of childrenByParent) {
     const parent = posById.get(parentSlug);
     if (!parent) continue;
@@ -315,7 +321,15 @@ function buildEdgePaths(
       .map((s) => posById.get(s))
       .filter((n): n is LayoutNode => Boolean(n));
     if (kids.length === 0) continue;
-    const parentCx = parent.x + CARD_WIDTH / 2;
+
+    // If this parent has a spouse drawn, anchor the child-stem at the
+    // midpoint between the couple, not at the primary parent's card
+    // center. Otherwise the stem visually belongs to only one parent.
+    const spouseSlug = spouseOf.get(parentSlug);
+    const spouseNode = spouseSlug ? posById.get(spouseSlug) : undefined;
+    const parentCx = spouseNode
+      ? (parent.x + CARD_WIDTH / 2 + spouseNode.x + CARD_WIDTH / 2) / 2
+      : parent.x + CARD_WIDTH / 2;
     const parentBottom = parent.y + CARD_HEIGHT;
     const busY = parentBottom + (kids[0].y - parentBottom) / 2;
 

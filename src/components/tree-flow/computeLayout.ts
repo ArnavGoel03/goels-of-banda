@@ -6,7 +6,7 @@ export const CARD_HEIGHT = 74;
 
 const H_SEP = CARD_WIDTH + 34;
 const V_SEP = CARD_HEIGHT + 86;
-const SPOUSE_GAP = 14;
+const SPOUSE_GAP = 44;
 
 export type LayoutNode = {
   id: string;
