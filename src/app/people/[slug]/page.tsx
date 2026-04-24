@@ -9,6 +9,8 @@ import { PersonHero } from "@/components/person/PersonHero";
 import { FamilyPanel } from "@/components/person/FamilyPanel";
 import { LifeTimeline } from "@/components/person/LifeTimeline";
 import { BusinessesPanel } from "@/components/person/BusinessesPanel";
+import { EducationPanel } from "@/components/person/EducationPanel";
+import { CareerPanel } from "@/components/person/CareerPanel";
 import { PlacesForPerson } from "@/components/person/PlacesForPerson";
 import { SourcesPanel } from "@/components/person/SourcesPanel";
 import { AdjacentNav } from "@/components/person/AdjacentNav";
@@ -87,6 +89,8 @@ export default async function PersonPage({ params }: { params: Params }) {
         ) : null}
 
         <FamilyPanel person={person} />
+        <CareerPanel person={person} />
+        <EducationPanel person={person} />
         <LifeTimeline person={person} />
         <BusinessesPanel person={person} />
         <PlacesForPerson person={person} />

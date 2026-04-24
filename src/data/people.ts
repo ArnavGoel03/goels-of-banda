@@ -310,8 +310,56 @@ export const people: Person[] = [
     spouse: { slug: "rashi-agarwal" },
     children: ["rhidhaan-agarwal", "anayra-agarwal"],
     publicity: "full",
+    education: [
+      {
+        schoolSlug: "iit-delhi",
+        degree: "B.Tech",
+        field: "Electrical and Electronics Engineering",
+        years: [1997, 2001],
+      },
+      {
+        schoolSlug: "epfl",
+        degree: "Semester on exchange",
+        city: "Lausanne, Switzerland",
+      },
+    ],
+    career: [
+      {
+        role: "Engineering Manager, R&D",
+        businessName: "SNRLabs",
+        years: [2010, 2013],
+        city: "San Francisco Bay Area",
+        notes: "Acquired by Seven Networks.",
+      },
+      {
+        role: "Director / Manager of Software Engineering",
+        businessName: "Seven Networks",
+        years: [2013, 2015],
+        city: "San Francisco Bay Area",
+      },
+      {
+        role: "Sr. Manager / Technical Lead",
+        businessName: "Aeris Communications",
+        years: [2015, 2022],
+        city: "San Francisco Bay Area",
+        notes: "IoT and connected-car platforms.",
+      },
+      {
+        role: "Engineering Lead",
+        businessName: "Autonomic",
+        years: [2022, 2023],
+        city: "San Francisco Bay Area",
+      },
+      {
+        role: "Software Engineering Leader (Principal Software Engineer)",
+        businessName: "Ford Motor Company",
+        years: [2023],
+        current: true,
+        city: "San Francisco Bay Area",
+      },
+    ],
     bio:
-      "Vivek Agarwal, born in Jhansi, is the eldest son of Ramesh Chandra and Prem Kumari. He studied Electrical and Electronics Engineering at IIT Delhi (1997–2001), including a semester on exchange at EPFL in Switzerland. After moving to the United States, he spent over a decade in Bay Area connected-device and IoT engineering, Engineering Manager R&D at SNRLabs (2010–13, acquired by Seven Networks), Director/Manager of Software Engineering at Seven Networks (2013–15), and nearly seven years as Sr. Manager / Technical Lead at Aeris Communications (2015–22), a leader in IoT and connected-car platforms. He then led a team at Autonomic before moving to Ford Motor Company in 2023, where he currently works as a Software Engineering Leader (Principal Software Engineer). Lives in Foster City, California with his wife Rashi and their two children, Anayra and Rhidhaan.",
+      "Eldest son of Ramesh Chandra and Prem Kumari. Moved from Jhansi to the San Francisco Bay Area and has spent over a decade in connected-device and IoT engineering. Lives in Foster City with his wife Rashi and their two children, Rhidhaan and Anayra.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/vivek-agarwal-46119b2/" },
     ],
@@ -448,8 +496,19 @@ export const people: Person[] = [
     publicity: "full",
     occupation: "Creative direction and design, Clay Craft India Pvt Ltd",
     businessSlugs: ["clay-craft-india"],
+    education: [
+      { schoolSlug: "kcnit-banda", degree: "B.Tech", city: "Banda, Uttar Pradesh" },
+    ],
+    career: [
+      {
+        role: "Creative direction and design",
+        businessSlug: "clay-craft-india",
+        current: true,
+        notes: "Designs new tableware collections across the Clay Craft Group.",
+      },
+    ],
     bio:
-      "Vijaya Agarwal (née Vijaya Goel), known in the family as Happy, is the daughter of Manmohan and Nandita Goel. She studied engineering at KCNIT Banda for her B.Tech before marrying Deepak Agarwal, a named co-founder and director of Clay Craft India Pvt Ltd, and now lives in Jaipur, Rajasthan. Alongside her husband and his two brothers, who jointly run the company, Vijaya handles creative direction for Clay Craft and designs new tableware collections for the brand.",
+      "Known in the family as Happy. Daughter of Manmohan and Nandita Goel; married Deepak Agarwal and now lives in Jaipur, where she leads creative direction at Clay Craft.",
   },
   {
     slug: "deepak-agarwal",
@@ -463,8 +522,35 @@ export const people: Person[] = [
     businessSlugs: ["clay-craft-india", "crown-craft-india", "jcpl-jaipur-ceramics", "vacbott", "griha-jaipur"],
     spouse: { slug: "vijaya-agarwal" },
     publicity: "full",
+    education: [
+      { schoolSlug: "scindia-school", degree: "K-12", years: [2001, 2006] },
+      {
+        schoolSlug: "jain-college",
+        degree: "Management",
+        field: "Finance specialisation",
+        years: [2006, 2009],
+      },
+      {
+        schoolSlug: "cardiff-university",
+        degree: "MBA",
+        field: "Finance",
+        years: [2009, 2010],
+        notes: "Thesis analysed the financial statements of The Carphone Warehouse PLC.",
+      },
+    ],
+    career: [
+      {
+        role: "Executive Director & CFO",
+        businessSlug: "clay-craft-india",
+        years: [2010],
+        current: true,
+        city: "Jaipur, Rajasthan",
+        notes:
+          "Runs Clay Craft India Limited alongside his two brothers as the founding Agarwal family. Oversees modern retail, online retail, digital marketing, hotelware sales, national and international exhibitions, licensing, and advertising across the Clay Craft Group.",
+      },
+    ],
     bio:
-      "Deepak Agarwal is the Executive Director & Chief Financial Officer of Clay Craft India Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue approximately $148M). He attended The Scindia School in Gwalior for high school (2001–2006), then studied Management with a Finance specialisation at JAIN College, Bengaluru (2006–2009) before completing an MBA in Finance at Cardiff University (2009–2010), where his degree thesis analysed the financial statements of The Carphone Warehouse PLC. He joined Clay Craft India as a Director in September 2010 and has been running it alongside his two brothers ever since, the three of them operating the company as the founding Agarwal family. Deepak oversees modern retail, online retail, digital marketing, social media, hotelware sales, national and international exhibitions, licensing and merchandising, and advertising across the Clay Craft Group, which now includes Clay Craft, Crown Craft (premium plastic homewares), JCPL (Jaipur Ceramics, acquired 2014), and Vacbott (stainless steel insulated bottles and flasks, launched 2022). In 2017 he oversaw Clay Craft India's first TV commercial, the 'Har Pal ke liye' campaign. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand.",
+      "Deepak runs Clay Craft India alongside his two brothers. In 2017 he oversaw the company's first TV commercial, the 'Har Pal ke liye' campaign. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/deepak-agarwal-b1560826/" },
       { label: "Clay Craft India, Corporate Leadership", url: "https://corporate.claycraftindia.com/leadership-management/" },
@@ -489,8 +575,66 @@ export const people: Person[] = [
     spouse: { slug: "preksha-agarwal" },
     children: ["raghav-goel"],
     publicity: "full",
+    education: [
+      {
+        schoolSlug: "scindia-school",
+        degree: "Classes 7–10",
+        years: [2006, 2010],
+      },
+      {
+        schoolSlug: "fiitjee",
+        degree: "Classes 11–12",
+        field: "IIT preparation",
+        notes: "Full-time at FIITJEE, Delhi with a dummy-school arrangement.",
+      },
+      {
+        schoolSlug: "bits-pilani",
+        degree: "B.E.",
+        field: "Electronics and Instrumentation",
+        years: [2012, 2016],
+        notes: "Active in the Film Making Club.",
+      },
+    ],
+    career: [
+      {
+        role: "DevOps Intern",
+        businessName: "Exotel",
+        years: [2015, 2015],
+      },
+      {
+        role: "Member of Technical Staff",
+        businessName: "VMware",
+        years: [2016, 2018],
+        city: "Bengaluru",
+        notes:
+          "Worked on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin.",
+      },
+      {
+        role: "Software Development Engineer",
+        businessName: "RIVIGO",
+        years: [2018, 2019],
+        city: "Gurugram",
+        notes: "Built a Kubernetes-based virtual development environment.",
+      },
+      {
+        role: "SDE 2 → SDE 3",
+        businessName: "Zomato",
+        years: [2019, 2024],
+        city: "Bengaluru",
+        notes:
+          "Replaced the company's ELK logging stack with ClickHouse (saving roughly $1M/year). Spoke at DevOpsDays Bengaluru 2023.",
+      },
+      {
+        role: "Staff Software Engineer",
+        businessName: "Intuit",
+        years: [2024],
+        current: true,
+        city: "Bengaluru",
+        notes: "Observability.",
+      },
+    ],
     bio:
-      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. He attended The Scindia School in Gwalior for classes 7 through 10 (2006–2010), then did classes 11 and 12 through a dummy-school arrangement in Delhi while preparing for the IIT entrance exams full-time at FIITJEE, before moving on to study Electronics and Instrumentation at BITS Pilani (2012–2016), where he was active in the Film Making Club. He began his career as a DevOps Intern at Exotel (2015), then worked as a Member of Technical Staff at VMware in Bengaluru (2016–2018) on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin. He moved to RIVIGO as a Software Development Engineer in Gurugram (2018–2019), building a Kubernetes-based virtual development environment, before joining Zomato in 2019, where he spent five years as SDE 2 and then SDE 3, notably replacing the company's ELK logging stack with ClickHouse (saving roughly $1M/year) and speaking at DevOpsDays Bengaluru 2023. In November 2024 he joined Intuit as a Staff Software Engineer working on observability, based in Bengaluru. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026, the sixth generation of the Banda Goel family.",
+      "Son of Vinod and Neelam. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026, the sixth generation of the Banda Goels on the paternal line.",
     notes: "Birth year approximate (calculated as 10.5 years older than Arnav Goel).",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/palashg/" },
@@ -523,8 +667,15 @@ export const people: Person[] = [
     parents: { father: "vinod-goel", mother: "neelam-agarwal-vinod" },
     spouse: { slug: "manmohan-agrawal-kanpur" },
     publicity: "full",
+    education: [
+      {
+        schoolSlug: "kcnit-banda",
+        degree: "K-12",
+        city: "Banda, Uttar Pradesh",
+      },
+    ],
     bio:
-      "Palak Goel is the elder daughter of Vinod and Neelam Agarwal Goel, about three years older than her brother Palash. She did her entire K-12 education at KCNIT Banda, growing up in the family home in Banda. She is married to Manmohan Agrawal, who runs MP Wire India (M. P. Wire Industries), a wire and fencing products manufacturer in Kanpur.",
+      "Elder daughter of Vinod and Neelam, about three years older than her brother Palash. Grew up in the family home in Banda. Married Manmohan Agrawal, who runs MP Wire India in Kanpur.",
     notes: "Birth year approximate (three years older than Palash Goel, whose year is itself approximate).",
   },
   {
@@ -584,8 +735,24 @@ export const people: Person[] = [
     occupation: "Chartered Accountant (qualified Sept 2025)",
     parents: { father: "shobhit-goel", mother: "roli" },
     publicity: "summary",
-    bio:
-      "Esha Goel is the daughter of Shobhit and Roli Goel. She studied at the Institute of Chartered Accountants of India (2019–2024) and qualified as a Chartered Accountant in September 2025, securing All-India Rank 28 at the CA Foundation level. She has been an Article Trainee at Preeti Jain & Associates in India since September 2022. Based in Satna, Madhya Pradesh.",
+    education: [
+      {
+        schoolSlug: "icai",
+        degree: "CA",
+        years: [2019, 2024],
+        notes: "Qualified September 2025. All-India Rank 28 at the CA Foundation level.",
+      },
+    ],
+    career: [
+      {
+        role: "Article Trainee",
+        businessName: "Preeti Jain & Associates",
+        years: [2022],
+        current: true,
+        city: "India",
+      },
+    ],
+    bio: "Daughter of Shobhit and Roli Goel. Based in Satna, Madhya Pradesh.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/esha-goel-a31b14220/" },
     ],
@@ -728,7 +895,15 @@ export const people: Person[] = [
     occupation: "Undergraduate student, VIT Vellore",
     parents: { father: "kapil-agarwal", mother: "nidhi-modi" },
     publicity: "summary",
-    bio: "Atharva Agarwal, known in the family as Yotak, is the son of Kapil and Nidhi Agarwal. Born in Jhansi, he is the only one of Arnav's maternal cousins who has finished school and is currently an undergraduate at VIT Vellore in Tamil Nadu.",
+    education: [
+      {
+        schoolSlug: "vit-vellore",
+        degree: "Undergraduate",
+        city: "Vellore, Tamil Nadu",
+      },
+    ],
+    bio:
+      "Known in the family as Yotak. Son of Kapil and Nidhi. The eldest of Aditi's maternal cousins who have reached college age.",
   },
   {
     slug: "lovnika-agarwal",
@@ -760,8 +935,24 @@ export const people: Person[] = [
     occupation: "SWE Intern; undergraduate student at UC San Diego; member of Triton Quantitative Trading",
     parents: { father: "rohit-goel", mother: "richa-goel" },
     publicity: "full",
+    education: [
+      {
+        schoolSlug: "uc-san-diego",
+        degree: "Undergraduate",
+        city: "La Jolla, California",
+        notes: "Member of Triton Quantitative Trading.",
+      },
+    ],
+    career: [
+      {
+        role: "Software Engineering Intern",
+        businessName: "Undisclosed",
+        current: true,
+        city: "La Jolla, California",
+      },
+    ],
     bio:
-      "Arnav Goel, also known as Yash, was born 3 November 2004 in Banda, Uttar Pradesh. Son of Rohit and Richa Goel; younger brother of Aditi Goel. He is the seventh-generation member of the Goel family of Banda on the paternal side. He is an undergraduate at UC San Diego, a member of Triton Quantitative Trading, and is currently based in La Jolla, California while working as a software engineering intern.",
+      "Also known as Yash. Son of Rohit and Richa; younger brother of Aditi. Seventh-generation member of the Goels of Banda on the paternal line.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/arnav-goel--/" },
     ],
@@ -779,8 +970,41 @@ export const people: Person[] = [
     occupation: "Area Field Marketing Manager, Pidilite Industries Limited",
     parents: { father: "rohit-goel", mother: "richa-goel" },
     publicity: "summary",
+    education: [
+      {
+        schoolSlug: "indraprastha-college",
+        degree: "B.A.",
+        field: "English Language and Literature",
+        years: [2016, 2019],
+        notes:
+          "Active in the English Literary Society and the Leaders For Tomorrow NGO.",
+      },
+      {
+        schoolSlug: "nmims-mumbai",
+        degree: "MBA",
+        field: "Marketing",
+        years: [2020, 2022],
+        notes:
+          "Vice President of ADverb, the school's media, marketing, branding and advertising cell.",
+      },
+    ],
+    career: [
+      {
+        role: "Management Trainee",
+        businessName: "Pidilite Industries",
+        years: [2022, 2023],
+        city: "Mumbai",
+      },
+      {
+        role: "Area Field Marketing Manager",
+        businessName: "Pidilite Industries",
+        years: [2023],
+        current: true,
+        city: "Gujarat",
+      },
+    ],
     bio:
-      "Aditi Goel, daughter of Rohit and Richa Goel, was born in Kanpur, Uttar Pradesh. Elder sister of Arnav Goel. She studied English Language and Literature at Indraprastha College for Women, Delhi (2016–2019), where she was active in the English Literary Society and the Leaders For Tomorrow NGO, and then earned her MBA in Marketing from NMIMS Mumbai (2020–2022), where she served as Vice President of ADverb, the school's media, marketing, branding and advertising cell. She joined Pidilite Industries in 2022 as a Management Trainee in Mumbai and is currently based in Gujarat as an Area Field Marketing Manager.",
+      "Daughter of Rohit and Richa, elder sister of Arnav. Born in Kanpur, Uttar Pradesh.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/aditigoel1311/" },
     ],

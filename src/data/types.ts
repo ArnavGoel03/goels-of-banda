@@ -2,6 +2,26 @@ export type Sex = "M" | "F" | "U";
 
 export type Approx = "exact" | "approximate" | "unknown";
 
+export type EducationEntry = {
+  schoolSlug?: string;
+  schoolName?: string;
+  degree?: string;
+  field?: string;
+  years?: [number, number];
+  city?: string;
+  notes?: string;
+};
+
+export type CareerEntry = {
+  role: string;
+  businessSlug?: string;
+  businessName?: string;
+  years?: [number, number?];
+  current?: boolean;
+  city?: string;
+  notes?: string;
+};
+
 export type Person = {
   slug: string;
   name: string;
@@ -28,6 +48,8 @@ export type Person = {
   spouse?: { slug: string; marriage?: { date?: string; year?: number } };
   children?: string[];
   bio: string;
+  education?: EducationEntry[];
+  career?: CareerEntry[];
   publicity?: "full" | "summary" | "minimal";
   birthFamilySurname?: string;
   relationshipToViewer?: string;

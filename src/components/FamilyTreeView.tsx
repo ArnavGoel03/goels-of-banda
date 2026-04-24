@@ -81,10 +81,10 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
   const treeRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative h-[85vh] rounded-lg border border-ink-100 bg-parchment-dark overflow-hidden">
+    <div className="relative h-[85vh] rounded-lg border border-ink-100 bg-parchment-dark overflow-hidden touch-none">
       <TransformWrapper
-        initialScale={0.6}
-        minScale={0.2}
+        initialScale={0.35}
+        minScale={0.15}
         maxScale={2.5}
         limitToBounds={false}
         centerOnInit
@@ -112,15 +112,22 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             minWidth: "100%",
           }}
         >
-          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[2200px]">
+          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[3400px]">
             <ConnectorsLayer containerRef={treeRef} />
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
-            <Row>
-              <Card data={node(get("gondilal-goel"))} />
-              <Card data={node(get("ganesh-prasad-goel"))} />
-            </Row>
-            <Connector />
-            <Missing label="3 unnamed generations · Gondilal&rsquo;s son (shop founder, ~1850s) → ~1880s → ~1910s (Radha Krishna&rsquo;s father)" />
+            <SideBySide>
+              <SideColumn side="paternal">
+                <Row>
+                  <Card data={node(get("gondilal-goel"))} />
+                  <Card data={node(get("ganesh-prasad-goel"))} />
+                </Row>
+                <Connector />
+                <Missing label="3 unnamed generations · Gondilal&rsquo;s son (shop founder, ~1850s) → ~1880s → ~1910s (Radha Krishna&rsquo;s father)" />
+              </SideColumn>
+              <SideColumn side="maternal">
+                <EmptySideNote>Maternal (Agarwals of Jhansi) branch begins at Generation 5.</EmptySideNote>
+              </SideColumn>
+            </SideBySide>
             <Connector />
 
             <GenLabel>Generation 5 · grandparents</GenLabel>
@@ -153,7 +160,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             <GenLabel>Generation 6 · parents&rsquo; generation</GenLabel>
             <SideBySide>
               <SideColumn side="paternal">
-                <div className="flex items-start justify-center gap-16 flex-wrap">
+                <div className="flex items-start justify-center gap-16 flex-nowrap">
                   <Branch label="Radha Krishna&rsquo;s children · Banda">
                     <Row>
                       <Couple>
@@ -210,8 +217,8 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             <SideBySide>
               <SideColumn side="paternal">
                 <div className="flex flex-col items-center gap-6">
-                  <BranchSectionLabel>Paternal · Radha Krishna&rsquo;s grandchildren</BranchSectionLabel>
-                  <div className="flex items-start justify-center gap-6 flex-wrap">
+                  <BranchSectionLabel>Paternal · Gen 7 · grandchildren</BranchSectionLabel>
+                  <div className="flex items-start justify-center gap-6 flex-nowrap">
                     <ClusterGroup title="Vinod&rsquo;s">
                       <Couple>
                         <Card data={node(get("palash-goel"))} />
@@ -244,9 +251,6 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                       <Card data={node(get("aditi-goel"), { self: true })} />
                       <Card data={node(get("arnav-goel"))} />
                     </ClusterGroup>
-                  </div>
-                  <BranchSectionLabel>Paternal · Manmohan&rsquo;s grandchildren</BranchSectionLabel>
-                  <div className="flex items-start justify-center gap-6 flex-wrap">
                     <ClusterGroup title="Honey&rsquo;s">
                       <Card data={node(get("vashundhara-goel"))} />
                     </ClusterGroup>
@@ -255,8 +259,8 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
               </SideColumn>
               <SideColumn side="maternal">
                 <div className="flex flex-col items-center gap-6">
-                  <BranchSectionLabel>Maternal · Nanaji&rsquo;s grandchildren</BranchSectionLabel>
-                  <div className="flex items-start justify-center gap-6 flex-wrap">
+                  <BranchSectionLabel>Maternal · Gen 7 · Nanaji&rsquo;s grandchildren</BranchSectionLabel>
+                  <div className="flex items-start justify-center gap-6 flex-nowrap">
                     <ClusterGroup title="Kapil&rsquo;s">
                       <Card data={node(get("atharva-agarwal"))} />
                       <Card data={node(get("lovnika-agarwal"))} />
@@ -329,6 +333,14 @@ function SideColumn({
   );
 }
 
+function EmptySideNote({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-xs italic text-ink-400 text-center max-w-sm mt-6">
+      {children}
+    </p>
+  );
+}
+
 function Branch({
   label,
   children,
@@ -363,7 +375,7 @@ function Row({
   gap?: "sm" | "md";
 }) {
   const g = gap === "md" ? "gap-4" : "gap-2";
-  return <div className={`flex items-start justify-center flex-wrap ${g}`}>{children}</div>;
+  return <div className={`flex items-start justify-center flex-nowrap ${g}`}>{children}</div>;
 }
 
 function Couple({ children }: { children: React.ReactNode }) {

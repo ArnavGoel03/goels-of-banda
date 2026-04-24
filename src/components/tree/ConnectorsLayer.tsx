@@ -14,6 +14,9 @@ type Box = {
 type Edge = {
   kind: "parent-child" | "spouse";
   path: string;
+  bridge: boolean;
+  endX: number;
+  endY: number;
 };
 
 export function ConnectorsLayer({
@@ -70,7 +73,15 @@ export function ConnectorsLayer({
         const toY = kid.top;
         const midY = (fromY + toY) / 2;
         const d = `M ${fromCx} ${fromY} C ${fromCx} ${midY}, ${toCx} ${midY}, ${toCx} ${toY}`;
-        result.push({ kind: "parent-child", path: d });
+        const containerWidth = container.offsetWidth;
+        const bridge = Math.abs(fromCx - toCx) > containerWidth * 0.35;
+        result.push({
+          kind: "parent-child",
+          path: d,
+          bridge,
+          endX: toCx,
+          endY: toY,
+        });
       }
 
       setEdges(result);
@@ -108,14 +119,22 @@ export function ConnectorsLayer({
     >
       <g>
         {edges.map((e, i) => (
-          <path
-            key={i}
-            d={e.path}
-            fill="none"
-            stroke="var(--color-ink-300)"
-            strokeWidth={1.25}
-            strokeLinecap="round"
-          />
+          <g key={i}>
+            <path
+              d={e.path}
+              fill="none"
+              stroke={e.bridge ? "var(--color-accent-700)" : "var(--color-ink-300)"}
+              strokeWidth={e.bridge ? 1.6 : 1.25}
+              strokeLinecap="round"
+              strokeDasharray={e.bridge ? "4 3" : undefined}
+            />
+            <circle
+              cx={e.endX}
+              cy={e.endY}
+              r={e.bridge ? 3.5 : 0}
+              fill="var(--color-accent-700)"
+            />
+          </g>
         ))}
       </g>
     </svg>
