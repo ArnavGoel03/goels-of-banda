@@ -171,39 +171,50 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             <GenLabel>Generation 6 · parents&rsquo; generation</GenLabel>
             <SideBySide>
               <SideColumn side="paternal">
-                <div className="flex items-start justify-center gap-16 flex-nowrap">
-                  <Branch label="Radha Krishna&rsquo;s children · Banda">
-                    <Row>
-                      <Couple>
-                        <Card data={node(get("vinod-goel"))} />
-                        <Card data={node(get("neelam-agarwal-vinod"))} />
-                      </Couple>
-                      <Couple>
-                        <Card data={node(get("shobhit-goel"))} />
-                        <Card data={node(get("roli"))} />
-                      </Couple>
-                      <Couple>
-                        <Card data={node(get("seema-agarwal"))} />
-                        <Card data={node(get("seema-husband"))} />
-                      </Couple>
-                      <Couple>
-                        <Card data={node(get("rohit-goel"))} />
-                        <Card data={node(get("richa-goel"))} />
-                      </Couple>
-                    </Row>
-                  </Branch>
-                  <Branch label="Manmohan&rsquo;s children · Banda">
-                    <Row>
-                      <Couple>
-                        <Card data={node(get("avijit-goel"))} />
-                        <Card data={node(get("shayana-goyal"))} />
-                      </Couple>
-                      <Couple>
-                        <Card data={node(get("vijaya-agarwal"))} />
-                        <Card data={node(get("deepak-agarwal"))} />
-                      </Couple>
-                    </Row>
-                  </Branch>
+                <div className="flex items-start justify-center gap-24 flex-nowrap">
+                  <SubFamily label="Radha Krishna&rsquo;s line">
+                    <Branch label="Radha Krishna&rsquo;s children · Banda">
+                      <Row>
+                        <Couple>
+                          <Card data={node(get("vinod-goel"))} />
+                          <Card data={node(get("neelam-agarwal-vinod"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("shobhit-goel"))} />
+                          <Card data={node(get("roli"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("seema-agarwal"))} />
+                          <Card data={node(get("seema-husband"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("rohit-goel"))} />
+                          <Card data={node(get("richa-goel"))} />
+                        </Couple>
+                      </Row>
+                    </Branch>
+                  </SubFamily>
+                  <SubFamily label="Manmohan&rsquo;s line">
+                    <Branch label="Manmohan&rsquo;s children · Banda">
+                      <Row>
+                        <Couple>
+                          <Card data={node(get("avijit-goel"))} />
+                          <Card data={node(get("shayana-goyal"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("vijaya-agarwal"))} />
+                          <Card data={node(get("deepak-agarwal"))} />
+                        </Couple>
+                      </Row>
+                    </Branch>
+                  </SubFamily>
+                  <SubFamily label="Deceased sister&rsquo;s line">
+                    <Branch label="Sister&rsquo;s child · Allahabad">
+                      <Row>
+                        <Card data={node(get("harsh-agarwal"))} />
+                      </Row>
+                    </Branch>
+                  </SubFamily>
                 </div>
               </SideColumn>
               <SideColumn side="maternal">
@@ -232,42 +243,46 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
               <SideColumn side="paternal">
                 <div className="flex flex-col items-center gap-6">
                   <BranchSectionLabel>Paternal · Gen 7 · grandchildren</BranchSectionLabel>
-                  <div className="flex items-start justify-center gap-6 flex-nowrap">
-                    <ClusterGroup title="Vinod&rsquo;s">
-                      <Couple>
-                        <Card data={node(get("palash-goel"))} />
-                        <Card data={node(get("preksha-agarwal"))} />
-                      </Couple>
-                      <Couple>
-                        <Card data={node(get("palak-goel"))} />
-                        <Card data={node(get("manmohan-agrawal-kanpur"))} />
-                      </Couple>
-                    </ClusterGroup>
-                    <ClusterGroup title="Shobhit&rsquo;s">
-                      <Couple>
-                        <Card data={node(get("shally-goel"))} />
-                        <Card data={node(get("atulit-agarwal"))} />
-                      </Couple>
-                      <Card data={node(get("esha-goel"))} />
-                      <Card data={node(get("rhitik-goel"))} />
-                    </ClusterGroup>
-                    <ClusterGroup title="Seema&rsquo;s">
-                      <Couple>
-                        <Card data={node(get("anu-agarwal"))} />
-                        <Card data={node(get("shanu-agarwal"))} />
-                      </Couple>
-                      <Couple>
-                        <Card data={node(get("aditya-agarwal"))} />
-                        <Card data={node(get("sugandha-maheshwari"))} />
-                      </Couple>
-                    </ClusterGroup>
-                    <ClusterGroup title="Rohit&rsquo;s">
-                      <Card data={node(get("aditi-goel"), { self: true, badge: "Future bride" })} />
-                      <Card data={node(get("arnav-goel"))} />
-                    </ClusterGroup>
-                    <ClusterGroup title="Honey&rsquo;s">
-                      <Card data={node(get("vashundhara-goel"))} />
-                    </ClusterGroup>
+                  <div className="flex items-start justify-center gap-24 flex-nowrap">
+                    <SubFamily label="Radha Krishna&rsquo;s line">
+                      <ClusterGroup title="Vinod&rsquo;s">
+                        <Couple>
+                          <Card data={node(get("palash-goel"))} />
+                          <Card data={node(get("preksha-agarwal"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("palak-goel"))} />
+                          <Card data={node(get("manmohan-agrawal-kanpur"))} />
+                        </Couple>
+                      </ClusterGroup>
+                      <ClusterGroup title="Shobhit&rsquo;s">
+                        <Couple>
+                          <Card data={node(get("shally-goel"))} />
+                          <Card data={node(get("atulit-agarwal"))} />
+                        </Couple>
+                        <Card data={node(get("esha-goel"))} />
+                        <Card data={node(get("rhitik-goel"))} />
+                      </ClusterGroup>
+                      <ClusterGroup title="Seema&rsquo;s">
+                        <Couple>
+                          <Card data={node(get("anu-agarwal"))} />
+                          <Card data={node(get("shanu-agarwal"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("aditya-agarwal"))} />
+                          <Card data={node(get("sugandha-maheshwari"))} />
+                        </Couple>
+                      </ClusterGroup>
+                      <ClusterGroup title="Rohit&rsquo;s">
+                        <Card data={node(get("aditi-goel"), { self: true, badge: "Future bride" })} />
+                        <Card data={node(get("arnav-goel"))} />
+                      </ClusterGroup>
+                    </SubFamily>
+                    <SubFamily label="Manmohan&rsquo;s line">
+                      <ClusterGroup title="Honey&rsquo;s">
+                        <Card data={node(get("vashundhara-goel"))} />
+                      </ClusterGroup>
+                    </SubFamily>
                   </div>
                 </div>
               </SideColumn>
@@ -399,6 +414,26 @@ function Couple({ children }: { children: React.ReactNode }) {
         {Array.isArray(children) ? children[0] : children}
         <span className="text-accent-700 font-serif text-xl">⚭</span>
         {Array.isArray(children) ? children[1] : null}
+      </div>
+    </div>
+  );
+}
+
+function SubFamily({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <span
+        className="text-[10px] uppercase tracking-[0.2em] text-ink-400 font-medium"
+        dangerouslySetInnerHTML={{ __html: label }}
+      />
+      <div className="flex items-start justify-center gap-6 flex-nowrap">
+        {children}
       </div>
     </div>
   );
