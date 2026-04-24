@@ -42,3 +42,9 @@ next-env.d.ts
 
 # local-only source material (private interview notes, raw GEDCOM, planning docs)
 /docs/sources/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

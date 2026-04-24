@@ -50,6 +50,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   async headers() {
     return [
       {
@@ -60,4 +61,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);

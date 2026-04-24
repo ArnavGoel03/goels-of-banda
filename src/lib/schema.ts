@@ -1,5 +1,5 @@
 import { site } from "@/data/config";
-import type { Business, Person, Place } from "@/data/types";
+import type { Business, Person } from "@/data/types";
 import { getPerson } from "@/data/people";
 
 export function absoluteUrl(path: string): string {
@@ -14,10 +14,6 @@ export function personUrl(slug: string): string {
 
 export function businessUrl(slug: string): string {
   return absoluteUrl(`/businesses/${slug}`);
-}
-
-export function parseYear(person: Person): number | undefined {
-  return person.birth?.year;
 }
 
 export function displayBirth(person: Person): string | undefined {
@@ -36,19 +32,14 @@ export function displayDeath(person: Person): string | undefined {
   return datePart ?? place;
 }
 
-export function ageIfLiving(person: Person): number | undefined {
-  const info = computeAge(person);
-  return info && !info.atDeath ? info.years : undefined;
-}
-
 export function computeAge(
   person: Person,
   now: Date = new Date(),
 ): { years: number; atDeath: boolean } | undefined {
-  const birthYear = person.birth?.year;
+  const birthDate = parsePartialDate(person.birth?.date);
+  const birthYear = person.birth?.year ?? birthDate?.year;
   if (!birthYear) return undefined;
 
-  const birthDate = parsePartialDate(person.birth?.date);
   const birthMonth = birthDate?.month ?? 1;
   const birthDay = birthDate?.day ?? 1;
 
@@ -230,16 +221,3 @@ export function faqJsonLd(items: { question: string; answer: string }[]) {
   };
 }
 
-export function placeJsonLd(place: Place) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    name: place.name,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: place.name,
-      addressCountry: place.country,
-    },
-    description: place.connection,
-  };
-}

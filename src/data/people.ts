@@ -1400,7 +1400,3 @@ export const peopleBySlug: Record<string, Person> = Object.fromEntries(
 export function getPerson(slug: string): Person | undefined {
   return peopleBySlug[slug];
 }
-
-export function publicPeople(): Person[] {
-  return people.filter((p) => p.publicity !== "minimal");
-}

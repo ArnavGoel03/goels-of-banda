@@ -1,7 +1,5 @@
 export type Sex = "M" | "F" | "U";
 
-export type Approx = "exact" | "approximate" | "unknown";
-
 export type EducationEntry = {
   schoolSlug?: string;
   schoolName?: string;

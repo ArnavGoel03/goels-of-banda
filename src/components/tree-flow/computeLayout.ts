@@ -1,7 +1,7 @@
 import dagre from "@dagrejs/dagre";
 import type { Person } from "@/data/types";
 
-export type LayoutNode = {
+type LayoutNode = {
   id: string;
   x: number;
   y: number;
@@ -9,7 +9,7 @@ export type LayoutNode = {
   height: number;
 };
 
-export type LayoutEdge = {
+type LayoutEdge = {
   id: string;
   source: string;
   target: string;
