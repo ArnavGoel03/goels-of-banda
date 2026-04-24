@@ -51,8 +51,9 @@ export const businesses: Business[] = [
     city: "Agra",
     state: "Uttar Pradesh",
     country: "India",
+    website: "https://www.agssl.in",
     description:
-      "A stock-brokering firm registered in Agra, Uttar Pradesh. Owned by the husband of Seema Agarwal (née Goel), and operates a Dubai branch run by their son Aditya Agarwal. Shobhit Goel works as a sub-broker under the firm's broking licence in Satna, Madhya Pradesh.",
+      "A stock-brokering firm registered in Agra, Uttar Pradesh. Owned by the husband of Seema Agarwal (née Goel), and operates a Dubai branch run by their son Aditya Agarwal. The firm runs its own equity trading platform, similar in scope to consumer-facing brokers like Zerodha, that clients use to place trades and manage their portfolios. Shobhit Goel works as a sub-broker under the firm's broking licence in Satna, Madhya Pradesh.",
     runByPersonSlugs: ["aditya-agarwal"],
   },
   {
