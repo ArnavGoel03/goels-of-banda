@@ -271,7 +271,7 @@ export const people: Person[] = [
     children: ["arnav-goel", "aditi-goel"],
     publicity: "full",
     bio:
-      "Rohit Goel, born 1972 in Banda, co-runs the family jewellery firm 'Gondilal Saraf' in the heart of Banda together with his elder brother Vinod. He married Richa Goel (née Neelam Agarwal of Jhansi) on 12 February 1998. Father of Aditi and Arnav Goel.",
+      "Rohit Goel, born 1972 in Banda, did his studies in Allahabad (Prayagraj), Uttar Pradesh before returning to Banda to co-run the family jewellery firm 'Gondilal Saraf' in the heart of Banda together with his elder brother Vinod. He married Richa Goel (née Neelam Agarwal of Jhansi) on 12 February 1998. Father of Aditi and Arnav Goel.",
   },
   {
     slug: "richa-goel",
@@ -449,7 +449,7 @@ export const people: Person[] = [
     occupation: "Creative direction and design, Clay Craft India Pvt Ltd",
     businessSlugs: ["clay-craft-india"],
     bio:
-      "Vijaya Agarwal (née Vijaya Goel), known in the family as Happy, is the daughter of Manmohan and Nandita Goel. She married Deepak Agarwal, a named co-founder and director of Clay Craft India Pvt Ltd, and lives in Jaipur, Rajasthan. Alongside her husband and his two brothers, who jointly run the company, Vijaya handles creative direction for Clay Craft and designs new tableware collections for the brand.",
+      "Vijaya Agarwal (née Vijaya Goel), known in the family as Happy, is the daughter of Manmohan and Nandita Goel. She studied engineering at KCNIT Banda for her B.Tech before marrying Deepak Agarwal, a named co-founder and director of Clay Craft India Pvt Ltd, and now lives in Jaipur, Rajasthan. Alongside her husband and his two brothers, who jointly run the company, Vijaya handles creative direction for Clay Craft and designs new tableware collections for the brand.",
   },
   {
     slug: "deepak-agarwal",
@@ -459,12 +459,12 @@ export const people: Person[] = [
     generation: 3,
     familyRole: "Husband of Vijaya Agarwal",
     currentLocation: "Jaipur, Rajasthan, India",
-    occupation: "Co-founder and director, Clay Craft India Pvt Ltd",
-    businessSlugs: ["clay-craft-india"],
+    occupation: "Executive Director & CFO, Clay Craft India Limited",
+    businessSlugs: ["clay-craft-india", "crown-craft-india", "jcpl-jaipur-ceramics", "vacbott", "griha-jaipur"],
     spouse: { slug: "vijaya-agarwal" },
     publicity: "full",
     bio:
-      "Deepak Agarwal is a named co-founder and current director of Clay Craft India Private Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue ~$148M). Deepak has two brothers who run Clay Craft alongside him, the three of them jointly operate the company as the founding Agarwal family. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand. Deepak's family is the Agarwal family that owns Clay Craft.",
+      "Deepak Agarwal is the Executive Director & Chief Financial Officer of Clay Craft India Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue approximately $148M). He attended The Scindia School in Gwalior for high school (2001–2006), then studied Management with a Finance specialisation at JAIN College, Bengaluru (2006–2009) before completing an MBA in Finance at Cardiff University (2009–2010), where his degree thesis analysed the financial statements of The Carphone Warehouse PLC. He joined Clay Craft India as a Director in September 2010 and has been running it alongside his two brothers ever since, the three of them operating the company as the founding Agarwal family. Deepak oversees modern retail, online retail, digital marketing, social media, hotelware sales, national and international exhibitions, licensing and merchandising, and advertising across the Clay Craft Group, which now includes Clay Craft, Crown Craft (premium plastic homewares), JCPL (Jaipur Ceramics, acquired 2014), and Vacbott (stainless steel insulated bottles and flasks, launched 2022). In 2017 he oversaw Clay Craft India's first TV commercial, the 'Har Pal ke liye' campaign. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand.",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/deepak-agarwal-b1560826/" },
       { label: "Clay Craft India, Corporate Leadership", url: "https://corporate.claycraftindia.com/leadership-management/" },
@@ -490,7 +490,7 @@ export const people: Person[] = [
     children: ["raghav-goel"],
     publicity: "full",
     bio:
-      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. He attended The Scindia School in Gwalior (2006–2010) and studied Electronics and Instrumentation at BITS Pilani (2012–2016), where he was active in the Film Making Club. He began his career as a DevOps Intern at Exotel (2015), then worked as a Member of Technical Staff at VMware in Bengaluru (2016–2018) on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin. He moved to RIVIGO as a Software Development Engineer in Gurugram (2018–2019), building a Kubernetes-based virtual development environment, before joining Zomato in 2019, where he spent five years as SDE 2 and then SDE 3, notably replacing the company's ELK logging stack with ClickHouse (saving roughly $1M/year) and speaking at DevOpsDays Bengaluru 2023. In November 2024 he joined Intuit as a Staff Software Engineer working on observability, based in Bengaluru. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026, the sixth generation of the Banda Goel family.",
+      "Palash Goel is the son of Vinod and Neelam Agarwal Goel. He attended The Scindia School in Gwalior for classes 7 through 10 (2006–2010), then did classes 11 and 12 through a dummy-school arrangement in Delhi while preparing for the IIT entrance exams full-time at FIITJEE, before moving on to study Electronics and Instrumentation at BITS Pilani (2012–2016), where he was active in the Film Making Club. He began his career as a DevOps Intern at Exotel (2015), then worked as a Member of Technical Staff at VMware in Bengaluru (2016–2018) on iSCSI storage in ESXi and the vCenter Hostprofiles iSCSI plugin. He moved to RIVIGO as a Software Development Engineer in Gurugram (2018–2019), building a Kubernetes-based virtual development environment, before joining Zomato in 2019, where he spent five years as SDE 2 and then SDE 3, notably replacing the company's ELK logging stack with ClickHouse (saving roughly $1M/year) and speaking at DevOpsDays Bengaluru 2023. In November 2024 he joined Intuit as a Staff Software Engineer working on observability, based in Bengaluru. Married to Preksha Agarwal (from Jhansi). Father of Raghav Goel, born February 2026, the sixth generation of the Banda Goel family.",
     notes: "Birth year approximate (calculated as 10.5 years older than Arnav Goel).",
     sources: [
       { label: "LinkedIn profile", url: "https://www.linkedin.com/in/palashg/" },

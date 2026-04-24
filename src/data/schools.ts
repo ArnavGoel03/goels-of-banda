@@ -79,6 +79,26 @@ export const schools: School[] = [
     website: "https://ucsd.edu/",
     city: "La Jolla, California",
   },
+  {
+    slug: "cardiff-university",
+    name: "Cardiff University",
+    aliases: ["Prifysgol Caerdydd"],
+    website: "https://www.cardiff.ac.uk/",
+    city: "Cardiff, Wales",
+  },
+  {
+    slug: "jain-college",
+    name: "JAIN College",
+    website: "https://www.jaincollege.ac.in/",
+    city: "Bengaluru, Karnataka",
+  },
+  {
+    slug: "fiitjee",
+    name: "FIITJEE",
+    aliases: ["FIITJEE Delhi"],
+    website: "https://www.fiitjee.com/",
+    city: "Delhi (and nationwide)",
+  },
 ];
 
 export const schoolsBySlug: Record<string, School> = Object.fromEntries(
