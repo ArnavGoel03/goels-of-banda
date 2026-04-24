@@ -187,12 +187,12 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                           <Card data={node(get("neelam-agarwal-vinod"))} />
                         </Couple>
                         <Couple>
-                          <Card data={node(get("shobhit-goel"))} />
-                          <Card data={node(get("roli"))} />
-                        </Couple>
-                        <Couple>
                           <Card data={node(get("seema-agarwal"))} />
                           <Card data={node(get("seema-husband"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("shobhit-goel"))} />
+                          <Card data={node(get("roli"))} />
                         </Couple>
                         <Couple>
                           <Card data={node(get("rohit-goel"))} />
@@ -297,14 +297,6 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                           <Card data={node(get("manmohan-agrawal-kanpur"))} />
                         </Couple>
                       </ClusterGroup>
-                      <ClusterGroup title="Shobhit&rsquo;s">
-                        <Couple>
-                          <Card data={node(get("shally-goel"))} />
-                          <Card data={node(get("atulit-agarwal"))} />
-                        </Couple>
-                        <Card data={node(get("esha-goel"))} />
-                        <Card data={node(get("rhitik-goel"))} />
-                      </ClusterGroup>
                       <ClusterGroup title="Seema&rsquo;s">
                         <Couple>
                           <Card data={node(get("anu-agarwal"))} />
@@ -314,6 +306,14 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                           <Card data={node(get("aditya-agarwal"))} />
                           <Card data={node(get("sugandha-maheshwari"))} />
                         </Couple>
+                      </ClusterGroup>
+                      <ClusterGroup title="Shobhit&rsquo;s">
+                        <Couple>
+                          <Card data={node(get("shally-goel"))} />
+                          <Card data={node(get("atulit-agarwal"))} />
+                        </Couple>
+                        <Card data={node(get("esha-goel"))} />
+                        <Card data={node(get("rhitik-goel"))} />
                       </ClusterGroup>
                       <ClusterGroup title="Rohit&rsquo;s">
                         <Card data={node(get("aditi-goel"), { self: true, badge: "Future bride" })} />

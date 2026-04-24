@@ -73,7 +73,7 @@ export const people: Person[] = [
     occupation: "Jeweller",
     businessSlugs: ["gondilal-saraf"],
     parents: { father: "rk-father" },
-    children: ["vinod-goel", "shobhit-goel", "seema-agarwal", "rohit-goel"],
+    children: ["vinod-goel", "seema-agarwal", "shobhit-goel", "rohit-goel"],
     spouse: { slug: "rani-agarwal-dadiji", marriage: { date: "18 February" } },
     publicity: "full",
     bio:
@@ -92,7 +92,7 @@ export const people: Person[] = [
     currentLocation: "Banda, Uttar Pradesh, India",
     occupation: "Homemaker",
     spouse: { slug: "radha-krishna-goel", marriage: { date: "18 February" } },
-    children: ["vinod-goel", "shobhit-goel", "seema-agarwal", "rohit-goel"],
+    children: ["vinod-goel", "seema-agarwal", "shobhit-goel", "rohit-goel"],
     birthFamilySurname: "Agarwal",
     publicity: "full",
     bio:
