@@ -7,7 +7,10 @@ export function PersonHero({ person }: { person: Person }) {
   const bylineParts = buildByline(person);
 
   return (
-    <header className="border-b border-ink-100 pb-8">
+    <header
+      className="border-b border-ink-100 pb-8"
+      style={{ viewTransitionName: `person-${person.slug}` }}
+    >
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {person.generation != null ? (
           <span className="rounded-full border border-ink-200 bg-parchment px-2.5 py-0.5 text-[10px] uppercase tracking-[0.15em] text-ink-500">
@@ -23,7 +26,7 @@ export function PersonHero({ person }: { person: Person }) {
 
       <h1 className="mt-4 font-serif text-5xl sm:text-6xl font-semibold text-ink-900 leading-[1.02]">
         {person.name}
-        {!person.isLiving ? (
+        {!person.isLiving && !isPlaceholder(person) ? (
           <span className="ml-3 text-ink-300 font-normal">✝</span>
         ) : null}
       </h1>
@@ -60,6 +63,10 @@ function buildLifespan(person: Person): string | undefined {
   }
   if (b) return `b. ${approx}${b}`;
   return undefined;
+}
+
+function isPlaceholder(p: Person): boolean {
+  return p.publicity === "minimal" && !p.birth?.year && !p.death?.year;
 }
 
 function buildByline(person: Person): string[] {

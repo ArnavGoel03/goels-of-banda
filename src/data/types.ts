@@ -27,6 +27,15 @@ export type PersonPhoto = {
   credit?: string;
 };
 
+export type OralHistoryClip = {
+  src: string;
+  title: string;
+  transcript?: string;
+  recordedOn?: string;
+  recordedBy?: string;
+  durationSeconds?: number;
+};
+
 export type Person = {
   slug: string;
   name: string;
@@ -62,6 +71,7 @@ export type Person = {
   notes?: string;
   generation?: number;
   photos?: PersonPhoto[];
+  oralHistories?: OralHistoryClip[];
 };
 
 export type ArchiveDocument = {

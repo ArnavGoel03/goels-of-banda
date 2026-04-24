@@ -1,19 +1,22 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import panzoom, { type PanZoom } from "panzoom";
 import type { Person } from "@/data/types";
 import { computeAge } from "@/lib/schema";
-import { computeLayout } from "./computeLayout";
-import { PersonCard, CARD_WIDTH, CARD_HEIGHT, type PersonCardData } from "./PersonCard";
+import {
+  computeLayout,
+  CARD_WIDTH,
+  CARD_HEIGHT,
+  type LayoutNode,
+  type LayoutEdge,
+} from "./computeLayout";
+import { PersonCard, type PersonCardData } from "./PersonCard";
 
-const MIN_ZOOM = 0.25;
-const MAX_ZOOM = 2.4;
-const INITIAL_PADDING = 80;
+const PADDING = 80;
 
 type Placed = {
-  id: string;
-  x: number;
-  y: number;
+  node: LayoutNode;
   data: PersonCardData;
 };
 
@@ -24,299 +27,159 @@ type EdgePath = {
 };
 
 export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
-  const { placed, edges, bounds } = useMemo(
-    () => buildTree(peopleList),
+  const { placed, edgePaths, bounds } = useMemo(
+    () => buildRenderModel(peopleList),
     [peopleList],
   );
 
+  const worldW = bounds.w + PADDING * 2;
+  const worldH = bounds.h + PADDING * 2;
+
+  const sceneRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [zoom, setZoom] = useState(1);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const fitVersionRef = useRef(0);
-
-  const worldWidth = bounds.maxX - bounds.minX + INITIAL_PADDING * 2;
-  const worldHeight = bounds.maxY - bounds.minY + INITIAL_PADDING * 2;
-
-  const fitToView = useCallback(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.width === 0 || rect.height === 0) return;
-    const zX = rect.width / worldWidth;
-    const zY = rect.height / worldHeight;
-    const z = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, Math.min(zX, zY, 1)));
-    const offsetX = (rect.width - worldWidth * z) / 2;
-    const offsetY = (rect.height - worldHeight * z) / 2;
-    setZoom(z);
-    setOffset({ x: offsetX, y: offsetY });
-  }, [worldWidth, worldHeight]);
+  const pzRef = useRef<PanZoom | null>(null);
 
   useEffect(() => {
-    fitVersionRef.current += 1;
-    fitToView();
-  }, [fitToView]);
+    if (!sceneRef.current || !viewportRef.current) return;
+    const pz = panzoom(sceneRef.current, {
+      maxZoom: 2.4,
+      minZoom: 0.2,
+      bounds: true,
+      boundsPadding: 0.2,
+      smoothScroll: false,
+      filterKey() {
+        // Let our own key handler manage arrow keys so the whole page
+        // scrolls properly when focus isn't inside the tree.
+        return true;
+      },
+      beforeMouseDown(e) {
+        // Don't start a pan when the pointer is inside a clickable card;
+        // let the click pass through. A card can still be dragged by
+        // pressing outside it first.
+        const target = e.target as HTMLElement | null;
+        return Boolean(target?.closest("[data-draggable-skip]"));
+      },
+    });
+    pzRef.current = pz;
 
-  useEffect(() => {
-    const onResize = () => fitToView();
-    window.addEventListener("resize", onResize);
-    window.addEventListener("orientationchange", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("orientationchange", onResize);
+    // Fit to viewport on mount.
+    const fit = () => {
+      const vp = viewportRef.current;
+      if (!vp) return;
+      const r = vp.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return;
+      const sx = r.width / worldW;
+      const sy = r.height / worldH;
+      const s = Math.max(0.2, Math.min(1, Math.min(sx, sy)));
+      pz.zoomAbs(0, 0, s);
+      pz.moveTo((r.width - worldW * s) / 2, (r.height - worldH * s) / 2);
     };
-  }, [fitToView]);
+    const t = setTimeout(fit, 0);
+    const onResize = () => fit();
+    window.addEventListener("resize", onResize);
 
-  const pointers = useRef(new Map<number, { x: number; y: number }>());
-  const pan = useRef<{
-    startX: number;
-    startY: number;
-    origX: number;
-    origY: number;
-  } | null>(null);
-  const pinch = useRef<{ startDistance: number; startZoom: number } | null>(null);
-  const dragged = useRef(false);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", onResize);
+      pz.dispose();
+      pzRef.current = null;
+    };
+  }, [worldW, worldH]);
 
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    const pointerCount = pointers.current.size;
-
-    if (pointerCount === 1) {
-      pan.current = {
-        startX: e.clientX,
-        startY: e.clientY,
-        origX: offset.x,
-        origY: offset.y,
-      };
-      pinch.current = null;
-      dragged.current = false;
-    } else if (pointerCount === 2) {
-      const pts = [...pointers.current.values()];
-      const dx = pts[0].x - pts[1].x;
-      const dy = pts[0].y - pts[1].y;
-      pinch.current = {
-        startDistance: Math.hypot(dx, dy),
-        startZoom: zoom,
-      };
-      pan.current = null;
-    }
-    try {
-      (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
-    } catch {}
+  const adjust = (delta: number) => {
+    const pz = pzRef.current;
+    const vp = viewportRef.current;
+    if (!pz || !vp) return;
+    const r = vp.getBoundingClientRect();
+    pz.smoothZoom(r.width / 2, r.height / 2, 1 + delta);
   };
 
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!pointers.current.has(e.pointerId)) return;
-    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    const pointerCount = pointers.current.size;
-
-    if (pointerCount === 2 && pinch.current) {
-      const el = viewportRef.current;
-      if (!el) return;
-      const pts = [...pointers.current.values()];
-      const midX = (pts[0].x + pts[1].x) / 2;
-      const midY = (pts[0].y + pts[1].y) / 2;
-      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
-      if (dist === 0) return;
-      const ratio = dist / pinch.current.startDistance;
-      const nextZoom = Math.max(
-        MIN_ZOOM,
-        Math.min(MAX_ZOOM, pinch.current.startZoom * ratio),
-      );
-      const rect = el.getBoundingClientRect();
-      const localX = midX - rect.left;
-      const localY = midY - rect.top;
-      const worldX = (localX - offset.x) / zoom;
-      const worldY = (localY - offset.y) / zoom;
-      setOffset({
-        x: localX - worldX * nextZoom,
-        y: localY - worldY * nextZoom,
-      });
-      setZoom(nextZoom);
-      dragged.current = true;
-      return;
-    }
-
-    if (!pan.current) return;
-    const dx = e.clientX - pan.current.startX;
-    const dy = e.clientY - pan.current.startY;
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) dragged.current = true;
-    setOffset({ x: pan.current.origX + dx, y: pan.current.origY + dy });
+  const fit = () => {
+    const pz = pzRef.current;
+    const vp = viewportRef.current;
+    if (!pz || !vp) return;
+    const r = vp.getBoundingClientRect();
+    const sx = r.width / worldW;
+    const sy = r.height / worldH;
+    const s = Math.max(0.2, Math.min(1, Math.min(sx, sy)));
+    pz.zoomAbs(0, 0, s);
+    pz.moveTo((r.width - worldW * s) / 2, (r.height - worldH * s) / 2);
   };
 
-  const endPointer = (e: React.PointerEvent<HTMLDivElement>) => {
-    pointers.current.delete(e.pointerId);
-    if (pointers.current.size < 2) pinch.current = null;
-    if (pointers.current.size === 0) pan.current = null;
-    try {
-      (e.currentTarget as HTMLDivElement).releasePointerCapture(e.pointerId);
-    } catch {}
-  };
-
-  const onClickCapture = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (dragged.current) {
-      e.preventDefault();
-      e.stopPropagation();
-      dragged.current = false;
-    }
-  };
-
-  const zoomAroundPoint = useCallback(
-    (factor: number, pointerX: number, pointerY: number) => {
-      const nextZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom * factor));
-      if (nextZoom === zoom) return;
-      const worldX = (pointerX - offset.x) / zoom;
-      const worldY = (pointerY - offset.y) / zoom;
-      setOffset({
-        x: pointerX - worldX * nextZoom,
-        y: pointerY - worldY * nextZoom,
-      });
-      setZoom(nextZoom);
-    },
-    [zoom, offset.x, offset.y],
-  );
-
-  const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const pointerX = e.clientX - rect.left;
-    const pointerY = e.clientY - rect.top;
-
-    // Mac trackpad pinch arrives as wheel + ctrlKey. Regular scroll without
-    // ⌘/Ctrl is allowed to bubble so the page scroll keeps working.
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      const factor = Math.exp(-e.deltaY * 0.0015);
-      zoomAroundPoint(factor, pointerX, pointerY);
-    }
-  };
-
-  const adjustZoom = (delta: number) => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    zoomAroundPoint(1 + delta, rect.width / 2, rect.height / 2);
-  };
-
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const step = 80 / zoom;
-    switch (e.key) {
-      case "+":
-      case "=":
-        e.preventDefault();
-        adjustZoom(0.2);
-        break;
-      case "-":
-      case "_":
-        e.preventDefault();
-        adjustZoom(-0.16);
-        break;
-      case "0":
-        e.preventDefault();
-        fitToView();
-        break;
-      case "ArrowUp":
-        e.preventDefault();
-        setOffset((o) => ({ x: o.x, y: o.y + step }));
-        break;
-      case "ArrowDown":
-        e.preventDefault();
-        setOffset((o) => ({ x: o.x, y: o.y - step }));
-        break;
-      case "ArrowLeft":
-        e.preventDefault();
-        setOffset((o) => ({ x: o.x + step, y: o.y }));
-        break;
-      case "ArrowRight":
-        e.preventDefault();
-        setOffset((o) => ({ x: o.x - step, y: o.y }));
-        break;
-    }
+  const print = () => {
+    if (typeof window === "undefined") return;
+    window.print();
   };
 
   return (
     <div
-      ref={containerRef}
+      ref={viewportRef}
       className="relative h-[85vh] rounded-lg border border-ink-100 bg-parchment-dark overflow-hidden select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent-700/60"
       tabIndex={0}
-      onKeyDown={onKeyDown}
-      aria-label="Family tree. Drag to pan, pinch or Ctrl+scroll to zoom, arrow keys to pan, plus and minus keys to zoom, zero to fit."
       role="application"
+      aria-label="Family tree. Drag to pan, pinch or Ctrl+scroll to zoom."
+      data-tree-viewport
     >
       <div
-        ref={viewportRef}
-        className="absolute inset-0 touch-none cursor-grab active:cursor-grabbing"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endPointer}
-        onPointerCancel={endPointer}
-        onPointerLeave={endPointer}
-        onWheel={onWheel}
-        onClickCapture={onClickCapture}
+        ref={sceneRef}
+        style={{
+          width: worldW,
+          height: worldH,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          transformOrigin: "0 0",
+          willChange: "transform",
+        }}
       >
-        <div
-          className="origin-top-left"
-          style={{
-            transform: `translate3d(${offset.x}px, ${offset.y}px, 0) scale(${zoom})`,
-            width: worldWidth,
-            height: worldHeight,
-            position: "absolute",
-            top: 0,
-            left: 0,
-            willChange: "transform",
-          }}
+        <svg
+          width={worldW}
+          height={worldH}
+          className="absolute inset-0 pointer-events-none"
+          style={{ overflow: "visible" }}
         >
-          <svg
-            width={worldWidth}
-            height={worldHeight}
-            className="absolute inset-0 pointer-events-none"
-            style={{ overflow: "visible" }}
+          <g transform={`translate(${-bounds.minX + PADDING}, ${-bounds.minY + PADDING})`}>
+            {edgePaths.map((e) => (
+              <path
+                key={e.id}
+                d={e.d}
+                fill="none"
+                stroke={
+                  e.kind === "spouse"
+                    ? "var(--color-accent-700)"
+                    : "var(--color-ink-400)"
+                }
+                strokeWidth={e.kind === "spouse" ? 1.3 : 1.1}
+                strokeDasharray={e.kind === "spouse" ? "4 3" : undefined}
+                opacity={e.kind === "spouse" ? 0.85 : 0.6}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            ))}
+          </g>
+        </svg>
+        {placed.map((n) => (
+          <div
+            key={n.node.id}
+            data-draggable-skip
+            style={{
+              position: "absolute",
+              left: n.node.x - bounds.minX + PADDING,
+              top: n.node.y - bounds.minY + PADDING,
+              width: CARD_WIDTH,
+              height: CARD_HEIGHT,
+              viewTransitionName: `person-${n.node.id}`,
+            }}
           >
-            <g
-              transform={`translate(${-bounds.minX + INITIAL_PADDING}, ${-bounds.minY + INITIAL_PADDING})`}
-            >
-              {edges.map((e) => (
-                <path
-                  key={e.id}
-                  d={e.d}
-                  fill="none"
-                  stroke={
-                    e.kind === "spouse"
-                      ? "var(--color-accent-700)"
-                      : "var(--color-ink-400)"
-                  }
-                  strokeWidth={e.kind === "spouse" ? 1.3 : 1.1}
-                  strokeDasharray={e.kind === "spouse" ? "4 3" : undefined}
-                  opacity={e.kind === "spouse" ? 0.85 : 0.6}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              ))}
-            </g>
-          </svg>
-          {placed.map((n) => (
-            <div
-              key={n.id}
-              style={{
-                position: "absolute",
-                left: n.x - bounds.minX + INITIAL_PADDING,
-                top: n.y - bounds.minY + INITIAL_PADDING,
-                width: CARD_WIDTH,
-                height: CARD_HEIGHT,
-              }}
-            >
-              <PersonCard data={n.data} />
-            </div>
-          ))}
-        </div>
+            <PersonCard data={n.data} />
+          </div>
+        ))}
       </div>
 
-      <div className="absolute top-3 right-3 z-10 flex flex-col gap-1 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm">
+      <div className="absolute top-3 right-3 z-10 flex flex-col gap-1 rounded-md bg-parchment/95 border border-ink-100 shadow-sm backdrop-blur-sm print:hidden">
         <button
           type="button"
-          onClick={() => adjustZoom(0.2)}
+          onClick={() => adjust(0.25)}
           className="px-3 py-1.5 text-sm text-ink-700 hover:text-accent-700 border-b border-ink-100"
           aria-label="Zoom in"
         >
@@ -324,7 +187,7 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
         </button>
         <button
           type="button"
-          onClick={() => adjustZoom(-0.16)}
+          onClick={() => adjust(-0.2)}
           className="px-3 py-1.5 text-sm text-ink-700 hover:text-accent-700 border-b border-ink-100"
           aria-label="Zoom out"
         >
@@ -332,26 +195,34 @@ export function TreeFlowView({ peopleList }: { peopleList: Person[] }) {
         </button>
         <button
           type="button"
-          onClick={fitToView}
-          className="px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-ink-600 hover:text-accent-700"
+          onClick={fit}
+          className="px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-ink-600 hover:text-accent-700 border-b border-ink-100"
           aria-label="Fit to view"
         >
           fit
         </button>
+        <button
+          type="button"
+          onClick={print}
+          className="px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-ink-600 hover:text-accent-700"
+          aria-label="Print / save as PDF"
+          title="Print — use 'Save as PDF' in the print dialog for a PDF export"
+        >
+          print
+        </button>
       </div>
 
-      <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs">
+      <div className="absolute bottom-3 left-3 z-10 rounded-md bg-parchment/95 border border-ink-100 px-3 py-2 text-xs text-ink-600 shadow-sm backdrop-blur-sm pointer-events-none max-w-xs print:hidden">
         <span className="font-medium text-ink-800">Tap</span> a card to open ·{" "}
         <span className="font-medium text-ink-800">Drag</span> to pan ·{" "}
         <span className="font-medium text-ink-800">Pinch</span> or{" "}
-        <span className="font-medium text-ink-800">⌘/Ctrl + scroll</span> to zoom ·{" "}
-        <span className="font-medium text-ink-800">0</span> to fit
+        <span className="font-medium text-ink-800">⌘/Ctrl + scroll</span> to zoom
       </div>
     </div>
   );
 }
 
-function buildTree(peopleList: Person[]) {
+function buildRenderModel(peopleList: Person[]) {
   const layout = computeLayout(peopleList);
   const bySlug = new Map(peopleList.map((p) => [p.slug, p]));
   const posById = new Map(layout.nodes.map((n) => [n.id, n]));
@@ -368,9 +239,7 @@ function buildTree(peopleList: Person[]) {
         : `age ${age.years}`
       : undefined;
     return {
-      id: ln.id,
-      x: ln.x,
-      y: ln.y,
+      node: ln,
       data: {
         slug: p.slug,
         name: p.name,
@@ -386,59 +255,77 @@ function buildTree(peopleList: Person[]) {
     };
   });
 
-  // Group parent-child edges by parent so we can draw one comb per parent.
-  const childrenByParent = new Map<string, string[]>();
-  const spouseEdgeList: { id: string; source: string; target: string }[] = [];
-  for (const e of layout.edges) {
-    if (e.kind === "spouse") {
-      spouseEdgeList.push(e);
-    } else {
-      const list = childrenByParent.get(e.source) ?? [];
-      list.push(e.target);
-      childrenByParent.set(e.source, list);
-    }
+  const edgePaths = buildEdgePaths(layout.edges, posById);
+
+  let minX = Infinity,
+    minY = Infinity,
+    maxX = -Infinity,
+    maxY = -Infinity;
+  for (const n of placed) {
+    if (n.node.x < minX) minX = n.node.x;
+    if (n.node.y < minY) minY = n.node.y;
+    if (n.node.x + CARD_WIDTH > maxX) maxX = n.node.x + CARD_WIDTH;
+    if (n.node.y + CARD_HEIGHT > maxY) maxY = n.node.y + CARD_HEIGHT;
+  }
+  if (!isFinite(minX)) {
+    minX = minY = 0;
+    maxX = maxY = 0;
   }
 
-  const edges: EdgePath[] = [];
+  return {
+    placed,
+    edgePaths,
+    bounds: { minX, minY, w: maxX - minX, h: maxY - minY },
+  };
+}
+
+function buildEdgePaths(
+  edges: LayoutEdge[],
+  posById: Map<string, LayoutNode>,
+): EdgePath[] {
+  const out: EdgePath[] = [];
+  const childrenByParent = new Map<string, string[]>();
+  const spouse: LayoutEdge[] = [];
+  for (const e of edges) {
+    if (e.kind === "spouse") spouse.push(e);
+    else {
+      const arr = childrenByParent.get(e.source) ?? [];
+      arr.push(e.target);
+      childrenByParent.set(e.source, arr);
+    }
+  }
 
   for (const [parentSlug, childSlugs] of childrenByParent) {
     const parent = posById.get(parentSlug);
     if (!parent) continue;
     const kids = childSlugs
       .map((s) => posById.get(s))
-      .filter((n): n is NonNullable<typeof n> => Boolean(n));
+      .filter((n): n is LayoutNode => Boolean(n));
     if (kids.length === 0) continue;
     const parentCx = parent.x + CARD_WIDTH / 2;
     const parentBottom = parent.y + CARD_HEIGHT;
-    const kidTop = kids[0].y;
-    const busY = parentBottom + (kidTop - parentBottom) / 2;
+    const busY = parentBottom + (kids[0].y - parentBottom) / 2;
 
-    // Sort by x so the bus line spans min to max cleanly.
     kids.sort((a, b) => a.x - b.x);
-    const kidCenters = kids.map((k) => k.x + CARD_WIDTH / 2);
-    const minKidX = Math.min(...kidCenters, parentCx);
-    const maxKidX = Math.max(...kidCenters, parentCx);
+    const cxs = kids.map((k) => k.x + CARD_WIDTH / 2);
+    const minCx = Math.min(...cxs, parentCx);
+    const maxCx = Math.max(...cxs, parentCx);
 
-    // Stem from parent down to the bus.
-    edges.push({
+    out.push({
       id: `stem-${parentSlug}`,
       kind: "parent-child",
       d: `M ${parentCx} ${parentBottom} L ${parentCx} ${busY}`,
     });
-
-    // Horizontal bus across all children + the parent's column.
-    if (kids.length > 1 || minKidX !== parentCx) {
-      edges.push({
+    if (kids.length > 1 || minCx !== parentCx) {
+      out.push({
         id: `bus-${parentSlug}`,
         kind: "parent-child",
-        d: `M ${minKidX} ${busY} L ${maxKidX} ${busY}`,
+        d: `M ${minCx} ${busY} L ${maxCx} ${busY}`,
       });
     }
-
-    // Drop from the bus into each child's top.
     for (const k of kids) {
       const cx = k.x + CARD_WIDTH / 2;
-      edges.push({
+      out.push({
         id: `drop-${parentSlug}-${k.id}`,
         kind: "parent-child",
         d: `M ${cx} ${busY} L ${cx} ${k.y}`,
@@ -446,42 +333,21 @@ function buildTree(peopleList: Person[]) {
     }
   }
 
-  for (const e of spouseEdgeList) {
+  for (const e of spouse) {
     const a = posById.get(e.source);
     const b = posById.get(e.target);
     if (!a || !b) continue;
     const y = (a.y + b.y) / 2 + CARD_HEIGHT / 2;
     const ax = a.x + (a.x < b.x ? CARD_WIDTH : 0);
     const bx = b.x + (b.x < a.x ? CARD_WIDTH : 0);
-    edges.push({
+    out.push({
       id: e.id,
       kind: "spouse",
       d: `M ${ax} ${y} L ${bx} ${y}`,
     });
   }
 
-  let minX = Infinity;
-  let minY = Infinity;
-  let maxX = -Infinity;
-  let maxY = -Infinity;
-  for (const n of placed) {
-    if (n.x < minX) minX = n.x;
-    if (n.y < minY) minY = n.y;
-    if (n.x + CARD_WIDTH > maxX) maxX = n.x + CARD_WIDTH;
-    if (n.y + CARD_HEIGHT > maxY) maxY = n.y + CARD_HEIGHT;
-  }
-  if (!isFinite(minX)) {
-    minX = 0;
-    minY = 0;
-    maxX = 0;
-    maxY = 0;
-  }
-
-  return {
-    placed,
-    edges,
-    bounds: { minX, minY, maxX, maxY },
-  };
+  return out;
 }
 
 function isPlaceholderPerson(p: Person): boolean {

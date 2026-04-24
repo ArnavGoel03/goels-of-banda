@@ -17,6 +17,8 @@ import { AdjacentNav } from "@/components/person/AdjacentNav";
 import { RelatedStories } from "@/components/person/RelatedStories";
 import { LiveRelationship } from "@/components/person/LiveRelationship";
 import { PhotoGallery } from "@/components/person/PhotoGallery";
+import { MemorialBanner } from "@/components/person/MemorialBanner";
+import { OralHistoryPanel } from "@/components/person/OralHistoryPanel";
 import { linkify } from "@/lib/linkify";
 
 export function generateStaticParams() {
@@ -79,6 +81,7 @@ export default async function PersonPage({ params }: { params: Params }) {
         </Link>
 
         <PersonHero person={person} />
+        <MemorialBanner person={person} />
         <LiveRelationship person={person} allPeople={people} />
 
         {person.bio ? (
@@ -92,6 +95,9 @@ export default async function PersonPage({ params }: { params: Params }) {
         <FamilyPanel person={person} />
         {person.photos && person.photos.length > 0 ? (
           <PhotoGallery photos={person.photos} personName={person.name} />
+        ) : null}
+        {person.oralHistories && person.oralHistories.length > 0 ? (
+          <OralHistoryPanel clips={person.oralHistories} personName={person.name} />
         ) : null}
         <CareerPanel person={person} />
         <EducationPanel person={person} />
