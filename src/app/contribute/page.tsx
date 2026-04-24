@@ -3,6 +3,7 @@ import Link from "next/link";
 import { site } from "@/data/config";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
+import { ContributeForm } from "@/components/contribute/ContributeForm";
 
 export const metadata: Metadata = {
   title: "Contribute",
@@ -10,12 +11,6 @@ export const metadata: Metadata = {
     "Help complete the Goel family of Banda's living history, add names, correct details, share stories or photos.",
   alternates: { canonical: "/contribute" },
 };
-
-const newIssueTemplate = encodeURIComponent(
-  `### Who / what does this concern?\n_(name or page, e.g. "Rohit Goel" or "/places/banda")_\n\n### What should be added, changed, or corrected?\n\n### Source or how you know this\n_(optional, dadaji told you, a document, a photo, etc.)_\n\n### Anything else\n`,
-);
-
-const issueUrl = `${site.repoUrl}/issues/new?labels=contribution&title=Family%20tree%20addition&body=${newIssueTemplate}`;
 
 export default function ContributePage() {
   return (
@@ -41,32 +36,15 @@ export default function ContributePage() {
           please contribute.
         </p>
 
-        <h2>Three ways to contribute</h2>
-
-        <h3>1. Open an issue on GitHub</h3>
+        <h2>Tell us what to add or change</h2>
         <p>
-          The fastest way. You&apos;ll need a GitHub account (free). Click the button
-          below to open a pre-filled issue form.
+          Fill this in. Clicking &ldquo;Open this on GitHub&rdquo; lands you on a
+          pre-filled issue form, one click to submit. Or use the email link if you
+          don&apos;t have a GitHub account.
         </p>
-        <p>
-          <a
-            href={issueUrl}
-            rel="noopener"
-            className="inline-block rounded-md bg-accent-700 px-4 py-2 text-sm font-medium text-parchment no-underline hover:bg-accent-800 transition-colors"
-          >
-            Open a new issue on GitHub →
-          </a>
-        </p>
+        <ContributeForm />
 
-        <h3>2. Email the family</h3>
-        <p>
-          Not on GitHub? Send an email to{" "}
-          <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> with the
-          addition or correction. Please include the person or page it concerns, what
-          should change, and, if you&apos;re comfortable, how you know.
-        </p>
-
-        <h3>3. Submit a pull request (technical)</h3>
+        <h3 className="mt-12">Prefer a pull request? (technical)</h3>
         <p>
           If you&apos;re comfortable with git, the family data lives in{" "}
           <code className="rounded bg-ink-100 px-1 py-0.5 text-sm">src/data/</code> in

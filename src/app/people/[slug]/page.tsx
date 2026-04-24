@@ -15,7 +15,8 @@ import { PlacesForPerson } from "@/components/person/PlacesForPerson";
 import { SourcesPanel } from "@/components/person/SourcesPanel";
 import { AdjacentNav } from "@/components/person/AdjacentNav";
 import { RelatedStories } from "@/components/person/RelatedStories";
-import { RelationshipChip } from "@/components/person/RelationshipChip";
+import { LiveRelationship } from "@/components/person/LiveRelationship";
+import { PhotoGallery } from "@/components/person/PhotoGallery";
 import { linkify } from "@/lib/linkify";
 
 export function generateStaticParams() {
@@ -78,7 +79,7 @@ export default async function PersonPage({ params }: { params: Params }) {
         </Link>
 
         <PersonHero person={person} />
-        <RelationshipChip person={person} />
+        <LiveRelationship person={person} allPeople={people} />
 
         {person.bio ? (
           <section className="prose-family mt-8">
@@ -89,6 +90,9 @@ export default async function PersonPage({ params }: { params: Params }) {
         ) : null}
 
         <FamilyPanel person={person} />
+        {person.photos && person.photos.length > 0 ? (
+          <PhotoGallery photos={person.photos} personName={person.name} />
+        ) : null}
         <CareerPanel person={person} />
         <EducationPanel person={person} />
         <LifeTimeline person={person} />

@@ -3,6 +3,8 @@ import { site } from "@/data/config";
 import { people } from "@/data/people";
 import { businesses } from "@/data/businesses";
 import { stories } from "@/data/stories";
+import { documents } from "@/data/documents";
+import { traditions } from "@/data/traditions";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.baseUrl;
@@ -18,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/businesses`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/places`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/stories`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${base}/archive`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/traditions`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/contribute`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
@@ -45,5 +49,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...peoplePages, ...businessPages, ...storyPages];
+  const documentPages: MetadataRoute.Sitemap = documents.map((d) => ({
+    url: `${base}/archive/${d.slug}`,
+    lastModified: now,
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
+
+  const traditionPages: MetadataRoute.Sitemap = traditions.map((t) => ({
+    url: `${base}/traditions/${t.slug}`,
+    lastModified: now,
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticPages,
+    ...peoplePages,
+    ...businessPages,
+    ...storyPages,
+    ...documentPages,
+    ...traditionPages,
+  ];
 }

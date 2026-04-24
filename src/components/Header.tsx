@@ -23,6 +23,8 @@ export function Header() {
             <NavLink href="/people">People</NavLink>
             <NavLink href="/businesses">Businesses</NavLink>
             <NavLink href="/places">Places</NavLink>
+            <NavLink href="/traditions">Traditions</NavLink>
+            <NavLink href="/archive">Archive</NavLink>
             <NavLink href="/faq">FAQ</NavLink>
           </nav>
           <SearchTrigger />

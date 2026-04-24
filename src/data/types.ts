@@ -20,6 +20,13 @@ export type CareerEntry = {
   notes?: string;
 };
 
+export type PersonPhoto = {
+  src: string;
+  caption?: string;
+  year?: number;
+  credit?: string;
+};
+
 export type Person = {
   slug: string;
   name: string;
@@ -54,6 +61,32 @@ export type Person = {
   sources?: { label: string; url: string }[];
   notes?: string;
   generation?: number;
+  photos?: PersonPhoto[];
+};
+
+export type ArchiveDocument = {
+  slug: string;
+  title: string;
+  kind: "letter" | "invitation" | "ledger" | "certificate" | "photo" | "clipping" | "other";
+  date?: { year?: number; date?: string };
+  personSlugs?: string[];
+  placeSlugs?: string[];
+  pdfUrl?: string;
+  imageUrl?: string;
+  description: string;
+};
+
+export type Tradition = {
+  slug: string;
+  title: string;
+  kind: "recipe" | "festival" | "ritual" | "saying" | "other";
+  personSlugs?: string[];
+  placeSlugs?: string[];
+  summary: string;
+  body: string[];
+  ingredients?: string[];
+  steps?: string[];
+  occasion?: string;
 };
 
 export type Business = {

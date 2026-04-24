@@ -6,6 +6,8 @@ import { people } from "@/data/people";
 import { places } from "@/data/places";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
+import { OccasionsCard } from "@/components/home/OccasionsCard";
+import { ChangelogCard } from "@/components/home/ChangelogCard";
 
 export const metadata: Metadata = {
   title: `${site.name}, 200 years of jewellers in Banda, Uttar Pradesh`,
@@ -68,6 +70,8 @@ export default function Home() {
         </p>
       </section>
 
+      <OccasionsCard />
+
       <section className="mx-auto max-w-5xl px-6 py-10">
         <h2 className="font-serif text-2xl font-semibold text-ink-900 border-b border-ink-100 pb-2">
           Explore the family
@@ -104,6 +108,16 @@ export default function Home() {
             copy={`${places.length} cities on three continents, now on an interactive map.`}
           />
           <ExploreCard
+            href="/traditions"
+            title="Traditions"
+            copy="Recipes, rituals, and sayings passed down in the family."
+          />
+          <ExploreCard
+            href="/archive"
+            title="Family archive"
+            copy="Letters, invitations, shop ledgers, old photographs."
+          />
+          <ExploreCard
             href="/faq"
             title="Frequently asked"
             copy="Short answers to questions about the family and the firms."
@@ -115,6 +129,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <ChangelogCard />
     </>
   );
 }
