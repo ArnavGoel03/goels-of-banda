@@ -114,7 +114,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
             minWidth: "100%",
           }}
         >
-          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[3400px]">
+          <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[5200px]">
             <ConnectorsLayer containerRef={treeRef} />
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
             <SideBySide>
@@ -124,7 +124,12 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                   <Card data={node(get("ganesh-prasad-goel"))} />
                 </Row>
                 <Connector />
-                <Missing label="3 unnamed generations · Gondilal&rsquo;s son (shop founder, ~1850s) → ~1880s → ~1910s (Radha Krishna&rsquo;s father)" />
+                <Missing label="2 unnamed generations · Gondilal&rsquo;s son (shop founder, ~1850s) → ~1880s" />
+                <Connector />
+                <BranchLabel>Generation 4 · Radha Krishna&rsquo;s father · ~1910s</BranchLabel>
+                <Row>
+                  <Card data={node(get("rk-father"))} />
+                </Row>
               </SideColumn>
               <SideColumn side="maternal">
                 <EmptySideNote>Maternal (Agarwals of Jhansi) branch begins at Generation 5.</EmptySideNote>
@@ -153,7 +158,9 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                     <Card data={node(get("sohan-goel"))} />
                     <Card data={node(get("sohan-wife"))} />
                   </Couple>
-                  <Card data={{ slug: "#", name: "3 sisters", sub: "Banda · Gurugram · ✝", placeholder: true }} />
+                  <Card data={node(get("rk-sister-banda"))} />
+                  <Card data={node(get("rk-sister-gurugram"))} />
+                  <Card data={node(get("rk-sister-allahabad-dec"))} />
                 </Row>
               </SideColumn>
               <SideColumn side="maternal">
@@ -194,6 +201,28 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                       </Row>
                     </Branch>
                   </SubFamily>
+                  <SubFamily label="Mahesh&rsquo;s line">
+                    <Branch label="Mahesh&rsquo;s children · Banda &amp; Australia">
+                      <Row>
+                        <Couple>
+                          <Card data={node(get("mahesh-son-1"))} />
+                          <Card data={node(get("mahesh-son-1-wife"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("mahesh-son-2"))} />
+                          <Card data={node(get("mahesh-son-2-wife"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("mahesh-son-3"))} />
+                          <Card data={node(get("mahesh-son-3-wife"))} />
+                        </Couple>
+                        <Couple>
+                          <Card data={node(get("mahesh-daughter-australia"))} />
+                          <Card data={node(get("mahesh-daughter-australia-husband"))} />
+                        </Couple>
+                      </Row>
+                    </Branch>
+                  </SubFamily>
                   <SubFamily label="Manmohan&rsquo;s line">
                     <Branch label="Manmohan&rsquo;s children · Banda">
                       <Row>
@@ -208,10 +237,23 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                       </Row>
                     </Branch>
                   </SubFamily>
+                  <SubFamily label="Sohan&rsquo;s line">
+                    <Branch label="Sohan&rsquo;s children · Banda">
+                      <Row>
+                        <Card data={node(get("sohan-son-chanu"))} />
+                        <Card data={node(get("sohan-son-tukku"))} />
+                        <Card data={node(get("sohan-son-youngest"))} />
+                        <Card data={node(get("khushi-agrawal"))} />
+                      </Row>
+                    </Branch>
+                  </SubFamily>
                   <SubFamily label="Deceased sister&rsquo;s line">
                     <Branch label="Sister&rsquo;s child · Allahabad">
                       <Row>
-                        <Card data={node(get("harsh-agarwal"))} />
+                        <Couple>
+                          <Card data={node(get("harsh-agarwal"))} />
+                          <Card data={node(get("harsh-wife"))} />
+                        </Couple>
                       </Row>
                     </Branch>
                   </SubFamily>
@@ -281,6 +323,12 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
                     <SubFamily label="Manmohan&rsquo;s line">
                       <ClusterGroup title="Honey&rsquo;s">
                         <Card data={node(get("vashundhara-goel"))} />
+                      </ClusterGroup>
+                    </SubFamily>
+                    <SubFamily label="Deceased sister&rsquo;s line">
+                      <ClusterGroup title="Harsh&rsquo;s">
+                        <Card data={node(get("harsh-son-1"))} />
+                        <Card data={node(get("harsh-son-2"))} />
                       </ClusterGroup>
                     </SubFamily>
                   </div>
