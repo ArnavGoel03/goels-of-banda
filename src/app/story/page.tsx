@@ -121,10 +121,8 @@ export default function StoryPage() {
         <p>
           The family&apos;s branches outside the ancestral trade are equally specific: a
           stockbroking firm (AG Shares &amp; Securities) registered in Agra with a Dubai
-          branch; a wire-manufacturing business (MP Wire India, est. 1989) in Kanpur run
-          by a daughter-in-law&apos;s husband; and a marriage into the founding family of
-          Clay Craft India, one of the country&apos;s largest ceramic-tableware
-          manufacturers.
+          branch, and a wire-manufacturing business (MP Wire India, est. 1989) in Kanpur
+          run by a daughter-in-law&apos;s husband.
         </p>
 
         <p className="mt-10">

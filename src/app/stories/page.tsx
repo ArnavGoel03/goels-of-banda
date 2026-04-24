@@ -8,7 +8,7 @@ import { site } from "@/data/config";
 export const metadata: Metadata = {
   title: "Stories",
   description:
-    "Long-form stories about the Goel family of Banda: the 1820s founding, the 2000 split, the Jhansi-Banda intermarriage pattern, and the rise of the Clay Craft Group.",
+    "Long-form stories about the Goel family of Banda: the 1820s founding, the 2000 split, and the Jhansi-Banda intermarriage pattern.",
   alternates: { canonical: "/stories" },
 };
 
@@ -30,9 +30,8 @@ export default function StoriesPage() {
         </h1>
         <p className="mt-3 max-w-2xl text-ink-600">
           Long-form pieces about the inflection points of the Goel family, why
-          the shop is named what it is, why the split of 2000 mattered, how
-          marriage ties stitched Banda to Jhansi, and how one 1994 ceramics
-          plant grew into a group of brands.
+          the shop is named what it is, why the split of 2000 mattered, and how
+          marriage ties stitched Banda to Jhansi.
         </p>
       </section>
 

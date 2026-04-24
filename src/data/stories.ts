@@ -30,28 +30,6 @@ export const stories: Story[] = [
     businessSlugs: ["gondilal-saraf", "ganesh-prasad-gondilal-saraf"],
     placeSlugs: ["banda"],
   },
-  {
-    slug: "clay-craft-group",
-    title: "From one ceramics plant to the Clay Craft Group",
-    kind: "profile",
-    summary:
-      "The Agarwal family Vijaya Goel married into built Clay Craft India, established in Jaipur in 1994, into a group that now includes Crown Craft (est. 2009), JCPL / Jaipur Ceramics (acquired 2014), Vacbott (launched 2022), and the Griha retail flagship.",
-    era: "1994 to present",
-    body: [
-      "Clay Craft India is the flagship. Established in Jaipur in 1994 by the Agarwal family, it is an Indian manufacturer of fine bone china and ceramic tableware; reported FY25 revenue is approximately $148M.",
-      "In 2009 the same family launched Crown Craft India as a sister concern in Jaipur, an ISO 9001-certified premium plastic homewares brand. In April 2014, Clay Craft India acquired Jaipur Ceramics Pvt. Ltd. (JCPL), a fine porcelain manufacturer; JCPL now operates under two sub-brands inside the group, JCPL Fine Porcelain for the HoReCa channel and JCPL Modern Living for retail. In September 2022 the group launched Vacbott, a Made-in-India line of double-wall vacuum-insulated stainless steel bottles and flasks. The Griha concept home store on Amrapali Marg in Vaishali Nagar, Jaipur, anchors the group's direct-to-consumer retail.",
-      "Deepak Agarwal, Executive Director and Chief Financial Officer of Clay Craft India Limited, joined as a Director in September 2010 after completing his MBA in Finance at Cardiff University. He runs the company alongside his two brothers. His wife Vijaya Agarwal, daughter of Manmohan Goel of Banda, handles creative direction and designs new collections across the group's brands.",
-    ],
-    personSlugs: ["deepak-agarwal", "vijaya-agarwal", "manmohan-goel"],
-    businessSlugs: [
-      "clay-craft-india",
-      "crown-craft-india",
-      "jcpl-jaipur-ceramics",
-      "vacbott",
-      "griha-jaipur",
-    ],
-    placeSlugs: ["jaipur"],
-  },
 ];
 
 export const storiesBySlug: Record<string, Story> = Object.fromEntries(

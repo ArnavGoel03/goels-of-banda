@@ -77,10 +77,17 @@ export function buildTimeline(): TimelineEvent[] {
     }
   }
 
+  const skipFromTimeline = new Set([
+    "ganesh-prasad-gondilal-saraf",
+    "clay-craft-india",
+    "crown-craft-india",
+    "jcpl-jaipur-ceramics",
+    "vacbott",
+    "griha-jaipur",
+  ]);
   for (const b of businesses) {
     if (!b.established) continue;
-    // Skip the ancestral one if we've already anchored it manually
-    if (b.slug === "ganesh-prasad-gondilal-saraf") continue;
+    if (skipFromTimeline.has(b.slug)) continue;
     events.push({
       year: b.established,
       kind: "business",

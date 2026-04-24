@@ -84,7 +84,7 @@ export const people: Person[] = [
     name: "Rani Agarwal",
     altNames: ["Dadiji"],
     sex: "F",
-    birth: { year: 1944 },
+    birth: { year: 1944, place: "Ranipur, Uttar Pradesh, India" },
     isLiving: true,
     generation: 2,
     familyRole: "Paternal grandmother",
@@ -96,7 +96,7 @@ export const people: Person[] = [
     birthFamilySurname: "Agarwal",
     publicity: "full",
     bio:
-      "Rani Agarwal, known as Dadiji, married into the Goel family of Banda. Mother of four: Vinod, Shobhit, Seema, and Rohit Goel.",
+      "Rani Agarwal, known as Dadiji, grew up in Ranipur, Uttar Pradesh before marrying into the Goel family of Banda. Mother of four: Vinod, Seema, Shobhit, and Rohit Goel.",
   },
   {
     slug: "manmohan-goel",
@@ -309,17 +309,18 @@ export const people: Person[] = [
     generation: 3,
     familyRole: "Paternal aunt (father's sister)",
     relationshipToViewer: "Paternal aunt (father's sister)",
+    currentLocation: "Agra, Uttar Pradesh, India",
     parents: { father: "radha-krishna-goel", mother: "rani-agarwal-dadiji" },
     spouse: { slug: "seema-husband" },
     children: ["anu-agarwal", "aditya-agarwal"],
     birthFamilySurname: "Goel",
     publicity: "full",
     bio:
-      "Sister of Rohit Goel and his brothers. Married into an Agarwal family. Mother of Anu Agarwal (Chandigarh) and Aditya Agarwal (Dubai).",
+      "Sister of Rohit Goel and his brothers. Lives in Agra with her husband Ajay Agarwal, whose family runs AG Shares & Securities from there. Mother of Anu Agarwal (Chandigarh) and Aditya Agarwal (Dubai).",
   },
   {
     slug: "seema-husband",
-    name: "Seema's husband",
+    name: "Ajay Agarwal",
     sex: "M",
     isLiving: true,
     generation: 3,
@@ -331,8 +332,7 @@ export const people: Person[] = [
     children: ["anu-agarwal", "aditya-agarwal"],
     publicity: "summary",
     bio:
-      "Husband of Seema Agarwal; father of Anu and Aditya. Owns AG Shares & Securities, the family stock-broking firm registered in Agra, whose Dubai branch is run by their son Aditya.",
-    notes: "Legal name not yet recorded in this tree.",
+      "Ajay Agarwal lives in Agra with his wife Seema; father of Anu and Aditya. Owns AG Shares & Securities, the family stock-broking firm registered in Agra, whose Dubai branch is run by their son Aditya.",
   },
   {
     slug: "rohit-goel",
