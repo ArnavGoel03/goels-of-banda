@@ -116,6 +116,7 @@ export function FamilyTreeView({ peopleList }: { peopleList: Person[] }) {
         >
           <div ref={treeRef} className="relative p-12 flex flex-col items-center gap-0 min-w-[5200px]">
             <ConnectorsLayer containerRef={treeRef} />
+            <PaternalMaternalDivider />
             <GenLabel>Generation 1 · namesakes · ~1820s · Banda</GenLabel>
             <SideBySide>
               <SideColumn side="paternal">
@@ -399,14 +400,36 @@ function SideColumn({
   children: React.ReactNode;
 }) {
   const sideLabel = side === "paternal" ? "Paternal · Goels of Banda" : "Maternal · Agarwals of Jhansi";
-  const borderClass = side === "paternal" ? "border-r border-dashed border-ink-200" : "";
   return (
-    <div className={`flex-1 flex flex-col items-center gap-3 px-10 ${borderClass}`}>
+    <div className="flex-1 flex flex-col items-center gap-3 px-10">
       <span className="text-[10px] uppercase tracking-[0.22em] text-ink-400 font-medium">
         {sideLabel}
       </span>
       {children}
     </div>
+  );
+}
+
+function PaternalMaternalDivider() {
+  return (
+    <>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] z-[2]"
+        style={{
+          background:
+            "repeating-linear-gradient(to bottom, var(--color-ink-300) 0, var(--color-ink-300) 6px, transparent 6px, transparent 12px)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 z-[3]"
+      >
+        <span className="inline-block bg-parchment px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-ink-600 font-semibold border border-ink-200 rounded-full whitespace-nowrap shadow-sm">
+          Paternal · Maternal
+        </span>
+      </div>
+    </>
   );
 }
 
