@@ -466,6 +466,7 @@ export const people: Person[] = [
     bio:
       "Deepak Agarwal is a named co-founder and current director of Clay Craft India Private Limited, a major Indian ceramic tableware manufacturer headquartered in Jaipur, Rajasthan (established 1994, FY25 revenue ~$148M). Deepak has two brothers who run Clay Craft alongside him, the three of them jointly operate the company as the founding Agarwal family. Husband of Vijaya Agarwal, who handles creative direction and designs new collections for the brand. Deepak's family is the Agarwal family that owns Clay Craft.",
     sources: [
+      { label: "LinkedIn profile", url: "https://www.linkedin.com/in/deepak-agarwal-b1560826/" },
       { label: "Clay Craft India, Corporate Leadership", url: "https://corporate.claycraftindia.com/leadership-management/" },
       { label: "Clay Craft India on ZaubaCorp", url: "https://www.zaubacorp.com/company/CLAY-CRAFT-INDIA-PVT-LTD/U26933RJ1988PTC004677" },
       { label: "Clay Craft India on LinkedIn", url: "https://in.linkedin.com/company/clay-craft-india-private-limited" },
