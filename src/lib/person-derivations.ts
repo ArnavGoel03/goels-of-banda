@@ -35,7 +35,7 @@ export type LifeEvent = {
   year: number;
   yearApprox?: boolean;
   title: string;
-  kind: "birth" | "death" | "child" | "business";
+  kind: "birth" | "death" | "child" | "business" | "marriage";
   personSlug?: string;
   businessSlug?: string;
   place?: string;
@@ -50,6 +50,15 @@ export function getLifeEvents(person: Person): LifeEvent[] {
       title: "Born",
       kind: "birth",
       place: person.birth.place,
+    });
+  }
+  if (person.spouse?.marriage?.year) {
+    const sp = getPerson(person.spouse.slug);
+    events.push({
+      year: person.spouse.marriage.year,
+      title: sp ? `Married ${sp.name}` : "Married",
+      kind: "marriage",
+      personSlug: sp?.slug,
     });
   }
   (person.children ?? []).forEach((slug) => {

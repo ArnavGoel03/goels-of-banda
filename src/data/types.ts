@@ -25,7 +25,7 @@ export type Person = {
   occupation?: string;
   businessSlugs?: string[];
   parents?: { father?: string; mother?: string };
-  spouse?: { slug: string };
+  spouse?: { slug: string; marriage?: { date?: string; year?: number } };
   children?: string[];
   bio: string;
   publicity?: "full" | "summary" | "minimal";

@@ -74,5 +74,7 @@ function dotColor(kind: LifeEvent["kind"]): string {
       return "bg-gold";
     case "child":
       return "bg-accent-400";
+    case "marriage":
+      return "bg-accent-700";
   }
 }

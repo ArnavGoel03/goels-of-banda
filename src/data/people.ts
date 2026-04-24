@@ -267,11 +267,11 @@ export const people: Person[] = [
     occupation: "Jeweller",
     businessSlugs: ["gondilal-saraf"],
     parents: { father: "radha-krishna-goel", mother: "rani-agarwal-dadiji" },
-    spouse: { slug: "richa-goel" },
+    spouse: { slug: "richa-goel", marriage: { date: "12 February 1998", year: 1998 } },
     children: ["arnav-goel", "aditi-goel"],
     publicity: "full",
     bio:
-      "Rohit Goel, born 1972 in Banda, co-runs the family jewellery firm 'Gondilal Saraf' in the heart of Banda together with his elder brother Vinod. Father of Arnav and Aditi Goel.",
+      "Rohit Goel, born 1972 in Banda, co-runs the family jewellery firm 'Gondilal Saraf' in the heart of Banda together with his elder brother Vinod. He married Richa Goel (née Neelam Agarwal of Jhansi) on 12 February 1998. Father of Aditi and Arnav Goel.",
   },
   {
     slug: "richa-goel",
@@ -286,12 +286,12 @@ export const people: Person[] = [
     currentLocation: "Banda, Uttar Pradesh, India",
     occupation: "Homemaker",
     parents: { father: "ramesh-chandra-agarwal", mother: "prem-kumari" },
-    spouse: { slug: "rohit-goel" },
+    spouse: { slug: "rohit-goel", marriage: { date: "12 February 1998", year: 1998 } },
     children: ["arnav-goel", "aditi-goel"],
     birthFamilySurname: "Agarwal",
     publicity: "full",
     bio:
-      "Richa Goel, born Neelam Agarwal in 1973 in Jhansi, married Rohit Goel and took the post-marriage name Richa Goel, per tradition in some North Indian Agarwal families. Mother of Arnav and Aditi Goel. One of two Neelam Agarwals (the other being Vinod Goel's wife) who married Goel brothers from Banda; the pattern is part of a long-running intermarriage tie between the Banda Goels and the Jhansi Agarwals.",
+      "Richa Goel, born Neelam Agarwal in 1973 in Jhansi, married Rohit Goel on 12 February 1998 and took the post-marriage name Richa Goel, per tradition in some North Indian Agarwal families. Mother of Aditi and Arnav Goel. One of two Neelam Agarwals (the other being Vinod Goel's wife) who married Goel brothers from Banda; the pattern is part of a long-running intermarriage tie between the Banda Goels and the Jhansi Agarwals.",
   },
 
   // ============ GENERATION 3, Mom's siblings (maternal side) ============
@@ -513,6 +513,7 @@ export const people: Person[] = [
     slug: "palak-goel",
     name: "Palak Goel",
     sex: "F",
+    birth: { year: 1991, yearApprox: true, place: "Banda, Uttar Pradesh, India" },
     isLiving: true,
     generation: 4,
     familyRole: "Paternal first cousin",
@@ -522,7 +523,8 @@ export const people: Person[] = [
     spouse: { slug: "manmohan-agrawal-kanpur" },
     publicity: "full",
     bio:
-      "Palak Goel is the daughter of Vinod and Neelam Agarwal Goel. She did her entire K-12 education at KCNIT Banda, growing up in the family home in Banda. She is married to Manmohan Agrawal, who runs MP Wire India (M. P. Wire Industries), a wire and fencing products manufacturer in Kanpur.",
+      "Palak Goel is the elder daughter of Vinod and Neelam Agarwal Goel, about three years older than her brother Palash. She did her entire K-12 education at KCNIT Banda, growing up in the family home in Banda. She is married to Manmohan Agrawal, who runs MP Wire India (M. P. Wire Industries), a wire and fencing products manufacturer in Kanpur.",
+    notes: "Birth year approximate (three years older than Palash Goel, whose year is itself approximate).",
   },
   {
     slug: "manmohan-agrawal-kanpur",
@@ -763,7 +765,7 @@ export const people: Person[] = [
     slug: "aditi-goel",
     name: "Aditi Goel",
     sex: "F",
-    birth: { place: "Kanpur, Uttar Pradesh, India" },
+    birth: { date: "3 November 1998", year: 1998, place: "Kanpur, Uttar Pradesh, India" },
     isLiving: true,
     generation: 4,
     familyRole: "Sister",
