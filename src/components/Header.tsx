@@ -15,15 +15,20 @@ export function Header() {
           </span>
         </Link>
         <div className="flex items-center gap-2">
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-1 text-sm">
+          <nav
+            aria-label="Primary"
+            className="hidden lg:flex items-center gap-0.5 text-[13px]"
+          >
             <NavLink href="/story">Story</NavLink>
             <NavLink href="/family-tree">Tree</NavLink>
             <NavLink href="/timeline">Timeline</NavLink>
-            <NavLink href="/stories">Stories</NavLink>
             <NavLink href="/people">People</NavLink>
+            <NavLink href="/stories">Stories</NavLink>
+            <NavLink href="/memories">Memories</NavLink>
+            <NavLink href="/recipes">Recipes</NavLink>
+            <NavLink href="/traditions">Traditions</NavLink>
             <NavLink href="/businesses">Businesses</NavLink>
             <NavLink href="/places">Places</NavLink>
-            <NavLink href="/traditions">Traditions</NavLink>
             <NavLink href="/archive">Archive</NavLink>
             <NavLink href="/faq">FAQ</NavLink>
           </nav>
@@ -55,7 +60,7 @@ function NavLink({
       className={
         highlight
           ? "rounded-md bg-accent-700 px-3 py-1.5 text-parchment hover:bg-accent-800 transition-colors"
-          : "rounded-md px-3 py-1.5 text-ink-700 hover:bg-ink-100 hover:text-ink-900 transition-colors"
+          : "rounded-md px-2 py-1.5 text-ink-700 hover:bg-ink-100 hover:text-ink-900 transition-colors"
       }
     >
       {children}

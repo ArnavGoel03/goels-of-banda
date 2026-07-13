@@ -86,19 +86,6 @@ export type ArchiveDocument = {
   description: string;
 };
 
-export type Tradition = {
-  slug: string;
-  title: string;
-  kind: "recipe" | "festival" | "ritual" | "saying" | "other";
-  personSlugs?: string[];
-  placeSlugs?: string[];
-  summary: string;
-  body: string[];
-  ingredients?: string[];
-  steps?: string[];
-  occasion?: string;
-};
-
 export type Business = {
   slug: string;
   name: string;

@@ -20,6 +20,9 @@ export function Footer() {
               <li><Link href="/people" className="hover:text-accent-700">All people</Link></li>
               <li><Link href="/businesses" className="hover:text-accent-700">Family businesses</Link></li>
               <li><Link href="/places" className="hover:text-accent-700">Places</Link></li>
+              <li><Link href="/recipes" className="hover:text-accent-700">Recipes</Link></li>
+              <li><Link href="/memories" className="hover:text-accent-700">Memories</Link></li>
+              <li><Link href="/traditions" className="hover:text-accent-700">Traditions</Link></li>
               <li><Link href="/faq" className="hover:text-accent-700">FAQ</Link></li>
             </ul>
           </div>
@@ -46,7 +49,7 @@ export function Footer() {
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-ink-100 pt-6 md:flex-row md:items-center md:justify-between">
           <p>
-            © {site.copyrightStart}–{new Date().getFullYear()} The Goel Family of Banda. All rights respected.
+            © {site.copyrightStart}-{new Date().getFullYear()} The Goel Family of Banda. All rights respected.
           </p>
           <p className="text-ink-500">
             Version history is preserved in the{" "}

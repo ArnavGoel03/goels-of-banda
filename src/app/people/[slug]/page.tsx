@@ -19,6 +19,7 @@ import { LiveRelationship } from "@/components/person/LiveRelationship";
 import { PhotoGallery } from "@/components/person/PhotoGallery";
 import { MemorialBanner } from "@/components/person/MemorialBanner";
 import { OralHistoryPanel } from "@/components/person/OralHistoryPanel";
+import { ContributedPanel } from "@/components/person/ContributedPanel";
 import { linkify } from "@/lib/linkify";
 
 export function generateStaticParams() {
@@ -105,6 +106,7 @@ export default async function PersonPage({ params }: { params: Params }) {
         <BusinessesPanel person={person} />
         <PlacesForPerson person={person} />
         <RelatedStories personSlug={person.slug} />
+        <ContributedPanel personSlug={person.slug} personName={person.name} />
         <SourcesPanel person={person} />
 
         {person.notes ? (

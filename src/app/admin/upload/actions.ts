@@ -1,12 +1,22 @@
 "use server";
 
-import { put } from "@vercel/blob";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { requireAdmin } from "@/lib/auth";
+import { hasStorage } from "@/lib/config";
 
 export type UploadResult =
   | { ok: true; url: string; pathname: string; kind: string; slug?: string; caption?: string; year?: string }
   | { ok: false; error: string };
 
 const ALLOWED_KINDS = new Set(["photos", "audio", "documents", "misc"]);
+
+// Media for the hand-authored content in src/data (person photos, oral history
+// clips, scanned letters) lives under this prefix and is public the moment it is
+// uploaded: an admin put it there on purpose. Contributed media (photo/, audio/)
+// is the opposite, and stays unreachable until it is published.
+const SITE_PREFIX = "site";
+
+const MAX_BYTES = 64 * 1024 * 1024;
 
 function slugify(s: string): string {
   return s
@@ -16,24 +26,26 @@ function slugify(s: string): string {
     .slice(0, 80);
 }
 
+/**
+ * Uploads to R2, never Vercel Blob. The bytes come through the server action
+ * (these are one-off admin uploads, not a hot path), and the returned URL is
+ * the site's own /api/media path, so files are served from our origin and cached
+ * by the CDN with no egress bill.
+ */
 export async function uploadBlob(formData: FormData): Promise<UploadResult> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return { ok: false, error: "BLOB_READ_WRITE_TOKEN is not set on this deployment." };
-  }
-  const expected = process.env.ADMIN_UPLOAD_TOKEN;
-  if (!expected) {
-    return {
-      ok: false,
-      error:
-        "ADMIN_UPLOAD_TOKEN is not set. Add it in Vercel → Project → Environment Variables before uploading.",
-    };
+  try {
+    await requireAdmin();
+  } catch {
+    return { ok: false, error: "Sign in as an admin to upload." };
   }
 
-  const token = (formData.get("token") as string | null) ?? "";
-  if (token !== expected) return { ok: false, error: "Wrong admin token." };
+  if (!hasStorage) {
+    return { ok: false, error: "R2 is not configured on this deployment. Set the R2_* env vars." };
+  }
 
   const file = formData.get("file") as File | null;
   if (!file || file.size === 0) return { ok: false, error: "No file attached." };
+  if (file.size > MAX_BYTES) return { ok: false, error: "That file is too large." };
 
   const rawKind = ((formData.get("kind") as string) ?? "misc").toLowerCase();
   const kind = ALLOWED_KINDS.has(rawKind) ? rawKind : "misc";
@@ -42,20 +54,34 @@ export async function uploadBlob(formData: FormData): Promise<UploadResult> {
   const year = ((formData.get("year") as string) ?? "").trim();
 
   const safeName = file.name.replace(/[^\w.\-]+/g, "-");
-  const pathname = [kind, personSlug, `${Date.now()}-${safeName}`]
+  const key = [SITE_PREFIX, kind, personSlug, `${Date.now()}-${safeName}`]
     .filter(Boolean)
     .join("/");
 
-  const blob = await put(pathname, file, {
-    access: "public",
-    addRandomSuffix: false,
-    contentType: file.type || undefined,
+  const client = new S3Client({
+    region: "auto",
+    endpoint:
+      process.env.R2_ENDPOINT ||
+      `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId: process.env.R2_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
+    },
   });
+
+  await client.send(
+    new PutObjectCommand({
+      Bucket: process.env.R2_BUCKET!,
+      Key: key,
+      Body: Buffer.from(await file.arrayBuffer()),
+      ContentType: file.type || "application/octet-stream",
+    }),
+  );
 
   return {
     ok: true,
-    url: blob.url,
-    pathname: blob.pathname,
+    url: `/api/media/${key}`,
+    pathname: key,
     kind,
     slug: personSlug || undefined,
     caption: caption || undefined,

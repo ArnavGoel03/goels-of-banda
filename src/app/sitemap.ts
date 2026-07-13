@@ -4,11 +4,17 @@ import { people } from "@/data/people";
 import { businesses } from "@/data/businesses";
 import { stories } from "@/data/stories";
 import { documents } from "@/data/documents";
-import { traditions } from "@/data/traditions";
+import { listMemories, listRecipes, listTraditions } from "@/lib/contributions";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = site.baseUrl;
   const now = new Date();
+
+  const [recipes, traditions, memories] = await Promise.all([
+    listRecipes(),
+    listTraditions(),
+    listMemories(),
+  ]);
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${base}`, lastModified: now, changeFrequency: "weekly", priority: 1 },
@@ -21,7 +27,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/places`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/stories`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
     { url: `${base}/archive`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/traditions`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/recipes`, lastModified: now, changeFrequency: "weekly", priority: 0.75 },
+    { url: `${base}/traditions`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/memories`, lastModified: now, changeFrequency: "weekly", priority: 0.75 },
     { url: `${base}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/contribute`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
@@ -56,10 +64,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const traditionPages: MetadataRoute.Sitemap = traditions.map((t) => ({
-    url: `${base}/traditions/${t.slug}`,
+  // Contributed entries reach the sitemap only once they are published.
+  const contributed: MetadataRoute.Sitemap = [
+    ...recipes.map((r) => `${base}/recipes/${r.slug}`),
+    ...traditions.map((t) => `${base}/traditions/${t.slug}`),
+    ...memories.map((m) => `${base}/memories/${m.slug}`),
+  ].map((url) => ({
+    url,
     lastModified: now,
-    changeFrequency: "yearly",
+    changeFrequency: "yearly" as const,
     priority: 0.6,
   }));
 
@@ -69,6 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...businessPages,
     ...storyPages,
     ...documentPages,
-    ...traditionPages,
+    ...contributed,
   ];
 }

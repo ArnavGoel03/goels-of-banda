@@ -4,7 +4,7 @@ import { businesses } from "@/data/businesses";
 import { places } from "@/data/places";
 
 export type SearchItem = {
-  kind: "person" | "business" | "place";
+  kind: "person" | "business" | "place" | "recipe" | "tradition" | "memory";
   slug: string;
   name: string;
   subtitle?: string;

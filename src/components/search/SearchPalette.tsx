@@ -12,12 +12,18 @@ const ICON: Record<SearchItem["kind"], string> = {
   person: "◆",
   business: "◇",
   place: "◉",
+  recipe: "◈",
+  tradition: "❖",
+  memory: "○",
 };
 
 const KIND_LABEL: Record<SearchItem["kind"], string> = {
   person: "Person",
   business: "Business",
   place: "Place",
+  recipe: "Recipe",
+  tradition: "Tradition",
+  memory: "Memory",
 };
 
 export function SearchPalette({
@@ -33,7 +39,15 @@ export function SearchPalette({
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  const index = useMemo(() => buildSearchIndex(), []);
+  // People, businesses and places are compiled into the bundle. Recipes,
+  // traditions and memories are rows, so they are fetched once, on first open,
+  // and never on a page load: no public page pays for search it may not use.
+  const [contributed, setContributed] = useState<SearchItem[] | null>(null);
+  const staticIndex = useMemo(() => buildSearchIndex(), []);
+  const index = useMemo(
+    () => (contributed ? [...staticIndex, ...contributed] : staticIndex),
+    [staticIndex, contributed],
+  );
   const results = useMemo(
     () => searchItems(index, query, 30),
     [index, query],
@@ -46,6 +60,21 @@ export function SearchPalette({
       setTimeout(() => inputRef.current?.focus(), 10);
     }
   }, [open]);
+
+  useEffect(() => {
+    if (!open || contributed) return;
+    let cancelled = false;
+    fetch("/api/search/contributions")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((items: SearchItem[]) => {
+        if (!cancelled) setContributed(items);
+      })
+      // Search still works on everything in the bundle if this fails.
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [open, contributed]);
 
   useEffect(() => {
     setActive(0);

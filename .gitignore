@@ -48,3 +48,10 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.env*.local
+
+# Live service secrets, pushed to Vercel by scripts/set-vercel-env.sh
+.env.services
+
+# Wrangler local state
+.wrangler/

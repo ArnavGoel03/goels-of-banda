@@ -52,7 +52,6 @@ export function BlobUploader() {
   const [personSlug, setPersonSlug] = useState("");
   const [caption, setCaption] = useState("");
   const [year, setYear] = useState("");
-  const [token, setToken] = useState("");
   const [result, setResult] = useState<UploadResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -66,7 +65,6 @@ export function BlobUploader() {
     const fd = new FormData();
     fd.set("file", file);
     fd.set("kind", kind);
-    fd.set("token", token);
     if (personSlug) fd.set("personSlug", personSlug);
     if (caption) fd.set("caption", caption);
     if (year) fd.set("year", year);
@@ -182,17 +180,9 @@ export function BlobUploader() {
         <Field label="Year" value={year} onChange={setYear} placeholder="e.g. 1998" />
       ) : null}
 
-      <Field
-        label="Admin upload token"
-        value={token}
-        onChange={setToken}
-        type="password"
-        placeholder="Set ADMIN_UPLOAD_TOKEN in Vercel env vars"
-      />
-
       <button
         type="submit"
-        disabled={!file || !token || submitting}
+        disabled={!file || submitting}
         className="rounded-md bg-accent-700 px-4 py-2 text-sm font-medium text-parchment hover:bg-accent-800 disabled:bg-ink-200 disabled:text-ink-500"
       >
         {submitting ? "Uploading…" : "Upload"}

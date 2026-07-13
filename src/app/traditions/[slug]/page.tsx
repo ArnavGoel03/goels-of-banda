@@ -1,32 +1,46 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { traditions, getTradition } from "@/data/traditions";
 import { JsonLd } from "@/components/JsonLd";
+import { VoiceNote } from "@/components/VoiceNote";
 import { breadcrumbJsonLd } from "@/lib/schema";
+import { getTradition, listTraditions, mediaUrl } from "@/lib/contributions";
+import { peopleBySlug } from "@/data/people";
 import { site } from "@/data/config";
-
-export function generateStaticParams() {
-  return traditions.map((t) => ({ slug: t.slug }));
-}
 
 type Params = Promise<{ slug: string }>;
 
+export async function generateStaticParams() {
+  const traditions = await listTraditions();
+  return traditions.map((t) => ({ slug: t.slug! }));
+}
+
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const t = getTradition(slug);
-  if (!t) return { title: "Not found" };
+  const tradition = await getTradition(slug);
+  if (!tradition) return { title: "Not found" };
   return {
-    title: t.title,
-    description: t.summary.slice(0, 170),
+    title: tradition.title,
+    description: (tradition.summary ?? tradition.body).slice(0, 170),
     alternates: { canonical: `/traditions/${slug}` },
   };
 }
 
+const KIND_LABEL: Record<string, string> = {
+  festival: "Festival custom",
+  ritual: "Ritual",
+  saying: "Saying",
+  custom: "Custom",
+};
+
 export default async function TraditionPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const t = getTradition(slug);
-  if (!t) return notFound();
+  const tradition = await getTradition(slug);
+  if (!tradition) return notFound();
+
+  const photo = mediaUrl(tradition.photoKey);
+  const audio = mediaUrl(tradition.audioKey);
+  const teller = tradition.toldBySlug ? peopleBySlug[tradition.toldBySlug] : undefined;
 
   return (
     <>
@@ -34,50 +48,64 @@ export default async function TraditionPage({ params }: { params: Params }) {
         data={breadcrumbJsonLd([
           { name: "Home", url: site.baseUrl },
           { name: "Traditions", url: `${site.baseUrl}/traditions` },
-          { name: t.title, url: `${site.baseUrl}/traditions/${slug}` },
+          { name: tradition.title, url: `${site.baseUrl}/traditions/${slug}` },
         ])}
       />
+
       <article className="mx-auto max-w-3xl px-6 pt-10 pb-16 prose-family">
         <Link
           href="/traditions"
           className="text-xs uppercase tracking-[0.18em] text-accent-700 hover:text-accent-800 font-medium no-underline"
         >
-          ← Traditions
+          Traditions
         </Link>
+
         <p className="mt-6 text-[10px] uppercase tracking-[0.18em] text-ink-500">
-          {t.kind}
-          {t.occasion ? ` · ${t.occasion}` : ""}
+          {[KIND_LABEL[tradition.kind] ?? tradition.kind, tradition.occasion]
+            .filter(Boolean)
+            .join(" · ")}
         </p>
-        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink-900">
-          {t.title}
-        </h1>
-        <p className="lead mt-3">{t.summary}</p>
 
-        {t.ingredients && t.ingredients.length > 0 ? (
-          <section>
-            <h2>Ingredients</h2>
-            <ul>
-              {t.ingredients.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
-          </section>
+        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink-900">{tradition.title}</h1>
+
+        {tradition.toldBy ? (
+          <p className="mt-2 text-sm text-ink-600 not-prose">
+            Kept by{" "}
+            {teller ? (
+              <Link href={`/people/${teller.slug}`} className="text-accent-700 underline">
+                {tradition.toldBy}
+              </Link>
+            ) : (
+              tradition.toldBy
+            )}
+          </p>
         ) : null}
 
-        {t.steps && t.steps.length > 0 ? (
-          <section>
-            <h2>Steps</h2>
-            <ol>
-              {t.steps.map((s, i) => (
-                <li key={i}>{s}</li>
-              ))}
-            </ol>
-          </section>
+        {tradition.summary ? <p className="lead mt-3">{tradition.summary}</p> : null}
+
+        {audio ? (
+          <VoiceNote
+            src={audio}
+            toldBy={tradition.toldBy}
+            transcript={tradition.audioTranscript}
+          />
         ) : null}
 
-        {t.body.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
+        {photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={photo}
+            alt={tradition.title}
+            className="my-8 w-full rounded-md border border-ink-100"
+          />
+        ) : null}
+
+        {tradition.body
+          .split("\n")
+          .filter(Boolean)
+          .map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
       </article>
     </>
   );

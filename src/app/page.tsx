@@ -108,9 +108,19 @@ export default function Home() {
             copy={`${places.length} cities on three continents, now on an interactive map.`}
           />
           <ExploreCard
+            href="/recipes"
+            title="Recipes"
+            copy="The dishes the family actually cooks, written down by the people who cook them."
+          />
+          <ExploreCard
+            href="/memories"
+            title="Memories"
+            copy="Anecdotes told by the family, many of them in the teller's own voice."
+          />
+          <ExploreCard
             href="/traditions"
             title="Traditions"
-            copy="Recipes, rituals, and sayings passed down in the family."
+            copy="Customs, rituals, and sayings passed down in the family."
           />
           <ExploreCard
             href="/archive"
