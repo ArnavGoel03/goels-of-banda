@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { hasStorage } from "@/lib/config";
 import { isPublishedMediaKey } from "@/lib/contributions";
+import { inlineContentType } from "@/lib/mediaTypes";
 import { getObject } from "@/lib/r2";
 
 export const runtime = "nodejs";
@@ -42,12 +43,17 @@ export async function GET(
     const object = await getObject(key);
     if (!object.body) return new NextResponse("Not found", { status: 404 });
 
+    // Never echo back the type the object was stored with: it is attacker
+    // controlled (see src/lib/mediaTypes.ts). Anything off the allowlist leaves
+    // as an opaque download, so a text/html "photo" can never run here.
+    const safeType = inlineContentType(key, object.contentType);
+
     return new NextResponse(object.body as unknown as BodyInit, {
       headers: {
-        "content-type": object.contentType,
+        "content-type": safeType ?? "application/octet-stream",
         ...(object.contentLength ? { "content-length": String(object.contentLength) } : {}),
         "cache-control": "public, max-age=31536000, immutable",
-        "content-disposition": "inline",
+        "content-disposition": safeType ? "inline" : "attachment",
         "x-content-type-options": "nosniff",
         // The site's global policy is same-origin; media is public by design.
         "cross-origin-resource-policy": "cross-origin",

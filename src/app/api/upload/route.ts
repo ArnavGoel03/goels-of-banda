@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getContributor } from "@/lib/auth";
 import { canContribute } from "@/lib/config";
+import { AUDIO_TYPES, IMAGE_TYPES } from "@/lib/mediaTypes";
 import { presignUpload } from "@/lib/r2";
 import { rateLimit } from "@/lib/ratelimit";
 
@@ -9,19 +10,6 @@ export const runtime = "nodejs";
 // A photo of a handwritten recipe card, or three minutes of someone talking.
 const MAX_IMAGE_BYTES = 24 * 1024 * 1024;
 const MAX_AUDIO_BYTES = 32 * 1024 * 1024;
-
-const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"]);
-const AUDIO_TYPES = new Set([
-  "audio/webm",
-  "audio/mp4",
-  "audio/mpeg",
-  "audio/mp3",
-  "audio/aac",
-  "audio/ogg",
-  "audio/wav",
-  "audio/x-m4a",
-  "audio/m4a",
-]);
 
 const EXT: Record<string, string> = {
   "image/jpeg": "jpg",

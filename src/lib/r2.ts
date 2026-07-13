@@ -45,8 +45,14 @@ const bucket = () => process.env.R2_BUCKET!;
 
 /**
  * Signed URL the browser PUTs bytes to directly, keeping uploads off our
- * functions. ContentType and the exact ContentLength are signed, so a client
- * cannot PUT something bigger or of a different type than the server approved.
+ * functions. The exact ContentLength IS signed, so a client cannot PUT more
+ * bytes than the server approved.
+ *
+ * ContentType is NOT: the S3 presigner drops it from the signature (its
+ * unsignable-headers list), so passing it here documents intent but enforces
+ * nothing, and the stored type of any contributed object has to be treated as
+ * attacker chosen. The media route is where that is actually contained, by
+ * forcing every response back onto an allowlist (src/lib/mediaTypes.ts).
  */
 export async function presignUpload(
   key: string,

@@ -5,7 +5,12 @@ import createMDX from "@next/mdx";
 // Content-Security-Policy: hardened for a static content site
 //  - allow same-origin by default
 //  - allow Google Fonts (used by next/font)
-//  - disallow inline scripts except the JSON-LD ones (we allow 'self' + our own hashes via next automatic nonce in SSR)
+//  - script-src keeps 'unsafe-inline' on purpose. Next's hydration payload is an
+//    inline script, and the pages that carry it are PRERENDERED, so there is no
+//    per-request nonce to give them: adding one would force every public page to
+//    render dynamically and give up the CDN cache. The backstop is that nothing
+//    user-supplied can reach a script context: contributed text renders as JSX
+//    text nodes (React escapes it) and JSON-LD escapes "<" (src/components/JsonLd.tsx).
 //  - allow third-party images we reference in bios (gondilal.com favicons etc.) on-demand via img-src https:
 //  - allow Clerk on the two signed-in surfaces (/contribute/new, /admin) and R2
 //    for the presigned uploads a contributor's photo or voice note goes to
