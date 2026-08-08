@@ -11,3 +11,16 @@ export const site = {
   locale: "en_IN",
   copyrightStart: 2026,
 } as const;
+
+/**
+ * Sites outside this one that a reader here is genuinely better off in.
+ * Declared once, so a host that changes changes in one place and no page
+ * ever types a sibling's URL by hand.
+ */
+export const elsewhere = {
+  larder: {
+    name: "Larder",
+    href: "https://yashgoel-larder.vercel.app",
+    domain: "yashgoel-larder.vercel.app",
+  },
+} as const;

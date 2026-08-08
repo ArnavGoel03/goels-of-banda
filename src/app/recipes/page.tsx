@@ -4,7 +4,7 @@ import { EntryCard } from "@/components/EntryCard";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { listRecipes, mediaUrl } from "@/lib/contributions";
-import { site } from "@/data/config";
+import { elsewhere, site } from "@/data/config";
 
 export const metadata: Metadata = {
   title: "Recipes",
@@ -71,6 +71,30 @@ export default async function RecipesPage() {
             ))}
           </ul>
         )}
+      </section>
+
+      {/* A family recipe records what one person does differently. It takes
+          the kitchen itself for granted, and that part is not a family
+          answer, so it is kept on its own site rather than restated here. */}
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <div className="rounded-md border border-ink-200 bg-parchment-dark p-8">
+          <p className="text-xs uppercase tracking-[0.22em] text-accent-700 font-medium">
+            The kitchen itself
+          </p>
+          <p className="mt-3 max-w-2xl text-ink-600">
+            Every recipe on this page assumes the kitchen around it. What keeps
+            where once the rains start, which oil survives which heat, what
+            order a tempering goes in, how much longer a rajma takes at two
+            thousand metres: none of that is particular to this family, so it
+            is not written out here. It is charted on {elsewhere.larder.name}.
+          </p>
+          <a
+            href={elsewhere.larder.href}
+            className="mt-6 inline-block text-sm text-ink-900 underline underline-offset-4 decoration-ink-300 hover:decoration-ink-900"
+          >
+            {elsewhere.larder.domain}
+          </a>
+        </div>
       </section>
     </>
   );
