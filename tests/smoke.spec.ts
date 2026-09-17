@@ -31,6 +31,8 @@ test.describe("smoke", () => {
   test("tree page renders", async ({ page }) => {
     await page.goto("/family-tree");
     await expect(page.getByRole("heading", { name: /The tree/ })).toBeVisible();
+    await expect(page.getByRole("application", { name: /Family tree/ })).toBeVisible();
+    await page.getByRole("button", { name: "Fit to view", exact: true }).click();
   });
 
   test("stories index", async ({ page }) => {
