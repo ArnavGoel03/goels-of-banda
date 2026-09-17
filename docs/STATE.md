@@ -18,7 +18,7 @@ changes, limits and required follow-up.
 
 Public GitHub Actions now runs the five existing smoke scenarios on desktop
 Chromium and Pixel 7, captures screenshots, and asserts no uncaught page errors.
-Frozen install, TS7 and optimized build passed in both hosted runs.
+Frozen install, TS7 and optimized build passed in all three hosted runs.
 Run [35272341613](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35272341613)
 returned six passes and four stale title/story assertion failures. The expected
 strings were corrected against unchanged main source; no public copy changed.
@@ -46,3 +46,20 @@ brand onto multiple lines; no visual polish pass is claimed. Resolve the layout
 failure while preserving family relationships, rerun these checks, and verify
 contribution/moderation/uploads before merge. Production remains paused and the
 custom domain does not resolve. No deployed upgrade is claimed.
+
+Final run [35273153555](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35273153555)
+completed on tested source `05fb2d9761b32e453b150334b9615b539555073e`:
+frozen install, native TS7 and optimized build passed; browser checks returned
+8 passed and 2 failed in 19.0s. Both desktop and Pixel 7 tree tests failed while
+waiting 5s for the dynamic application region, with the same uncaught Dagre
+`forEach` error. The Fit to view click is not reached. The other four routes
+pass on both viewports. This final result replaces the earlier timing-dependent
+9/10 result and confirms that the strengthened test detects both broken views.
+
+Source evidence: baseline `a33aca9c167190a5930b1b8b5353568a3eced60a` has no diff
+in `src/components/tree-flow/computeLayout.ts` or `src/data/people.ts` versus
+the tested candidate, and both lock Dagre 3.0.0. The direct layout reproducer
+above fails independently of Next/React rendering. The upgrade remains a draft;
+fixing this baseline defect and the stated live/authenticated acceptance remain
+outstanding. This receipt update changes documentation only; the tested source
+and failed acceptance have not changed.
