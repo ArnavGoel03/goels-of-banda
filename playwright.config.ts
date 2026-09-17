@@ -12,12 +12,16 @@ export default defineConfig({
   use: {
     baseURL,
     trace: "on-first-retry",
-    screenshot: "only-on-failure",
+    screenshot: process.env.CI ? { mode: "on", fullPage: true } : "only-on-failure",
   },
   projects: [
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "mobile-chromium",
+      use: { ...devices["Pixel 7"] },
     },
   ],
   webServer: process.env.PLAYWRIGHT_BASE_URL
@@ -25,7 +29,7 @@ export default defineConfig({
     : {
         command: "npm run start",
         url: "http://localhost:3000",
-        timeout: 120_000,
+        timeout: 30_000,
         reuseExistingServer: !process.env.CI,
       },
 });
