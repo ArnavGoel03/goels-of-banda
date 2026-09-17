@@ -1,97 +1,74 @@
-# Stack upgrade candidate, 18 September 2026
+# Stack upgrade and tree repair, 18 September 2026
 
-Branch: `chore/stack-upgrade-20260918`. Isolated worktree; original main checkout
-preserved. Candidate only, not merged or deployed.
+Source acceptance passes; production is paused. PR:
+https://github.com/ArnavGoel03/goels-of-banda/pull/1
+Certified source: `bc33363a01a9ba466402c2915f1c41226076ed1a`.
 
-## Versions
+## Versions and migration
 
-- `next`: `16.3.5`
-- `react`: `19.3.0`
-- `react-dom`: `19.3.0`
-- `@typescript/native`: `npm:typescript@7.0.2`
-- `typescript`: `npm:@typescript/typescript6@6.0.2`
-- `@types/react`: `19.3.0`
-- `@types/react-dom`: `19.3.0`
-- `@types/node`: `26.6.1`
-- `tailwindcss`: `4.3.3`
-- `@tailwindcss/postcss`: `4.3.3`
-- `@next/mdx`: `16.3.5`
-- `@sentry/nextjs`: `10.75.0`
-- `@playwright/test`: `^1.63.0`
+Next and @next/mdx 16.3.5; React/DOM/types 19.3.0; native TypeScript 7.0.2 via
+`@typescript/native`, real API compatibility via `typescript` alias to
+`@typescript/typescript6@6.0.2`; Node types 26.6.1; Tailwind/PostCSS 4.3.3;
+Sentry 10.75.0; Playwright 1.63.0; unpatched Dagre 3.1.1. Registry versions
+and compatibility were checked. pnpm and its lockfile remain canonical.
+The deprecated Edge runtime on opengraph-image was replaced with supported
+Node/static rendering; the resulting 1200x630 image was inspected.
 
-Stable versions verified against the npm registry. TypeScript 7 is the explicit
-native CLI; the real TS6 compatibility package remains for programmatic consumers.
-No peer requirement, lint rule or build/type gate was suppressed. ESLint 9.39.5 is
-retained where configured because Next current plugins do not support ESLint 10;
-it has an upstream support deprecation, so installation is not warning-free.
+CI uses verified stable checkout 7.0.1, setup-node 7.0.0, upload-artifact 7.0.1
+and pnpm/action-setup 6.1.0 to remove obsolete Node 20 action-runtime warnings.
+Application tooling runs on Node 24 with pnpm 12.4.2.
 
-## Changes and verification
+## Reproduced defect and repair
 
-Align @next/mdx16.3.5 and Sentry10.75.0; Playwright 1.63.0. Remove deprecated Edge runtime from the top-level image route, using supported Node/static rendering without changing its image content.
+Old source `a33aca9` and the initial upgraded source both crashed in Dagre's
+translateGraph with `Cannot read properties of undefined (reading 'forEach')`.
+The five smoke scenarios initially checked only the server-rendered tree heading
+and could pass before hydration failed. Run 35273153555 strengthened that check
+and confirmed 8 passes, 2 failures: both desktop and phone tree views crashed.
 
-TypeScript 7 typecheck and optimized build pass (5.9s final compilation). No lint script is configured. Playwright 1.63.0 runs the five smoke scenarios on desktop and phone in hosted CI; overall acceptance fails on the dynamic family-tree crash detailed below.
+Unpatched Dagre 3.1.1 alone reproduces the same fault. A narrow intermediate-point
+translation patch removes the crash but does not enforce shared ranks: minlen 0
+is only a lower bound, so the founding brothers can still occupy different rows.
+That experimental dependency patch was discarded. No dependency patch ships.
 
-Built home, people, family-tree return HTTP 200 HTML; opengraph-image returns HTTP 200 image/png. The generated 1200x630 image was opened and visually inspected, with content fitting the image.
+The repair contracts connected spouse pairs and the already-recorded founding
+brothers into layout groups sized for their original cards. Dagre lays out these
+groups using the existing generation anchors and parent constraints; collapsed
+parallel constraints retain the sum of their weights. The output expands each
+group into adjacent individual cards on the same row. Original relationship
+edges, person order, card dimensions and family data are retained. No relation is
+invented or removed, and no arbitrary rank offsets or fallback hides an error.
 
-Custom domain goelsofbanda.com did not resolve; the known Vercel alias remains 503 DEPLOYMENT_PAUSED. Authenticated contribution, moderation and uploads were not exercised.
+## Verification
 
-## Publication and outstanding acceptance
+- Five layout regression cases pass: spouse/child ranks, founding brothers,
+  one-sided spouse references and disconnected people, complete family layout,
+  and empty input. The unchanged old implementation fails four of these cases,
+  calibrating the regression. Full data: 74 finite, non-overlapping cards,
+  109 relationship edges; every parent above child, every spouse pair and the
+  founding brothers on the same row.
+- Native TS7, frozen install and optimized build pass. No project lint script
+  exists. Upstream install deprecations are not suppressed.
+- [Run 35284163900](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35284163900)
+  passed all 10 browser cases in 8.5s, plus five layout cases and production build.
+- [Final run 35284464677](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35284464677)
+  passes all 10 browser cases in 8.0s and compiles the production build in 13.5s
+  after the CI action-runtime update. No application
+  source changed between these two runs.
+- Desktop Chromium and Pixel 7 tests wait for the dynamic application, reject
+  uncaught page errors, verify Zoom and Fit scale restoration, click a visible
+  tree card and assert its destination. Home, people, person and stories also pass.
+- Four opened screenshots are retained: `quality/stack-upgrade-2026-09-18/`
+  contains `chromium-tree.png`, `mobile-chromium-tree.png` and corresponding
+  `*-card-navigation.png`. The fitted tree retains the existing wide canvas;
+  phone users can pan/zoom or use the existing people-list alternative. The
+  existing desktop header wraps its brand; no unrelated layout rewrite occurred.
 
-Known production Vercel URL rechecked: HTTP 503 `DEPLOYMENT_PAUSED`.
-No billing, plan or deployment settings were changed. Browser runtime setup and
-its documented discovery returned no connected browser. HTTP/build checks do not
-certify rendered layout, keyboard interaction, hydration or real-device behavior.
-Complete that acceptance and the project-specific outstanding checks before
-merging. Restore provider availability through the existing owner flow, then
-verify the deployed upgrade. Draft PR and exact commit are indexed in Atlas
-`docs/stack-upgrades-2026-09-18/sites-extra.md`.
+## Publication limits
 
-## Hosted browser acceptance follow-up
-
-Public GitHub Actions now runs the five existing smoke scenarios on desktop
-Chromium and Pixel 7, captures screenshots, and asserts no uncaught page errors.
-Frozen install, TS7 and optimized build passed in all three hosted runs.
-Run [35272341613](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35272341613)
-returned six passes and four stale title/story assertion failures. The expected
-strings were corrected against unchanged main source; no public copy changed.
-Run [35272667990](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35272667990)
-then returned nine passes and one tree page-error failure. Both tree screenshots
-show the global error boundary, revealing that the old heading-only assertion
-could pass before the dynamic tree crashed. The tree check now also waits for
-its application region and exercises Fit to view, so that race cannot pass.
-
-The remaining error is `Cannot read properties of undefined (reading 'forEach')`
-in Dagre translateGraph, where an edge lacks points. It reproduces without a
-browser by calling computeLayout with the existing people data. Main has the same
-layout source/data and Dagre 3.0.0 lock. A registry-verified Dagre 3.1.1 experiment
-reproduced the identical error and was reverted; the candidate retains 3.0.0.
-No suppression, fallback or family-rank redesign was introduced. Reproduce with:
-
-```sh
-pnpm exec tsx -e 'import {computeLayout} from "./src/components/tree-flow/computeLayout"; import {people} from "./src/data/people"; computeLayout(people)'
-```
-
-Desktop and phone screenshots of home, people, person, stories and tree were
-opened. Public content renders; the tree fails after hydration, so overall browser
-acceptance fails and this remains a draft. The desktop header compresses its
-brand onto multiple lines; no visual polish pass is claimed. Resolve the layout
-failure while preserving family relationships, rerun these checks, and verify
-contribution/moderation/uploads before merge. Production remains paused and the
-custom domain does not resolve. No deployed upgrade is claimed.
-
-Final run [35273153555](https://github.com/ArnavGoel03/goels-of-banda/actions/runs/35273153555)
-completed on tested source `05fb2d9761b32e453b150334b9615b539555073e`:
-frozen install, native TS7 and optimized build passed; browser checks returned
-8 passed and 2 failed in 19.0s. Both desktop and Pixel 7 tree tests failed while
-waiting 5s for the dynamic application region, with the same uncaught Dagre
-`forEach` error. The Fit to view click is not reached. The other four routes
-pass on both viewports. This final result replaces the earlier timing-dependent
-9/10 result and confirms that the strengthened test detects both broken views.
-
-Source evidence: baseline `a33aca9c167190a5930b1b8b5353568a3eced60a` has no diff
-in `src/components/tree-flow/computeLayout.ts` or `src/data/people.ts` versus
-the tested candidate, and both lock Dagre 3.0.0. The direct layout reproducer
-above fails independently of Next/React rendering. The upgrade remains a draft;
-fixing this baseline defect and the stated live/authenticated acceptance remain
-outstanding. This receipt update changes documentation only; the tested source
-and failed acceptance have not changed.
+Live recheck: goels-of-banda.vercel.app returns 503 `DEPLOYMENT_PAUSED`;
+goelsofbanda.com does not resolve. No billing, pause, budget, database or hosting
+settings were changed. Source verification does not establish a deployed release.
+Restore provider/domain availability, then verify the deployed upgrade.
+Authenticated contribution/moderation/uploads and physical-device checks remain
+separate obligations; auth and persisted data behavior were not changed here.
