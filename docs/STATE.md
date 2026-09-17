@@ -1,3 +1,11 @@
+# Tree repair acceptance in progress, 18 September 2026
+
+The stack candidate now uses stable unpatched Dagre 3.1.1 and contracts explicit
+spouse/founding-sibling same-rank relations before layout. Individual cards,
+relationship edges, generation anchors and summed constraint weights are retained.
+Five calibrated layout regression cases and native TS7 pass; hosted desktop/phone
+Zoom, Fit and card-navigation acceptance is pending. No merge or deployment yet.
+
 # Stack upgrade candidate, 18 September 2026
 
 The isolated `chore/stack-upgrade-20260918` branch upgrades Next to 16.3.5,
