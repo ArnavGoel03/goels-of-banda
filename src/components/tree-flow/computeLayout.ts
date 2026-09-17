@@ -27,17 +27,43 @@ function rankOf(p: Person): number {
   return 3;
 }
 
-// Dagre-based layout. Family trees aren't strict trees — every person
-// has up to two parents, and cross-marriages link otherwise-separate
-// lineages (e.g. Richa's Agarwal parents → Richa ↔ Rohit ← RK's Goel
-// line). Dagre handles this natively: we declare rank anchors per
-// generation so everyone lines up horizontally, then add parent-child
-// and spouse edges with weights that pull the graph into shape.
+// Contract same-rank relations before layout, then expand each group back into
+// individual cards. Dagre minlen: 0 is only a lower bound, not rank equality,
+// and its same-rank edge routing can fail before endpoints are assigned.
 export function computeLayout(people: Person[]): {
   nodes: LayoutNode[];
   edges: LayoutEdge[];
 } {
   const bySlug = new Map(people.map((p) => [p.slug, p]));
+  if (people.length === 0) return { nodes: [], edges: [] };
+
+  const representative = new Map(people.map((p) => [p.slug, p.slug]));
+  const groupOf = (slug: string): string => {
+    const parent = representative.get(slug)!;
+    if (parent === slug) return slug;
+    const root = groupOf(parent);
+    representative.set(slug, root);
+    return root;
+  };
+  const join = (a: string, b: string) => {
+    if (bySlug.has(a) && bySlug.has(b)) {
+      representative.set(groupOf(b), groupOf(a));
+    }
+  };
+  for (const p of people) {
+    if (p.spouse) join(p.slug, p.spouse.slug);
+  }
+  // The founding brothers have no recorded parent but share a generation.
+  join("gondilal-goel", "ganesh-prasad-goel");
+
+  const groups = new Map<string, Person[]>();
+  for (const p of people) {
+    const id = groupOf(p.slug);
+    const members = groups.get(id) ?? [];
+    members.push(p);
+    groups.set(id, members);
+  }
+
   const g = new dagre.graphlib.Graph();
   g.setGraph({
     rankdir: "TB",
@@ -47,9 +73,12 @@ export function computeLayout(people: Person[]): {
     marginy: 24,
   });
   g.setDefaultEdgeLabel(() => ({}));
+  const addConstraint = (from: string, to: string, weight: number) => {
+    // Parallel constraints can collapse onto one group edge; preserve their sum.
+    g.setEdge(from, to, { weight: (g.edge(from, to)?.weight ?? 0) + weight });
+  };
 
-  // One zero-width anchor per generation, chained vertically, so dagre
-  // never promotes a childless node out of its rank.
+  // Retain the generation anchors and their vertical ordering.
   const rankAnchors = new Map<number, string>();
   const uniqueRanks = new Set(people.map(rankOf));
   uniqueRanks.forEach((r) => {
@@ -58,8 +87,11 @@ export function computeLayout(people: Person[]): {
     g.setNode(anchorId, { width: 1, height: 1 });
   });
 
-  for (const p of people) {
-    g.setNode(p.slug, { width: CARD_WIDTH, height: CARD_HEIGHT });
+  for (const [id, members] of groups) {
+    g.setNode(id, {
+      width: members.length * CARD_WIDTH + (members.length - 1) * NODE_SEP,
+      height: CARD_HEIGHT,
+    });
   }
 
   const sortedRanks = [...uniqueRanks].sort((a, b) => a - b);
@@ -71,10 +103,9 @@ export function computeLayout(people: Person[]): {
     );
   }
 
-  // Pin each person to their rank anchor with a weightless edge so
-  // they sit in their generation without polluting x-ordering much.
+  // Attach each group to its existing generation anchor with a light edge.
   for (const p of people) {
-    g.setEdge(rankAnchors.get(rankOf(p))!, p.slug, { weight: 0.5 });
+    addConstraint(rankAnchors.get(rankOf(p))!, groupOf(p.slug), 0.5);
   }
 
   const edges: LayoutEdge[] = [];
@@ -83,7 +114,7 @@ export function computeLayout(people: Person[]): {
     const father = p.parents?.father;
     const mother = p.parents?.mother;
     if (father && bySlug.has(father)) {
-      g.setEdge(father, p.slug, { weight: 5 });
+      addConstraint(groupOf(father), groupOf(p.slug), 5);
       edges.push({
         id: `e-${father}-${p.slug}-f`,
         source: father,
@@ -92,7 +123,7 @@ export function computeLayout(people: Person[]): {
       });
     }
     if (mother && bySlug.has(mother)) {
-      g.setEdge(mother, p.slug, { weight: 5 });
+      addConstraint(groupOf(mother), groupOf(p.slug), 5);
       edges.push({
         id: `e-${mother}-${p.slug}-m`,
         source: mother,
@@ -109,7 +140,6 @@ export function computeLayout(people: Person[]): {
     const key = [p.slug, p.spouse.slug].sort().join("::");
     if (seenSpousePairs.has(key)) continue;
     seenSpousePairs.add(key);
-    g.setEdge(p.slug, p.spouse.slug, { weight: 2, minlen: 0 });
     edges.push({
       id: `spouse-${key}`,
       source: p.slug,
@@ -118,27 +148,22 @@ export function computeLayout(people: Person[]): {
     });
   }
 
-  // Known-siblings hint: Gondilal and Ganesh Prasad were brothers but
-  // we don't have their father recorded. A zero-length edge between
-  // them keeps them adjacent at the top of the graph. Not rendered.
-  if (bySlug.has("gondilal-goel") && bySlug.has("ganesh-prasad-goel")) {
-    g.setEdge("gondilal-goel", "ganesh-prasad-goel", { weight: 3, minlen: 0 });
-  }
-
   dagre.layout(g);
 
-  const nodes: LayoutNode[] = [];
-  for (const p of people) {
-    const n = g.node(p.slug);
-    if (!n) continue;
-    nodes.push({
-      id: p.slug,
-      x: n.x - CARD_WIDTH / 2,
-      y: n.y - CARD_HEIGHT / 2,
-      width: CARD_WIDTH,
-      height: CARD_HEIGHT,
+  const positions = new Map<string, LayoutNode>();
+  for (const [id, members] of groups) {
+    const n = g.node(id);
+    members.forEach((p, index) => {
+      positions.set(p.slug, {
+        id: p.slug,
+        x: n.x - n.width / 2 + index * (CARD_WIDTH + NODE_SEP),
+        y: n.y - CARD_HEIGHT / 2,
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
+      });
     });
   }
+  const nodes = people.map((p) => positions.get(p.slug)!);
 
   return { nodes, edges };
 }
