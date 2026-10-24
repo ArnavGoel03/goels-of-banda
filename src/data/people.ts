@@ -136,6 +136,7 @@ export const people: Person[] = [
   {
     slug: "manmohan-goel",
     name: "Manmohan Goel",
+    altNames: ["Mohan"],
     sex: "M",
     isLiving: true,
     generation: 2,
@@ -187,7 +188,8 @@ export const people: Person[] = [
   },
   {
     slug: "sohan-wife",
-    name: "Sohan's wife",
+    name: "Renu Goel",
+    altNames: ["Renu"],
     sex: "F",
     isLiving: true,
     generation: 2,
@@ -197,8 +199,8 @@ export const people: Person[] = [
     spouse: { slug: "sohan-goel" },
     publicity: "minimal",
     bio:
-      "Wife of Sohan Goel. Alongside her husband, raised an adopted daughter, Khushi Agrawal, who is biologically her sister's daughter.",
-    notes: "Legal name not yet recorded in this tree.",
+      "Renu Goel, wife of Sohan Goel. Alongside her husband, raised an adopted daughter, Khushi Agrawal, who is biologically her sister's daughter.",
+    notes: "Maiden name not yet recorded in this tree.",
   },
   {
     slug: "mahesh-goel",
@@ -759,6 +761,7 @@ export const people: Person[] = [
   {
     slug: "preksha-agarwal",
     name: "Preksha Agarwal",
+    altNames: ["Pihu"],
     sex: "F",
     birth: { place: "Jhansi, Uttar Pradesh, India" },
     isLiving: true,
@@ -1381,9 +1384,22 @@ export const people: Person[] = [
     currentLocation: "Banda, Uttar Pradesh, India",
     occupation: "Jeweller (runs separate shop with younger brother 'Tukku')",
     parents: { father: "sohan-goel", mother: "sohan-wife" },
+    spouse: { slug: "pallavi-chanu-wife" },
     publicity: "minimal",
     bio: "Known in the family as Chanu. Eldest of Sohan's three sons. Runs a jewellery shop in Banda with his younger brother Tukku, separate from the ancestral Ganesh Prasad Gondilal Saraf premises.",
     notes: "'Chanu' is the family nickname; legal given name not yet recorded in this tree.",
+  },
+  {
+    slug: "pallavi-chanu-wife",
+    name: "Pallavi",
+    sex: "F",
+    isLiving: true,
+    generation: 3,
+    familyRole: "Wife of Chanu Goel",
+    spouse: { slug: "sohan-son-chanu" },
+    publicity: "minimal",
+    bio: "Pallavi, wife of Chanu Goel.",
+    notes: "Surname not yet recorded in this tree.",
   },
   {
     slug: "sohan-son-tukku",
