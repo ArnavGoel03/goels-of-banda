@@ -307,6 +307,7 @@ export const people: Person[] = [
   {
     slug: "shobhit-goel",
     name: "Shobhit Goel",
+    altNames: ["Raju"],
     sex: "M",
     isLiving: true,
     generation: 3,
